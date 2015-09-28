@@ -77,7 +77,7 @@ app.controller("CardController", function($scope, $timeout, $interval) {
   };
 
   $scope.startTimer = function() {
-    $scope.timeLimit = 60000;
+    $scope.timeLimit = 45000;
 
     timer = $interval(function () {
       $scope.timeLimit -= 1000;
