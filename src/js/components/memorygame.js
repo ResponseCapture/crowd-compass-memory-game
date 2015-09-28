@@ -81,7 +81,7 @@ app.controller("CardController", function($scope, $timeout, $interval) {
 
     timer = $interval(function () {
       $scope.timeLimit -= 1000;
-      $scope.isCritical = $scope.timeLimit <= 10000 ? true : false;
+      $scope.isCritical = $scope.timeLimit <= 5000 ? true : false;
 
       if ($scope.timeLimit === 0) {
         $scope.stop();
