@@ -295,7 +295,7 @@ Here’s the situation. It’s the night before the biggest event of your year �
         </header>
         <header ng-hide="results.missing">
           <h1 class="animation-slide-top">You Won</h1>
-          <p>Your time was {{ results.time | date: 'm:ss'}} seconds!</p>
+          <p>Your time was {{ 60000 - results.time | date: 'm:ss'}} seconds!</p>
         </header>
         <p class="error-advise"><a class="btn btn-primary btn-round" href>GET A TIME BOOSTER</a></p>
         <a class="btn btn-primary btn-round" ng-click="newGame()">PLAY AGAIN</a>
