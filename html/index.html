@@ -82,6 +82,11 @@
       <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
         <!-- Navbar Toolbar -->
         <!-- End Navbar Toolbar -->
+        <ul class="nav navbar-toolbar navbar-center">
+          <li> 
+            <h2>1:00</h2>
+          </li>
+        </ul>
 
         <!-- Navbar Toolbar Right -->
         <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
@@ -123,6 +128,9 @@ Here’s the situation. It’s the night before the biggest event of your year �
   </div>
 
   <style>
+    .navbar-center {
+      text-align: center;
+    }
     .navbar-brand-logo {
       height: 28px;
     }
@@ -167,10 +175,61 @@ Here’s the situation. It’s the night before the biggest event of your year �
       background-color: #fff;
       box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
       margin: 7px;
+      cursor: pointer;/*
+      -moz-transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      -moz-transition: all .25s linear;
+      -webkit-transition: all .25s linear;
+      transition: all .25s linear;
+      -webkit-backface-visibility: hidden; 
+      backface-visibility: hidden; */
+    }
+    .flipped {
+      background: url('../assets/images/sprite.png');
+      background-position:  -361px 0;
     }
     .card:hover {
       box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.5);
       transition: all 0.2s ease-in-out;
+    }
+    .sprite { 
+      background: url('../assets/images/sprite.png');
+    }
+    .sprite.emma { 
+      background-position: 0 0; 
+    } 
+    .sprite.L1-clock { 
+      background-position: -180px 0;
+    } 
+    .sprite.L1-personality { 
+      background-position: -361px 0; 
+    } 
+    .sprite.L1-frazzled { 
+      background-position: -1080px 0; 
+    } 
+    .sprite.L1-supplies { 
+      background-position: -720px 0;
+    } 
+    .sprite.L1-phones { 
+      background-position: -1801px 0; 
+    } 
+    .sprite.L1-woman-docs { background-position: -2161px 0; } 
+    .sprite.L2-app-icons { background-position: -2521px 0; } 
+    .sprite.L2-boxing { background-position: -2881px 0; } 
+    .sprite.L2-crowd { background-position: -3241px 0; } 
+    .sprite.L2-decisions { background-position: -3601px 0; } 
+    .sprite.L2-jumping-guy { background-position: -3961px 0; } 
+    .sprite.L3-party-girl { background-position: -4321px 0; } 
+    .sprite.L3-sleeping-woman { background-position: -4681px 0; } 
+    .sprite.L3-super-woman { background-position: -5041px 0; } 
+    .sprite.L3-tired-guy { background-position: -5401px 0; }
+    @media only screen and (-webkit-min-device-pixel-ratio: 2), 
+      only screen and (min-device-pixel-ratio: 2) {
+      .sprite { 
+        background: url('../assets/images/sprite@2x.png');
+        background-size: 2884px 176px;
+      }
     }
   </style>
 
@@ -179,7 +238,7 @@ Here’s the situation. It’s the night before the biggest event of your year �
     <div class="page-content container-fluid"> -->
       <div class="card-container">
         <ul class="blocks blocks-xlg-4 blocks-lg-3 blocks-sm-3" data-plugin="masonry">
-            <div class="masonry-item card"></div>
+            <div class="masonry-item card sprite L1-personality"></div>
             <div class="masonry-item card"></div>
             <div class="masonry-item card"></div>
             <div class="masonry-item card"></div>
