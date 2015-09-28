@@ -133,9 +133,17 @@ Here’s the situation. It’s the night before the biggest event of your year �
     }
     .ssk-group {
       width: 100%;
+      padding: 0;
+    }
+    .site-footer span {
+      margin: 30px 0 0 0;
+    }
+    .site-footer {
+      background-color: #fff;
+    }
+    .ssk-group {
       bottom: 0;
       position: absolute;
-      padding: 0;
     }
     .ssk {
       background-color: #2d3b42;
@@ -153,6 +161,7 @@ Here’s the situation. It’s the night before the biggest event of your year �
     .card-container {
       min-width: 650px;
       max-width: 800px;
+      padding-top: 66px;
       margin: auto;
     }
     .card {
@@ -169,9 +178,9 @@ Here’s the situation. It’s the night before the biggest event of your year �
       -moz-transform-style: preserve-3d;
       -webkit-transform-style: preserve-3d;
       transform-style: preserve-3d;
-      -moz-transition: -moz-transform .15s linear;
-      -webkit-transition: -webkit-transform .15s linear;
-      transition: transform-style .15s linear;
+      -moz-transition: -moz-transform .25s linear;
+      -webkit-transition: -webkit-transform .25s linear;
+      transition: transform-style .25s linear;
       -webkit-backface-visibility: hidden; 
       backface-visibility: hidden; 
     }
@@ -182,6 +191,10 @@ Here’s the situation. It’s the night before the biggest event of your year �
     .progress-container {
       height: 64px;
       padding: 28px 0 0 0;
+      z-index: 9999;
+      width: 60%;
+      position: fixed;
+      top: 0;
     }
     .results-view {
       padding: 30px;
@@ -197,9 +210,6 @@ Here’s the situation. It’s the night before the biggest event of your year �
     }
     .card:hover {
       box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
-      -moz-transition: all 0.1s ease-in-out;
-      -webkit-transition: all 0.1s ease-in-out;
-      transition: all 0.1s ease-in-out;
       -moz-transform: scale(0.99);
       -webkit-transform: scale(0.99);
       transform: scale(0.99);
@@ -209,6 +219,9 @@ Here’s the situation. It’s the night before the biggest event of your year �
       -moz-transform: rotateY(180deg);
       -webkit-transform: rotateY(180deg);
       transform: rotateY(180deg);
+      -moz-transition: -moz-transform .25 linear;
+      -webkit-transition: -webkit-transform .25 linear;
+      transition: transform .25 linear;
       -moz-box-sizing: border-box;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
@@ -273,7 +286,8 @@ Here’s the situation. It’s the night before the biggest event of your year �
       <div ng-hide="results">
         <div class="card-container">
           <div class="progress-container">
-            <div class="progress">
+            <div class="progress progress-xs">
+              <span>{{timeLimit | date: 'm:ss'}}</span>
               <div class="progress-bar" ng-class="{'progress-bar-danger':isCritical}" ng-style="{width: (100-(timeLimit/600) + '%')}" role="progressbar">
                 <span class="sr-only">{{timeLimit | date: 'm:ss'}}</span>
               </div>
@@ -297,7 +311,7 @@ Here’s the situation. It’s the night before the biggest event of your year �
           <h1 class="animation-slide-top">You Won</h1>
           <p>Your time was {{ 60000 - results.time | date: 'm:ss'}} seconds!</p>
         </header>
-        <p class="error-advise"><a class="btn btn-primary btn-round" href>GET A TIME BOOSTER</a></p>
+        <p ng-hide="results.missing" class="error-advise"><a class="btn btn-primary btn-round" href>GET A TIME BOOSTER</a></p>
         <a class="btn btn-primary btn-round" ng-click="newGame()">PLAY AGAIN</a>
       </div><!-- 
     </div> -->
@@ -305,13 +319,11 @@ Here’s the situation. It’s the night before the biggest event of your year �
   <!-- End Page -->
 
 
-  <!-- Footer --><!-- 
+  <!-- Footer -->
   <footer class="site-footer">
-    <span class="site-footer-legal">© 2015 <a href="http://themeforest.net/item/remark-responsive-bootstrap-admin-template/11989202">Remark</a></span>
-    <div class="site-footer-right">
-      Crafted with <i class="red-600 wb wb-heart"></i> by <a href="http://themeforest.net/user/amazingSurge">amazingSurge</a>
-    </div>
-  </footer> -->
+    <span class="site-footer-legal">© Copyright 2009-2015 <a href="http://www.crowdcompass.com">CrowdCompass</a>. All Rights Reserved.</span>
+
+  </footer>
 
   <!-- Core  -->
   <script src="../assets/vendor/jquery/jquery.js"></script>

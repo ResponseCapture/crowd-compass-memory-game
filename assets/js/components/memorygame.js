@@ -62,7 +62,7 @@ app.controller("CardController", function($scope, $timeout, $interval) {
         $timeout(function() {
           nextCard.isFaceUp = card.isFaceUp = false;
           $scope.check = check;
-        }, 1000);
+        }, 500);
       }
 
       if ($scope.deck.every(function (c) { 
