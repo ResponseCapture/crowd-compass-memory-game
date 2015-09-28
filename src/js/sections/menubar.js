@@ -153,22 +153,23 @@
     },
 
     fold: function() {
-      this.scrollable.disable();
+      this.hide();
+      // this.scrollable.disable();
 
-      if (this.folded !== true) {
-        this.animate(function() {
+      // if (this.folded !== true) {
+      //   this.animate(function() {
 
-          $body.removeClass('site-menubar-unfold').addClass('site-menubar-fold');
-          this.folded = true;
+      //     $body.removeClass('site-menubar-unfold').addClass('site-menubar-fold');
+      //     this.folded = true;
 
-        }, function() {
-          this.hoverscroll.enable();
+      //   }, function() {
+      //     this.hoverscroll.enable();
 
-          if (this.folded !== null) {
-            $.site.resize();
-          }
-        });
-      }
+      //     if (this.folded !== null) {
+      //       $.site.resize();
+      //     }
+      //   });
+      // }
     },
 
     toggle: function() {

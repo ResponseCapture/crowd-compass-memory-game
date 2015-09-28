@@ -1,7 +1,7 @@
 /*!
- * remark v1.0.7 (http://getbootstrapadmin.com/remark)
- * Copyright 2015 amazingsurge
- * Licensed under the Themeforest Standard Licenses
+ * crowd-compass-memory-game v1.0.0 (https://github.com/ResponseCapture/crowd-compass-memory-game#readme)
+ * Copyright 2015 
+ * Licensed under the ISC
  */
 $.components.register("wizard", {
   mode: "default",

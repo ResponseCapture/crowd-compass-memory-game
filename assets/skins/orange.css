@@ -5200,7 +5200,7 @@ button.list-group-item-dark.active:focus {
 }
 .site-menubar {
   color: rgba(163, 175, 183, .9);
-  background: #263238;
+  background: #37474f;
 }
 .site-menubar.site-menubar-light {
   background: #fff;
@@ -5231,7 +5231,7 @@ button.list-group-item-dark.active:focus {
   padding: 0;
 }
 .site-menu > .site-menu-item.open {
-  background: #242f35;
+  background: #35444c;
 }
 .site-menu > .site-menu-item.open > a {
   color: #fff;
@@ -5250,7 +5250,7 @@ button.list-group-item-dark.active:focus {
   background-color: rgba(255, 255, 255, .02);
 }
 .site-menu > .site-menu-item.active {
-  background: #242f35;
+  background: #35444c;
   border-top: 1px solid rgba(0, 0, 0, .04);
   border-bottom: 1px solid rgba(0, 0, 0, .04);
 }

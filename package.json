@@ -16,5 +16,42 @@
   "bugs": {
     "url": "https://github.com/ResponseCapture/crowd-compass-memory-game/issues"
   },
-  "homepage": "https://github.com/ResponseCapture/crowd-compass-memory-game#readme"
+  "homepage": "https://github.com/ResponseCapture/crowd-compass-memory-game#readme",
+  "devDependencies": {
+    "glob": "*",
+    "grunt": "*",
+    "grunt-autoprefixer": "*",
+    "grunt-bootlint": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-compress": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-csslint": "*",
+    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-csscomb": "*",
+    "grunt-exec": "*",
+    "grunt-html": "*",
+    "load-grunt-config": "*",
+    "load-grunt-tasks": "*"
+  },
+  "engines": {
+    "node": ">=0.10.1"
+  },
+  "files": [
+    "assets/js/**/*.js",
+    "assets/css/**/*.css",
+    "assets/skins/*.css",
+    "assets/fonts",
+    "assets/vendor",
+    "src/js/**/*.js",
+    "src/less/**/*.less",
+    "src/skins/**/*.less",
+    "src/fonts/**/*.less",
+    "src/vendor/**/*.less",
+    "Gruntfile.js"
+  ]
 }
