@@ -1,3 +1,8 @@
+/*!
+ * crowd-compass-memory-game v1.0.0 (https://github.com/ResponseCapture/crowd-compass-memory-game#readme)
+ * Copyright 2015 
+ * Licensed under the ISC
+ */
 function shuffle(array) {
   var m = array.length, t, i;
   while (m) {

@@ -7,7 +7,7 @@
   <meta name="description" content="bootstrap admin template">
   <meta name="author" content="">
 
-  <title>Dashboard | Remark Admin Template</title>
+  <title>CrowdCompass Memory Game</title>
 
   <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
   <link rel="shortcut icon" href="../assets/images/favicon.ico">
@@ -82,11 +82,6 @@
       <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
         <!-- Navbar Toolbar -->
         <!-- End Navbar Toolbar -->
-        <ul class="nav navbar-toolbar navbar-center">
-          <li>
-          </li>
-        </ul>
-
         <!-- Navbar Toolbar Right -->
         <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
           <li class="dropdown">
@@ -114,7 +109,7 @@
             <h3>
               Alright {First Name},
             </h3>
-Here’s the situation. It’s the night before the biggest event of your year – and your event day toolkit has gone missing! Can you find all your essentials in 90 seconds or less?
+Here’s the situation. It’s the night before the biggest event of your year – and your event day toolkit has gone missing! Can you find all your essentials in 60 seconds or less?
           </div>
         </div>
     </div>
@@ -127,9 +122,6 @@ Here’s the situation. It’s the night before the biggest event of your year �
   </div>
 
   <style>
-    .navbar-center {
-      text-align: center;
-    }
     .navbar-brand-logo {
       height: 28px;
     }
@@ -159,9 +151,8 @@ Here’s the situation. It’s the night before the biggest event of your year �
       color: rgba(255,255,255, 1);
     }
     .card-container {
-      min-width: 550px;
-      max-width: 755px;
-      padding: 64px 0;
+      min-width: 650px;
+      max-width: 800px;
       margin: auto;
     }
     .card {
@@ -172,60 +163,104 @@ Here’s the situation. It’s the night before the biggest event of your year �
       display: inline-block;
       float: left;
       background-color: #fff;
-      box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
       margin: 7px;
-      cursor: pointer;/*
+      cursor: pointer;
+      box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
       -moz-transform-style: preserve-3d;
       -webkit-transform-style: preserve-3d;
       transform-style: preserve-3d;
-      -moz-transition: all .25s linear;
-      -webkit-transition: all .25s linear;
-      transition: all .25s linear;
+      -moz-transition: -moz-transform .15s linear;
+      -webkit-transition: -webkit-transform .15s linear;
+      transition: transform-style .15s linear;
       -webkit-backface-visibility: hidden; 
-      backface-visibility: hidden; */
+      backface-visibility: hidden; 
     }
-    .flipped {
-      background: url('../assets/images/sprite.png');
-      background-position:  -361px 0;
+    .progress {
+      width: 80%;
+      margin: auto;
+    }
+    .progress-container {
+      height: 64px;
+      padding: 28px 0 0 0;
+    }
+    .results-view {
+      padding: 30px;
+    }
+    .results-view h1 {
+      font-size: 10em;
+      font-weight: 400;
+    }
+    .results-view header p {
+      margin-bottom: 30px;
+      font-size: 30px;
+      text-transform: uppercase;
     }
     .card:hover {
-      box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.5);
-      transition: all 0.2s ease-in-out;
+      box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
+      -moz-transition: all 0.1s ease-in-out;
+      -webkit-transition: all 0.1s ease-in-out;
+      transition: all 0.1s ease-in-out;
+      -moz-transform: scale(0.99);
+      -webkit-transform: scale(0.99);
+      transform: scale(0.99);
     }
-    .sprite { 
+    .face.back {
+      box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
+      -moz-transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    .flip .card {
+      -moz-transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+    }
+    .flipped { 
       background: url('../assets/images/sprite.png');
     }
-    .sprite.emma { 
+    .face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden; 
+      backface-visibility: hidden; 
+    }
+    .flipped.L1-placer { 
       background-position: 0 0; 
     } 
-    .sprite.L1-clock { 
-      background-position: -180px 0;
+    .flipped.L1-clock { 
+      background-position: -181px 0;
     } 
-    .sprite.L1-personality { 
+    .flipped.L1-personality { 
       background-position: -361px 0; 
     } 
-    .sprite.L1-frazzled { 
-      background-position: -1080px 0; 
+    .flipped.L1-frazzled { 
+      background-position: -542px 0; 
     } 
-    .sprite.L1-supplies { 
-      background-position: -720px 0;
+    .flipped.L1-supplies { 
+      background-position: -723px 0;
     } 
-    .sprite.L1-phones { 
-      background-position: -1801px 0; 
+    .flipped.L1-phones { 
+      background-position: -1806px 0; 
     } 
-    .sprite.L1-woman-docs { background-position: -2161px 0; } 
-    .sprite.L2-app-icons { background-position: -2521px 0; } 
-    .sprite.L2-boxing { background-position: -2881px 0; } 
-    .sprite.L2-crowd { background-position: -3241px 0; } 
-    .sprite.L2-decisions { background-position: -3601px 0; } 
-    .sprite.L2-jumping-guy { background-position: -3961px 0; } 
-    .sprite.L3-party-girl { background-position: -4321px 0; } 
-    .sprite.L3-sleeping-woman { background-position: -4681px 0; } 
-    .sprite.L3-super-woman { background-position: -5041px 0; } 
-    .sprite.L3-tired-guy { background-position: -5401px 0; }
+    .flipped.L1-woman-docs { 
+      background-position: -1981px 0; 
+    } 
+    .flipped.L2-app-icons { background-position: -2521px 0; } 
+    .flipped.L2-boxing { background-position: -2881px 0; } 
+    .flipped.L2-crowd { background-position: -3241px 0; } 
+    .flipped.L2-decisions { background-position: -3601px 0; } 
+    .flipped.L2-jumping-guy { background-position: -3961px 0; } 
+    .flipped.L3-party-girl { background-position: -4321px 0; } 
+    .flipped.L3-sleeping-woman { background-position: -4681px 0; } 
+    .flipped.L3-super-woman { background-position: -5041px 0; } 
+    .flipped.L3-tired-guy { background-position: -5401px 0; }
     @media only screen and (-webkit-min-device-pixel-ratio: 2), 
       only screen and (min-device-pixel-ratio: 2) {
-      .sprite { 
+      .flipped { 
         background: url('../assets/images/sprite@2x.png');
         background-size: 2884px 176px;
       }
@@ -233,23 +268,37 @@ Here’s the situation. It’s the night before the biggest event of your year �
   </style>
 
   <!-- Page -->
-  <div class="page"><!-- 
+  <div class="page" ng-app="cards" ng-controller="CardController"><!-- 
     <div class="page-content container-fluid"> -->
-      <div class="card-container">
-        <ul class="blocks blocks-xlg-4 blocks-lg-3 blocks-sm-3" data-plugin="masonry">
-            <div class="masonry-item card"></div>
-            <div class="masonry-item card"></div>
-            <div class="masonry-item card"></div>
-            <div class="masonry-item card"></div>
-            <div class="masonry-item card"></div>
-            <div class="masonry-item card"></div>
-            <div class="masonry-item card"></div>
-            <div class="masonry-item card"></div>
-            <div class="masonry-item card"></div>
-            <div class="masonry-item card"></div>
-            <div class="masonry-item card"></div>
-            <div class="masonry-item card"></div>
-          </ul>
+      <div ng-hide="results">
+        <div class="card-container">
+          <div class="progress-container">
+            <div class="progress">
+              <div class="progress-bar" ng-class="{'progress-bar-danger':isCritical}" ng-style="{width: (100-(timeLimit/600) + '%')}" role="progressbar">
+                <span class="sr-only">{{timeLimit | date: 'm:ss'}}</span>
+              </div>
+            </div>
+          </div>
+          <div data-plugin="masonry" ng-init="newGame()">
+            <div ng-repeat="card in deck" class="masonry-item" ng-class="{flip: card.isFaceUp}" ng-click="check(card)">
+              <div class="card">
+                <div class="back face flipped {{ card.item }}"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div ng-show="results" class="results-view animsition text-center">
+        <header ng-show="results.missing">
+          <h1 class="animation-slide-top">You Lost</h1>
+          <p>Only {{ results.missing }} more pairs to find.</p>
+        </header>
+        <header ng-hide="results.missing">
+          <h1 class="animation-slide-top">You Won</h1>
+          <p>Your time was {{ results.time | date: 'm:ss'}} seconds!</p>
+        </header>
+        <p class="error-advise"><a class="btn btn-primary btn-round" href>GET A TIME BOOSTER</a></p>
+        <a class="btn btn-primary btn-round" ng-click="newGame()">PLAY AGAIN</a>
       </div><!-- 
     </div> -->
   </div>
@@ -272,6 +321,7 @@ Here’s the situation. It’s the night before the biggest event of your year �
   <script src="../assets/vendor/mousewheel/jquery.mousewheel.js"></script>
   <script src="../assets/vendor/asscrollable/jquery.asScrollable.all.js"></script>
   <script src="../assets/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
+  <script src="../assets/vendor/angular/angular.js"></script>
 
   <!-- Plugins -->
   <script src="../assets/vendor/switchery/switchery.min.js"></script>
@@ -303,6 +353,7 @@ Here’s the situation. It’s the night before the biggest event of your year �
   <script src="../assets/examples/js/dashboard/v1.js"></script>
 
   <script src="../assets/js/components/masonry.js"></script>
+  <script src="../assets/js/components/memorygame.js"></script>
   <!-- <script type="text/javascript">
     (function(d,j,f,c,h,b,e){d.GoogleAnalyticsObject=h;d[h]=d[h]||function(){(d[h].q=d[h].q||[]).push(arguments)},d[h].l=1*new Date();b=j.createElement(f),e=j.getElementsByTagName(f)[0];b.async=1;b.src=c;e.parentNode.insertBefore(b,e)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create","UA-10002404-10","auto");ga("send","pageview");
   </script> -->
