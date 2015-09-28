@@ -176,7 +176,6 @@ Here’s the situation. It’s the night before the biggest event of your year �
       background-color: #fff;
       margin: 7px;
       cursor: pointer;
-      box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
       -moz-transform-style: preserve-3d;
       -webkit-transform-style: preserve-3d;
       transform-style: preserve-3d;
@@ -211,10 +210,13 @@ Here’s the situation. It’s the night before the biggest event of your year �
       text-transform: uppercase;
     }
     .card:hover {
-      box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
-      -moz-transform: scale(0.99);
-      -webkit-transform: scale(0.99);
-      transform: scale(0.99);
+      box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
+      -moz-transform: scale(1.001);
+      -webkit-transform: scale(1.001);
+      transform: scale(1.001);
+      -moz-transition: -moz-transform .25 linear;
+      -webkit-transition: -webkit-transform .25 linear;
+      transition: transform .25 linear;
     }
     .face.back {
       box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
