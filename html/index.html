@@ -313,7 +313,7 @@ Here’s the situation. It’s the night before the biggest event of your year �
           <h1 class="animation-slide-top">You Won</h1>
           <p>Your time was {{ 60000 - results.time | date: 'm:ss'}} seconds!</p>
         </header>
-        <p ng-hide="results.missing" class="error-advise"><a class="btn btn-primary btn-round" href>GET A TIME BOOSTER</a></p>
+        <p ng-show="results.missing" class="error-advise"><a class="btn btn-primary btn-round" href>GET A TIME BOOSTER</a></p>
         <a class="btn btn-primary btn-round" ng-click="newGame()">PLAY AGAIN</a>
       </div><!-- 
     </div> -->
