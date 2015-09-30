@@ -48,7 +48,7 @@ function Game(cards, timeout, interval) {
       var elapsed = game.elapsedMs() / 1000;
 
       game.isCritical = elapsed <= 5;
-      mprogress.set(game.remaining() / limitMs);
+      mprogress.set((game.remaining() || 0) / limitMs);
 
       if (elapsed >= limit) {
         stop();
@@ -79,7 +79,7 @@ function Game(cards, timeout, interval) {
   }
 
   game.remaining = function () {
-    if (!end && begin) {
+    if (begin && game.elapsedMs() < limitMs) {
       return limitMs - game.elapsedMs();
     }
   }

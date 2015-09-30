@@ -81,7 +81,7 @@
       <!-- Navbar Collapse -->
       <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
         <!-- Navbar Toolbar -->
-        <div class="navbar-center">
+        <div ng-show="game.remaining()" class="navbar-center">
           <h1 class="progress-timer">{{ game.remaining() | date: 'm:ss'}}</h1>
           <div id="progress" class="progress-container"></div>
         </div>
