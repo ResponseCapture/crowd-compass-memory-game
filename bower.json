@@ -14,5 +14,8 @@
     "web",
     "admin",
     "bootstrap"
-  ]
+  ],
+  "dependencies": {
+    "mprogress": "~0.1.1"
+  }
 }

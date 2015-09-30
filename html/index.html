@@ -50,7 +50,7 @@
     Breakpoints();
   </script>
 </head>
-<body class="dashboard">
+<body class="dashboard" ng-app="cards" ng-controller="CardController">
   <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -81,6 +81,10 @@
       <!-- Navbar Collapse -->
       <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
         <!-- Navbar Toolbar -->
+        <div class="navbar-center">
+          <h1 class="progress-timer">{{ game.remaining() | date: 'm:ss'}}</h1>
+          <div id="progress" class="progress-container"></div>
+        </div>
         <!-- End Navbar Toolbar -->
         <!-- Navbar Toolbar Right -->
         <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
@@ -97,7 +101,6 @@
         <!-- End Navbar Toolbar Right -->
       </div>
       <!-- End Navbar Collapse -->
-
       <!-- Site Navbar Seach -->
       <!-- End Site Navbar Seach -->
     </div>
@@ -180,23 +183,34 @@ Here’s the situation. It’s the night before the biggest event of your year �
       -moz-transform-style: preserve-3d;
       -webkit-transform-style: preserve-3d;
       transform-style: preserve-3d;
-      -moz-transition: -moz-transform .25s linear;
-      -webkit-transition: -webkit-transform .25s linear;
-      transition: transform .25s linear;
+      -moz-transition: all .25s linear;
+      -webkit-transition: all .25s linear;
+      transition: all .25s linear;
       -webkit-backface-visibility: hidden; 
       backface-visibility: hidden; 
     }
-    .progress {
-      width: 80%;
-      margin: auto;
+    * {
+      -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+              box-sizing: border-box;
+    }
+    .progress-timer {
+      display: inline;
+      padding-right: 10px;
+    }
+    .navbar-center {
+      position: absolute;
+      overflow: hidden;
+      height: 100%;
+      width: 100%;
+      margin: 12px auto;
+      display: table;
+      text-align: center;
     }
     .progress-container {
-      height: 64px;
-      padding: 28px 0 0 0;
-      z-index: 9999;
-      width: 57%;
-      position: fixed;
-      top: 0;
+      display: inline-block;
+      padding: 15px 0 0 0;
+      width: 60%;
     }
     .results-view {
       padding: 30px;
@@ -215,18 +229,12 @@ Here’s the situation. It’s the night before the biggest event of your year �
       -moz-transform: scale(1.001);
       -webkit-transform: scale(1.001);
       transform: scale(1.001);
-      -moz-transition: -moz-transform .25 linear;
-      -webkit-transition: -webkit-transform .25 linear;
-      transition: transform .25 linear;
     }
     .face.back {
       box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
       -moz-transform: rotateY(180deg);
       -webkit-transform: rotateY(180deg);
       transform: rotateY(180deg);
-      -moz-transition: -moz-transform .25 linear;
-      -webkit-transition: -webkit-transform .25 linear;
-      transition: transform .25 linear;
       -moz-box-sizing: border-box;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
@@ -286,20 +294,12 @@ Here’s the situation. It’s the night before the biggest event of your year �
   </style>
 
   <!-- Page -->
-  <div class="page" ng-app="cards" ng-controller="CardController"><!-- 
-    <div class="page-content container-fluid"> -->
-      <div ng-hide="results">
+  <div class="page">
+    <div class="page-content container-fluid">
+      <div ng-hide="game.results">
         <div class="card-container">
-          <div class="progress-container">
-            <div class="progress progress-xs">
-              <span>{{timeLimit | date: 'm:ss'}}</span>
-              <div class="progress-bar" ng-class="{'progress-bar-danger':isCritical}" ng-style="{width: (100-(timeLimit/600) + '%')}" role="progressbar">
-                <span class="sr-only">{{timeLimit | date: 'm:ss'}}</span>
-              </div>
-            </div>
-          </div>
           <div data-plugin="masonry" ng-init="newGame()">
-            <div ng-repeat="card in deck" class="masonry-item" ng-class="{flip: card.isFaceUp}" ng-click="check(card)">
+            <div ng-repeat="card in game.deck" class="masonry-item" ng-class="{flip: card.isFaceUp}" ng-click="game.check(card)">
               <div class="card">
                 <div class="back face flipped {{ card.item }}"></div>
               </div>
@@ -307,19 +307,19 @@ Here’s the situation. It’s the night before the biggest event of your year �
           </div>
         </div>
       </div>
-      <div ng-show="results" class="results-view animsition text-center">
-        <header ng-show="results.missing">
+      <div ng-show="game.results" class="results-view animsition text-center">
+        <header ng-show="game.results.missing">
           <h1 class="animation-slide-top">You Lost</h1>
-          <p>Only {{ results.missing }} more pairs to find.</p>
+          <p>Only {{ game.results.missing }} more pairs to find.</p>
         </header>
-        <header ng-hide="results.missing">
+        <header ng-hide="game.results.missing">
           <h1 class="animation-slide-top">You Won</h1>
-          <p>Your time was {{ 60000 - results.time | date: 'm:ss'}} seconds!</p>
+          <p>Your time was {{ game.results.time }} seconds!</p>
         </header>
-        <p ng-show="results.missing" class="error-advise"><a class="btn btn-primary btn-round" href>GET A TIME BOOSTER</a></p>
+        <p ng-show="game.results.missing" class="error-advise"><a class="btn btn-primary btn-round" href>GET A TIME BOOSTER</a></p>
         <a class="btn btn-primary btn-round" ng-click="newGame()">PLAY AGAIN</a>
-      </div><!-- 
-    </div> -->
+      </div>
+    </div>
   </div>
   <!-- End Page -->
 
@@ -345,6 +345,7 @@ Here’s the situation. It’s the night before the biggest event of your year �
   <script src="../assets/vendor/intro-js/intro.js"></script>
   <script src="../assets/vendor/screenfull/screenfull.js"></script>
   <script src="../assets/vendor/slidepanel/jquery-slidePanel.js"></script>
+  <script src="../assets/js/components/mprogress.min.js"></script>
 
   <!-- Plugins For This Page -->
   <script src="../assets/vendor/masonry/masonry.pkgd.min.js"></script>
@@ -367,10 +368,11 @@ Here’s the situation. It’s the night before the biggest event of your year �
   <script src="../assets/js/components/switchery.js"></script>
 
   <!-- Scripts For This Page -->
-  <script src="../assets/examples/js/dashboard/v1.js"></script>
 
   <script src="../assets/js/components/masonry.js"></script>
   <script src="../assets/js/components/memorygame.js"></script>
+
+  <script src="../assets/examples/js/dashboard/v1.js"></script>
   <!-- <script type="text/javascript">
     (function(d,j,f,c,h,b,e){d.GoogleAnalyticsObject=h;d[h]=d[h]||function(){(d[h].q=d[h].q||[]).push(arguments)},d[h].l=1*new Date();b=j.createElement(f),e=j.getElementsByTagName(f)[0];b.async=1;b.src=c;e.parentNode.insertBefore(b,e)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create","UA-10002404-10","auto");ga("send","pageview");
   </script> -->
