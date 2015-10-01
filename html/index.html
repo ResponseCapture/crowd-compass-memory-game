@@ -81,7 +81,7 @@
       <!-- Navbar Collapse -->
       <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
         <!-- Navbar Toolbar -->
-        <div ng-show="game.remaining()" class="navbar-center">
+        <div ng-show="game.remaining() !== undefined" class="navbar-center" ng-class="{'progress-danger': game.isCritical}">
           <h1 class="progress-timer">{{ game.remaining() | date: 'm:ss'}}</h1>
           <div id="progress" class="progress-container"></div>
         </div>
@@ -206,6 +206,9 @@ Here’s the situation. It’s the night before the biggest event of your year �
       margin: 12px auto;
       display: table;
       text-align: center;
+    }
+    .progress-danger .progress-timer {
+      color: rgb(255, 0, 0);
     }
     .progress-container {
       display: inline-block;
