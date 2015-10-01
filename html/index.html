@@ -207,8 +207,35 @@ Here’s the situation. It’s the night before the biggest event of your year �
       display: table;
       text-align: center;
     }
-    .progress-danger .progress-timer {
+    .progress-danger .deter-bar {
+      background: rgb(255, 0, 0);
+    }
+    .progress-danger .progress-timer,
+    .progress-danger .bar-bg {
       color: rgb(255, 0, 0);
+      animation-duration: .4s;
+      animation-name: blink;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      -webkit-animation-duration: .4s;
+      -webkit-animation-name: blink;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-direction: alternate;
+    }
+    @keyframes blink {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+    .progress-danger .deter-bar .peg {
+      -webkit-box-shadow: 0 0 10px rgb(255, 0, 0),0 0 5px #29d;
+      box-shadow: 0 0 10px rgb(255, 0, 0),0 0 5px #29d;
+    }
+    .progress-danger .bar-bg {
+      background: rgba(255, 0, 0, 0.25);
     }
     .progress-container {
       display: inline-block;

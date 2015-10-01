@@ -79,7 +79,6 @@ function Game(cards, timeout, interval) {
 
       game.isCritical = Math.floor(remaining / 1000) <= critical;
       mprogress.set((remaining || 0) / limitMs);
-      console.log((remaining || 0) / limitMs);
 
       if (elapsed >= limit) {
         stop();
