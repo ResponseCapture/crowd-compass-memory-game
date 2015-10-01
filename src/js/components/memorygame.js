@@ -29,7 +29,7 @@ function Game(cards, timeout, interval) {
     begin,
     timer,
     limit = 30,
-    critical = 28,
+    critical = 5,
     limitMs = limit * 1000,
     noop = function () {},
     game = {};
