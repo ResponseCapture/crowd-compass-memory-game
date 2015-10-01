@@ -81,8 +81,8 @@
       <!-- Navbar Collapse -->
       <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
         <!-- Navbar Toolbar -->
-        <div ng-show="game.remaining() !== undefined" class="navbar-center" ng-class="{'progress-danger': game.isCritical}">
-          <h1 class="progress-timer">{{ game.remaining() | date: 'm:ss'}}</h1>
+        <div ng-show="!game.results" class="navbar-center" ng-class="{'progress-danger': game.isCritical}">
+          <h3 class="progress-timer">{{ game.remaining() | date: 'mm:ss'}}</h3>
           <div id="progress" class="progress-container"></div>
         </div>
         <!-- End Navbar Toolbar -->
@@ -194,10 +194,6 @@ Here’s the situation. It’s the night before the biggest event of your year �
          -moz-box-sizing: border-box;
               box-sizing: border-box;
     }
-    .progress-timer {
-      display: inline;
-      padding-right: 10px;
-    }
     .navbar-center {
       position: absolute;
       overflow: hidden;
@@ -207,12 +203,40 @@ Here’s the situation. It’s the night before the biggest event of your year �
       display: table;
       text-align: center;
     }
+    .progress-timer {
+      display: inline;
+      padding-right: 10px;
+      color: rgb(0, 153, 238);
+    }
+    .ui-mprogress .deter-bar {
+      background: rgb(0, 153, 238);
+    }
+    .ui-mprogress .deter-bar .peg {
+      -webkit-box-shadow: 0 0 10px rgb(0, 153, 238),0 0 5px #29d;
+      box-shadow: 0 0 10px rgb(0, 153, 238),0 0 5px #29d;
+    }
+    .ui-mprogress .bar-bg {
+      background: rgba(153, 153, 153, .25);
+    }
+    .ui-mprogress .bar-bg, .ui-mprogress .deter-bar {
+      height: 7px;
+    }
+    .ui-mprogress .bar-bg, .ui-mprogress .deter-bar  {
+      border-radius: 15px;
+    }
     .progress-danger .deter-bar {
-      background: rgb(255, 0, 0);
+      background: rgb(244, 67, 54);
+    }
+    .progress-danger .deter-bar .peg {
+      -webkit-box-shadow: 0 0 10px rgb(244, 67, 54),0 0 5px #29d;
+      box-shadow: 0 0 10px rgb(255, 0, 0),0 0 5px #29d;
+    }
+    .progress-danger .bar-bg {
+      background: rgba(244, 67, 54, 0.25);
     }
     .progress-danger .progress-timer,
     .progress-danger .bar-bg {
-      color: rgb(255, 0, 0);
+      color: rgb(244, 67, 54);
       animation-duration: .4s;
       animation-name: blink;
       animation-iteration-count: infinite;
@@ -230,16 +254,10 @@ Here’s the situation. It’s the night before the biggest event of your year �
         opacity: 0;
       }
     }
-    .progress-danger .deter-bar .peg {
-      -webkit-box-shadow: 0 0 10px rgb(255, 0, 0),0 0 5px #29d;
-      box-shadow: 0 0 10px rgb(255, 0, 0),0 0 5px #29d;
-    }
-    .progress-danger .bar-bg {
-      background: rgba(255, 0, 0, 0.25);
-    }
     .progress-container {
       display: inline-block;
-      padding: 15px 0 0 0;
+      margin-top: 10px;
+      height: 15px;
       width: 60%;
     }
     .results-view {

@@ -28,8 +28,8 @@ function Game(cards, timeout, interval) {
   var timer,
     begin,
     timer,
-    limit = 10,
-    critical = 5,
+    limit = 30,
+    critical = 28,
     limitMs = limit * 1000,
     noop = function () {},
     game = {};
@@ -110,9 +110,11 @@ function Game(cards, timeout, interval) {
   }
 
   game.remaining = function () {
-    if (begin && !game.results) {
+    if (begin) {
       var elapsed = game.elapsedMs();
       return elapsed < limitMs ? limitMs - elapsed : 0;
+    } else {
+      return limitMs;
     }
   }
 

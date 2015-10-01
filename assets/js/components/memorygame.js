@@ -33,7 +33,7 @@ function Game(cards, timeout, interval) {
   var timer,
     begin,
     timer,
-    limit = 10,
+    limit = 30,
     critical = 5,
     limitMs = limit * 1000,
     noop = function () {},
@@ -84,7 +84,6 @@ function Game(cards, timeout, interval) {
 
       game.isCritical = Math.floor(remaining / 1000) <= critical;
       mprogress.set((remaining || 0) / limitMs);
-      console.log((remaining || 0) / limitMs);
 
       if (elapsed >= limit) {
         stop();
@@ -116,9 +115,11 @@ function Game(cards, timeout, interval) {
   }
 
   game.remaining = function () {
-    if (begin && !game.results) {
+    if (begin) {
       var elapsed = game.elapsedMs();
       return elapsed < limitMs ? limitMs - elapsed : 0;
+    } else {
+      return limitMs;
     }
   }
 
