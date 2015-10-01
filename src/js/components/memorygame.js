@@ -24,7 +24,7 @@ var level1 = [
   'L1-phones'
 ];
 
-function Level(cards, limit, timeout, interval) {
+function Game(cards, limit, timeout, interval) {
   var timer,
     begin,
     timer,
@@ -129,7 +129,7 @@ var app = angular.module('cards', []);
 
 app.controller("CardController", function($scope, $timeout, $interval) {
   $scope.newGame = function () {
-    $scope.game = Level(level1, 30, $timeout, $interval);
+    $scope.game = Game(level1, 30, $timeout, $interval);
   };
 }); 
 
