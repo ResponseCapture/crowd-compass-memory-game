@@ -129,6 +129,9 @@ Here’s the situation. It’s the night before the biggest event of your year �
       padding: 1px 10px;
       margin-bottom: 2px;
     }
+    .invalid-input {
+      border: 1px solid rgb(244, 67, 54);
+    }
     .navbar-brand-logo {
       height: 28px;
     }
@@ -388,8 +391,8 @@ Here’s the situation. It’s the night before the biggest event of your year �
           <p class="error-advise">
             <a ng-show="!getinfo" class="btn btn-primary btn-round" ng-click="getinfo = true">GET A TIME BOOSTER</a>
             <span ng-show="getinfo">
-              <label>Work Email: <input type="email" ng-model="user.workEmail"></label>
-              <a class="btn btn-primary btn-go btn-round" ng-click="getinfo = false; newGame(true)">GO</a>
+              <label>Work Email: <input type="email" ng-required ng-model="user.workEmail"></label>
+              <a class="btn btn-primary btn-go btn-round" ng-disabled="!user.workEmail" ng-click="getinfo = false; newGame(true)">GO</a>
             </span>
           </p>
           <a class="btn btn-primary btn-round" ng-click="newGame()">PLAY AGAIN</a>
@@ -402,8 +405,8 @@ Here’s the situation. It’s the night before the biggest event of your year �
           <p class="error-advise">
             <a ng-show="!getinfo" class="btn btn-primary btn-round" ng-click="getinfo = true">GO TO NEXT LEVEL</a>
             <span ng-show="getinfo"> 
-              <label>Work Email: <input type="email" ng-model="user.workEmail"></label>
-              <a class="btn btn-primary btn-go btn-round" ng-click="getinfo = false; playLevel(2)">GO</a>
+              <label>Work Email: <input type="email" ng-required ng-model="user.workEmail"></label>
+              <a class="btn btn-primary btn-go btn-round" ng-disabled="!user.workEmail" ng-click="getinfo = false; playLevel(2)">GO</a>
             </span>
           </p>
           <a class="btn btn-primary btn-round" ng-click="newGame()">PLAY AGAIN</a>
