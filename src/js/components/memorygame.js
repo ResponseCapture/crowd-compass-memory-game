@@ -75,6 +75,7 @@ function Game(cards, limit, timeout, interval) {
 
   var checkNext;
   var check = function(card) {
+    if (card.isFaceUp) return;
     if (checkNext) {
       checkNext(card);
     } else {
