@@ -24,6 +24,38 @@ var level1 = [
   'L1-phones'
 ];
 
+var level2 = [
+  'L1-placer',
+  'L1-woman-docs',
+  'L2-app-icons',
+  'L2-boxing',
+  'L2-crowd',
+  'L2-decisions'
+];
+
+var level3 = [
+  'L1-placer',
+  'L3-jumping-guy',
+  'L3-party-girl',
+  'L3-sleeping-woman',
+  'L3-super-woman',
+  'L3-tired-guy'
+];
+
+function MemoryGame(timeout, interval) {
+  var games = [];
+
+  this.newGame = function (booster, level) {
+    booster = booster || 0;
+
+    switch (level) {
+      case 2: return Game(level2, 20 + booster, timeout, interval);
+      case 3: return Game(level3, 10 + booster, timeout, interval);
+      default: return Game(level1, 30 + booster, timeout, interval);
+    }
+  }
+}
+
 function Game(cards, limit, timeout, interval) {
   var timer,
     begin,
@@ -128,8 +160,14 @@ function Game(cards, limit, timeout, interval) {
 var app = angular.module('cards', []);
 
 app.controller("CardController", function($scope, $timeout, $interval) {
-  $scope.newGame = function () {
-    $scope.game = Game(level1, 30, $timeout, $interval);
+  var memoryGame = new MemoryGame($timeout, $interval);
+
+  $scope.newGame = function (booster) {
+    $scope.game = memoryGame.newGame(booster);
+  };
+
+  $scope.playLevel = function (level) {
+    $scope.game = memoryGame.newGame(null, level);
   };
 }); 
 

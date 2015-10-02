@@ -29,16 +29,48 @@ var level1 = [
   'L1-phones'
 ];
 
-function Level(cards, limit, timeout, interval) {
+var level2 = [
+  'L1-placer',
+  'L1-woman-docs',
+  'L2-app-icons',
+  'L2-boxing',
+  'L2-crowd',
+  'L2-decisions'
+];
+
+var level3 = [
+  'L1-placer',
+  'L3-jumping-guy',
+  'L3-party-girl',
+  'L3-sleeping-woman',
+  'L3-super-woman',
+  'L3-tired-guy'
+];
+
+function MemoryGame(timeout, interval) {
+  var games = [];
+
+  this.newGame = function (booster, level) {
+    booster = booster || 0;
+
+    switch (level) {
+      case 2: return Game(level2, 20 + booster, timeout, interval);
+      case 3: return Game(level3, 10 + booster, timeout, interval);
+      default: return Game(level1, 30 + booster, timeout, interval);
+    }
+  }
+}
+
+function Game(cards, limit, timeout, interval) {
   var timer,
     begin,
     timer,
     critical = 5,
     limitMs = limit * 1000,
     noop = function () {},
-    level = {};
+    game = {};
 
-  level.deck = shuffle(cards.concat(cards))
+  game.deck = shuffle(cards.concat(cards))
     .map(function(picture) {
       return {
         item: picture,
@@ -63,7 +95,7 @@ function Level(cards, limit, timeout, interval) {
           }, 250);
         }
 
-        if (level.deck.every(function (c) { 
+        if (game.deck.every(function (c) { 
           return c.isFaceUp; 
         })) {
           stop();
@@ -73,15 +105,15 @@ function Level(cards, limit, timeout, interval) {
   };
 
   var start = function () {
-    level.check = check;
+    game.check = check;
     begin = new Date();
     mprogress.start();
 
     timer = interval(function () {
-      var elapsed = level.elapsedMs() / 1000,
-        remaining = level.remaining();
+      var elapsed = game.elapsedMs() / 1000,
+        remaining = game.remaining();
 
-      level.isCritical = Math.floor(remaining / 1000) <= critical;
+      game.isCritical = Math.floor(remaining / 1000) <= critical;
       mprogress.set((remaining || 0) / limitMs);
 
       if (elapsed >= limit) {
@@ -92,53 +124,55 @@ function Level(cards, limit, timeout, interval) {
 
   var stop = function () {
     interval.cancel(timer);
-    level.check = noop;
+    game.check = noop;
     var end = new Date() - begin;
-    var faceDown = level.deck
+    var faceDown = game.deck
       .filter(function (c) { 
         return !c.isFaceUp; 
       }).length;
 
       timeout(function() {
-        level.results = {
+        game.results = {
           time: Math.ceil(end / 1000),
-          total: level.deck.length / 2,
+          total: game.deck.length / 2,
           missing: Math.ceil(faceDown / 2)
         };
         mprogress.end();
       }, 1500);
   };
 
-  level.elapsedMs = function () {
+  game.elapsedMs = function () {
     return new Date() - begin;
   }
 
-  level.remaining = function () {
+  game.remaining = function () {
     if (begin) {
-      var elapsed = level.elapsedMs();
+      var elapsed = game.elapsedMs();
       return elapsed < limitMs ? limitMs - elapsed : 0;
     } else {
       return limitMs;
     }
   }
 
-  level.check = function (card) {
+  game.check = function (card) {
     start();
     check(card);
   };
 
-  return level;
-}
-
-function Game() {
-  
+  return game;
 }
 
 var app = angular.module('cards', []);
 
 app.controller("CardController", function($scope, $timeout, $interval) {
-  $scope.newGame = function () {
-    $scope.game = Level(level1, 30, $timeout, $interval);
+  var memoryGame = new MemoryGame($timeout, $interval);
+
+  $scope.newGame = function (booster) {
+    $scope.game = memoryGame.newGame(booster);
+  };
+
+  $scope.playLevel = function (level) {
+    $scope.game = memoryGame.newGame(null, level);
   };
 }); 
 
