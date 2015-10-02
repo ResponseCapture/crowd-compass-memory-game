@@ -54,23 +54,41 @@ function MemoryGame(timeout, interval) {
     booster = booster || 0;
 
     switch (level) {
-      case 2: return Game(level2, 20 + booster, timeout, interval);
-      case 3: return Game(level3, 10 + booster, timeout, interval);
-      default: return Game(level1, 30 + booster, timeout, interval);
+      case 3:
+        return Game({
+          cards: level3,
+          limit: 10 + booster,
+          cardFront: 'card-front-3.png'
+        }, timeout, interval);
+      case 2:
+        return Game({
+          cards: level2,
+          limit: 20 + booster,
+          cardFront: 'card-front-2.png'
+        }, timeout, interval);
+      default:
+        return Game({
+          cards: level1,
+          limit: 30 + booster,
+          cardFront: 'card-front-1.png'
+        }, timeout, interval);
     }
   }
 }
 
-function Game(cards, limit, timeout, interval) {
+function Game(options, timeout, interval) {
   var timer,
     begin,
     timer,
     critical = 5,
+    limit = options.limit,
     limitMs = limit * 1000,
     noop = function () {},
     game = {};
 
-  game.deck = shuffle(cards.concat(cards))
+  game.cardFront = options.cardFront;
+
+  game.deck = shuffle(options.cards.concat(options.cards))
     .map(function(picture) {
       return {
         item: picture,
