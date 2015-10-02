@@ -17,14 +17,6 @@
   <link rel="stylesheet" href="../assets/css/bootstrap-extend.min.css">
   <link rel="stylesheet" href="../assets/css/site.min.css">
 
-  <!-- Plugins -->
-  <link rel="stylesheet" href="../assets/vendor/animsition/animsition.css">
-  <link rel="stylesheet" href="../assets/vendor/asscrollable/asScrollable.css">
-  <link rel="stylesheet" href="../assets/vendor/switchery/switchery.css">
-  <link rel="stylesheet" href="../assets/vendor/intro-js/introjs.css">
-  <link rel="stylesheet" href="../assets/vendor/slidepanel/slidePanel.css">
-  <link rel="stylesheet" href="../assets/vendor/flag-icon-css/flag-icon.css">
-
   <!-- Page -->
   <link rel="stylesheet" href="../assets/examples/css/dashboard/v1.css">
 
@@ -129,9 +121,6 @@ Here’s the situation. It’s the night before the biggest event of your year �
       padding: 1px 10px;
       margin-bottom: 2px;
     }
-    .invalid-input {
-      border: 2px solid rgb(244, 67, 54);
-    }
     .navbar-brand-logo {
       height: 28px;
     }
@@ -229,6 +218,11 @@ Here’s the situation. It’s the night before the biggest event of your year �
     }
     .ui-mprogress .bar-bg, .ui-mprogress .deter-bar  {
       border-radius: 15px;
+    }
+    .ui-mprogress .peg {
+      -webkit-transform: rotate(3deg) translate(0, -6px);
+      -moz-transform: rotate(3deg) translate(0, -6px);
+      transform: rotate(3deg) translate(0, -6px);
     }
     .progress-danger .deter-bar {
       background: rgb(244, 67, 54);
@@ -389,8 +383,8 @@ Here’s the situation. It’s the night before the biggest event of your year �
           </header>
           <p class="error-advise">
             <a ng-hide="getinfo" class="btn btn-primary btn-round" ng-click="getinfo = true">GET A TIME BOOSTER</a>
-            <span ng-show="getinfo">
-              <label>Work Email: <input type="email" ng-class="{'invalid-input': !user.workEmail}" ng-pattern="/\./" ng-required ng-model="user.workEmail" autofocus></label>
+            <span ng-if="getinfo">
+              <label>Work Email: <input type="email" ng-pattern="/\./" ng-required ng-model="user.workEmail" autofocus></label>
               <a class="btn btn-primary btn-go btn-round" ng-disabled="!user.workEmail" ng-click="getinfo = false; newGame(true)">GO</a>
             </span>
           </p>
@@ -403,8 +397,8 @@ Here’s the situation. It’s the night before the biggest event of your year �
           </header>
           <p class="error-advise">
             <a ng-hide="getinfo" class="btn btn-primary btn-round" ng-click="getinfo = true">GO TO NEXT LEVEL</a>
-            <span ng-show="getinfo"> 
-              <label>Work Email: <input type="email" ng-class="{'invalid-input': !user.workEmail}" ng-pattern="/\./" ng-required ng-model="user.workEmail" autofocus></label>
+            <span ng-if="getinfo"> 
+              <label>Work Email: <input type="email" ng-pattern="/\./" ng-required ng-model="user.workEmail" autofocus></label>
               <a class="btn btn-primary btn-go btn-round" ng-disabled="!user.workEmail" ng-click="getinfo = false; playLevel(2)">GO</a>
             </span>
           </p>
