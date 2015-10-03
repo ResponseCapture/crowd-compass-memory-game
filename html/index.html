@@ -376,7 +376,7 @@ Here’s the situation. It’s the night before the biggest event of your year �
         <div ng-show="game.results.missing" class="results-view animsition text-center">
           <header>
             <h1 class="animation-slide-top">You Lost</h1>
-            <p>Only {{ game.results.missing }} more pairs to find.</p>
+            <p>Only {{ game.results.missing }} more pair{{ game.results.missing > 1 ? 's' : '' }} to find.</p>
           </header>
           <p class="error-advise">
             <a ng-hide="getinfo" class="btn btn-primary btn-round" ng-click="getinfo = true">GET A TIME BOOSTER</a>
