@@ -176,7 +176,7 @@ function Game(options, timeout, interval) {
   return game;
 }
 
-var app = angular.module('cards', []);
+var app = angular.module('memory-game', []);
 
 app.controller("CardController", function($scope, $timeout, $interval) {
   var memoryGame = new MemoryGame($timeout, $interval);
