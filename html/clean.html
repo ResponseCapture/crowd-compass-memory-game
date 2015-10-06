@@ -131,6 +131,7 @@
   .mg-sidemenu {
     background-color: #37474f;
     position: fixed;
+    top: 0;
     color: rgb(255, 255, 255);
     width: 330px;
     height: 100%;
@@ -164,9 +165,10 @@
   .mg-content {
     position: relative;
     overflow: auto;
+    margin-top: 66px;
     background-color: #f1f4f5;
     height: calc(100vh - 112px);
-    z-index: -1;
+    z-index: 1;
   }
   
   .mg-main {
@@ -192,6 +194,11 @@
 
   .mg-main nav {
     background-color: #fff;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    left: 330px;
   }
 
   .mg-mobilenav {
@@ -209,18 +216,15 @@
     background-color: #263238;
   }
 
-  .mg-main--social {
-    float: right;
-    padding-top: 18px;
-    padding-right: 15px;
-  }
-
   .mg-main--avatar {
-    display: inline-block;
     width: 30px;
+    position: fixed;
+    top: 18px;
+    right: 15px;
+    z-index: 101;
   }
 
-  .mg-main--social img {
+  .mg-main--avatar img {
     max-width: 100%;
     height: auto;
     border-radius: 1000px;
@@ -552,6 +556,9 @@
     <script src="../assets/vendor/respond/respond.min.js"></script>
     <![endif]-->
 
+    <span class="mg-main--avatar">
+      <img src="../assets/portraits/5.jpg" alt="...">
+    </span>
     <nav class="mg-mobilenav">
       <button class="hamburger">
         <span class="sr-only">Toggle navigation</span>
@@ -562,11 +569,6 @@
         <h3 class="progress-timer">{{ game.remaining() | date: 'mm:ss'}}</h3>
         <div id="progress" class="progress-container"></div>
       </span>
-      <div class="mg-main--social">
-        <span class="mg-main--avatar">
-          <img src="../assets/portraits/5.jpg" alt="...">
-        </span>
-      </div>
     </nav>
     <div class="mg-sidemenu">
       <nav class="mg-darknav">
@@ -596,12 +598,6 @@
           <h3 class="progress-timer">{{ game.remaining() | date: 'mm:ss'}}</h3>
           <div id="progress" class="progress-container"></div>
         </span>
-
-        <div class="mg-main--social">
-          <span class="mg-main--avatar">
-            <img src="../assets/portraits/5.jpg" alt="...">
-          </span>
-        </div>
       </nav>
       <section class="mg-content">
 
