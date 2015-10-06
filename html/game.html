@@ -27,38 +27,13 @@
       color: #76838f;
       font-family: Roboto, sans-serif;
     }
-    .memory-game {
-      max-width: 756px;
-      max-height: 567px;
-      margin: auto;
-    }
-    .card-container {
-      width: 100%;
-      padding-bottom: 75%;
-    /*
-      min-width: 650px;
-      max-width: 800px;
-      padding-top: 66px;*/
-    }
     * { box-sizing: border-box; }
-    .navbar-center {
-      width: 100%;
-      text-align: center;
-    }
-    .progress-timer {
-      font-weight: 400;
-      line-height: 1.2;
-      font-size: 24px;
-      display: inline;
-      padding-right: 10px;
-      color: rgb(0, 153, 238);
-    }
     .ui-mprogress .deter-bar {
       background: rgb(0, 153, 238);
     }
     .ui-mprogress .deter-bar .peg {
-      -webkit-box-shadow: 0 0 10px rgb(0, 153, 238),0 0 5px #29d;
-      box-shadow: 0 0 10px rgb(0, 153, 238),0 0 5px #29d;
+      box-shadow: 0 0 10px rgb(0, 153, 238),0 0 14px #29d;
+      right: 2px;
     }
     .ui-mprogress .bar-bg {
       background: rgba(153, 153, 153, .25);
@@ -76,8 +51,7 @@
       background: rgb(244, 67, 54);
     }
     .progress-danger .deter-bar .peg {
-      -webkit-box-shadow: 0 0 10px rgb(244, 67, 54),0 0 5px #29d;
-      box-shadow: 0 0 10px rgb(255, 0, 0),0 0 5px #29d;
+      box-shadow: 0 0 10px rgb(255, 0, 0),0 0 14px #29d;
     }
     .progress-danger .bar-bg {
       background: rgba(244, 67, 54, 0.25);
@@ -100,11 +74,32 @@
         opacity: 0;
       }
     }
+    .clear {
+      clear: both;
+    }
+    .navbar-center {
+      max-width: 756px;
+      margin: 18px auto 0;
+      padding: 0 1.7%;
+    }
+    .ui-mprogress {
+      width: 100%;
+    }
+    .progress-timer {
+      font-size: 24px;
+      font-weight: 400;
+      line-height: .4;
+      margin: 0;
+      float: left;
+      padding-right: 5px;
+      color: rgb(0, 153, 238);
+    }
     .progress-container {
-      display: inline-block;
       margin-top: 10px;
-      height: 15px;
-      width: 60%;
+      border-radius: 1000px;
+      height: 7px;
+      z-index: 10;
+      overflow: hidden;
     }
     .results {
       padding: 30px;
@@ -153,15 +148,24 @@
       padding: 1px 10px;
       margin: 0 0 2px 2px;
     }
+    .card-container {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      clear: both;
+      max-width: 756px;
+      max-height: 567px;
+      margin: auto;
+      padding: 1%;
+    }
     .card {
       background-size: cover;
-      width: 22%;
-      max-width: 175px;
-      height: 175px;
+      width: 23%;
+      padding-bottom: 23%;
+      margin: 1%;
       display: inline-block;
       float: left;
       background-color: #fff;
-      margin: 7px;
       cursor: pointer;
       transform-style: preserve-3d;
       transition: all .25s linear;
@@ -179,9 +183,6 @@
     .flip .card {
       transform: rotateY(180deg);
     }
-    .flipped { 
-      background: url('../assets/images/sprite.png');
-    }
     .face {
       position: absolute;
       width: 100%;
@@ -189,59 +190,69 @@
       -webkit-backface-visibility: hidden; 
       backface-visibility: hidden; 
     }
+    .flipped { 
+      background: url('../assets/images/sprite.png');
+    }
     .flipped.L1-placer { 
       background-position: 0 0; 
     } 
     .flipped.L1-clock { 
-      background-position: -181px 0;
+      background-position: 6.66% 0;
     } 
     .flipped.L1-personality { 
-      background-position: -361px 0; 
+      background-position: 13.33% 0; 
     } 
     .flipped.L1-frazzled { 
-      background-position: -542px 0; 
+      background-position: 20% 0; 
     } 
     .flipped.L1-supplies { 
-      background-position: -723px 0;
+      background-position: 26.66% 0;
     } 
     .flipped.L1-phones { 
-      background-position: -903px 0; 
+      background-position: 33.33% 0; 
     } 
     .flipped.L1-woman-docs { 
-      background-position: -1084px 0; 
+      background-position: 40% 0; 
     } 
     .flipped.L2-app-icons { 
-      background-position: -1265px 0; 
+      background-position: 46.66% 0; 
     } 
     .flipped.L2-boxing {
-      background-position: -1445px 0; 
+      background-position: 53.33% 0; 
     } 
     .flipped.L2-crowd {
-      background-position: -1626px 0; 
+      background-position: 60% 0; 
     } 
     .flipped.L2-decisions { 
-      background-position: -1806px 0; 
+      background-position: 66.66% 0; 
     } 
     .flipped.L2-jumping-guy { 
-      background-position: -1987px 0; 
+      background-position: 73.33% 0; 
     } 
     .flipped.L3-party-girl { 
-      background-position: -2167px 0; 
+      background-position: 80% 0; 
     } 
     .flipped.L3-sleeping-woman { 
-      background-position: -2348px 0; 
+      background-position: 86.66% 0; 
     } 
     .flipped.L3-super-woman { 
-      background-position: -2528px 0; 
+      background-position: 93.33% 0; 
     } 
     .flipped.L3-tired-guy { 
-      background-position: -2709px 0; 
+      background-position: 100% 0; 
+    }
+    @media screen and (max-width: 768px) {
+      .card {
+        width: 31.33%;
+        padding-bottom: 31.33%;
+        margin: 1%;
+      }
     }
     @media only screen and (-webkit-min-device-pixel-ratio: 2), 
       only screen and (min-device-pixel-ratio: 2) {
       .flipped { 
         background: url('../assets/images/sprite@2x.png');
-        background-size: 2884px 176px;
+        background-size: auto 100%;
       }
     }
   </style>
@@ -250,6 +261,7 @@
     <div ng-hide="game.results" class="navbar-center" ng-class="{'progress-danger': game.isCritical}">
       <h3 class="progress-timer">{{ game.remaining() | date: 'mm:ss'}}</h3>
       <div id="progress" class="progress-container"></div>
+      <div class="clear"></div>
     </div>
 
     <div ng-hide="game.results" class="card-container" data-plugin="masonry" ng-init="newGame()">

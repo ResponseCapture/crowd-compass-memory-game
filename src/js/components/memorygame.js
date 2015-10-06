@@ -82,6 +82,8 @@ function Game(options, timeout, interval) {
     game = {};
 
   game.cardFront = options.cardFront;
+  mprogress.start();
+  mprogress.set(.99999);
 
   game.deck = shuffle(options.cards.concat(options.cards))
     .map(function(picture) {
@@ -121,7 +123,6 @@ function Game(options, timeout, interval) {
   var start = function () {
     game.check = check;
     begin = new Date();
-    mprogress.start();
 
     timer = interval(function () {
       var elapsed = game.elapsedMs() / 1000,
@@ -138,6 +139,8 @@ function Game(options, timeout, interval) {
 
   var stop = function () {
     interval.cancel(timer);
+    mprogress.set(1);
+    mprogress.end();
     game.check = noop;
     var end = new Date() - begin;
     var faceDown = game.deck
@@ -151,7 +154,6 @@ function Game(options, timeout, interval) {
           total: game.deck.length / 2,
           missing: Math.ceil(faceDown / 2)
         };
-        mprogress.end();
       }, 1500);
   };
 
