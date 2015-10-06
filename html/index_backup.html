@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html class="no-js css-menubar" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <meta name="description" content="bootstrap admin template">
+  <meta name="author" content="">
+
+  <title>CrowdCompass Memory Game</title>
+
+  <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="../assets/images/favicon.ico">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-extend.min.css">
+  <link rel="stylesheet" href="../assets/css/site.min.css">
+
+  <!-- Fonts -->
+  <link rel="stylesheet" href="../assets/fonts/web-icons/web-icons.min.css">
+  <link rel="stylesheet" href="../assets/fonts/brand-icons/brand-icons.min.css">
+  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+  <link rel="stylesheet" href="../assets/fonts/weather-icons/weather-icons.css">
+
+  <!--[if lt IE 9]>
+    <script src="../assets/vendor/html5shiv/html5shiv.min.js"></script>
+    <![endif]-->
+
+  <!--[if lt IE 10]>
+    <script src="../assets/vendor/media-match/media.match.min.js"></script>
+    <script src="../assets/vendor/respond/respond.min.js"></script>
+    <![endif]-->
+
+  <!-- Scripts -->
+  <script src="../assets/vendor/modernizr/modernizr.js"></script>
+  <script src="../assets/vendor/breakpoints/breakpoints.js"></script>
+  <script>
+    Breakpoints();
+  </script>
+</head>
+<body class="dashboard" ng-app="memory-game" ng-controller="CardController">
+  <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+  <nav class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega" role="navigation">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle hamburger hamburger-close navbar-toggle-left hided"
+      data-toggle="menubar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="hamburger-bar"></span>
+      </button>
+      <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
+        <img class="navbar-brand-logo" src="../assets/images/crowdcompass-logo-white.png" title="CrowdCompass">
+      </div>
+      <div class="navbar-toggle collapsed">
+        <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
+        data-animation="scale-up" role="button">
+          <span class="avatar avatar-online">
+            <img src="../assets/portraits/5.jpg" alt="...">
+            <i></i>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <div class="navbar-container container-fluid">
+      <!-- Navbar Collapse -->
+      <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
+        <!-- Navbar Toolbar -->
+        <div ng-show="!game.results" class="navbar-center" ng-class="{'progress-danger': game.isCritical}">
+          <h3 class="progress-timer">{{ game.remaining() | date: 'mm:ss'}}</h3>
+          <div id="progress" class="progress-container"></div>
+        </div>
+        <!-- End Navbar Toolbar -->
+        <!-- Navbar Toolbar Right -->
+        <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+          <li class="dropdown">
+            <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
+            data-animation="scale-up" role="button">
+              <span class="avatar avatar-online">
+                <img src="../assets/portraits/5.jpg" alt="...">
+                <i></i>
+              </span>
+            </a>
+          </li>
+        </ul>
+        <!-- End Navbar Toolbar Right -->
+      </div>
+      <!-- End Navbar Collapse -->
+      <!-- Site Navbar Seach -->
+      <!-- End Site Navbar Seach -->
+    </div>
+  </nav>
+  <div class="site-menubar">
+    <div class="site-menubar-body">
+      <div>
+          <div class="site-menubar-section">
+            <h3>
+              Alright {First Name},
+            </h3>
+Here’s the situation. It’s the night before the biggest event of your year – and your event day toolkit has gone missing! Can you find all your essentials in 45 seconds or less?
+          </div>
+        </div>
+    </div>
+    <div class="ssk-group">
+      <a href="" class="ssk ssk-linkedin"></a>
+      <a href="" class="ssk ssk-twitter"></a>
+      <a href="" class="ssk ssk-pinterest"></a>
+      <a href="" class="ssk ssk-facebook"></a>
+    </div>
+  </div>
+
+  <style>
+    .btn-go {
+      padding: 1px 10px;
+      margin: 0 0 2px 2px;
+    }
+    .navbar-brand-logo {
+      height: 28px;
+    }
+    .site-menubar-section, .site-menubar-section h3 {
+      color: white;
+    }
+    .site-menubar-section h3 {
+      font-weight: 300;
+    }
+    .ssk-group {
+      width: 100%;
+      padding: 0;
+    }
+    .site-footer span {
+      font-size: 11px;
+      color: #7a97a0;
+      margin: 30px 0 0 0;
+    }
+    .site-footer {
+      text-align: center;
+      background-color: #fff;
+    }
+    .ssk-group {
+      bottom: 0;
+      position: absolute;
+    }
+    .ssk {
+      background-color: #2d3b42;
+      width: 25%;
+      padding: 15px 0;
+      margin: 0;
+      color: rgba(163,175,183,.9);
+    }
+    .ssk::before {
+      font-size: 16px;
+    }
+    .ssk:hover {
+      color: rgba(255,255,255, 1);
+    }
+    .card-container {
+      min-width: 650px;
+      max-width: 800px;
+      padding-top: 66px;
+      margin: auto;
+    }
+    .card {
+      background-size: cover;
+      width: 175px;
+      height: 175px;
+      display: inline-block;
+      float: left;
+      background-color: #fff;
+      margin: 7px;
+      cursor: pointer;
+      -moz-transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      -moz-transition: all .25s linear;
+      -webkit-transition: all .25s linear;
+      transition: all .25s linear;
+      -webkit-backface-visibility: hidden; 
+      backface-visibility: hidden; 
+    }
+    * {
+      -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+              box-sizing: border-box;
+    }
+    .navbar-center {
+      position: absolute;
+      overflow: hidden;
+      height: 100%;
+      width: 100%;
+      margin: 12px auto;
+      display: table;
+      text-align: center;
+    }
+    .progress-timer {
+      display: inline;
+      padding-right: 10px;
+      color: rgb(0, 153, 238);
+    }
+    .ui-mprogress .deter-bar {
+      background: rgb(0, 153, 238);
+    }
+    .ui-mprogress .deter-bar .peg {
+      -webkit-box-shadow: 0 0 10px rgb(0, 153, 238),0 0 5px #29d;
+      box-shadow: 0 0 10px rgb(0, 153, 238),0 0 5px #29d;
+    }
+    .ui-mprogress .bar-bg {
+      background: rgba(153, 153, 153, .25);
+    }
+    .ui-mprogress .bar-bg, .ui-mprogress .deter-bar {
+      height: 7px;
+    }
+    .ui-mprogress .bar-bg, .ui-mprogress .deter-bar  {
+      border-radius: 15px;
+    }
+    .ui-mprogress .peg {
+      -webkit-transform: rotate(3deg) translate(0, -6px);
+      -moz-transform: rotate(3deg) translate(0, -6px);
+      transform: rotate(3deg) translate(0, -6px);
+    }
+    .progress-danger .deter-bar {
+      background: rgb(244, 67, 54);
+    }
+    .progress-danger .deter-bar .peg {
+      -webkit-box-shadow: 0 0 10px rgb(244, 67, 54),0 0 5px #29d;
+      box-shadow: 0 0 10px rgb(255, 0, 0),0 0 5px #29d;
+    }
+    .progress-danger .bar-bg {
+      background: rgba(244, 67, 54, 0.25);
+    }
+    .progress-danger .progress-timer,
+    .progress-danger .bar-bg {
+      color: rgb(244, 67, 54);
+    }
+    .progress-danger .bar-bg {
+      animation-duration: .4s;
+      animation-name: blink;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      -webkit-animation-duration: .4s;
+      -webkit-animation-name: blink;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-direction: alternate;
+    }
+    @keyframes blink {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+    .progress-container {
+      display: inline-block;
+      margin-top: 10px;
+      height: 15px;
+      width: 60%;
+    }
+    .results-view {
+      padding: 30px;
+    }
+    .results-view h1 {
+      font-size: 5em;
+      font-weight: 400;
+    }
+    .results-view header p {
+      margin-bottom: 30px;
+      font-size: 30px;
+      text-transform: uppercase;
+    }
+    .card:hover {
+      box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
+      -moz-transform: scale(1.001);
+      -webkit-transform: scale(1.001);
+      transform: scale(1.001);
+    }
+    .face.back {
+      box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
+      -moz-transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    .flip .card {
+      -moz-transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+    }
+    .flipped { 
+      background: url('../assets/images/sprite.png');
+    }
+    .face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden; 
+      backface-visibility: hidden; 
+    }
+    .flipped.L1-placer { 
+      background-position: 0 0; 
+    } 
+    .flipped.L1-clock { 
+      background-position: -181px 0;
+    } 
+    .flipped.L1-personality { 
+      background-position: -361px 0; 
+    } 
+    .flipped.L1-frazzled { 
+      background-position: -542px 0; 
+    } 
+    .flipped.L1-supplies { 
+      background-position: -723px 0;
+    } 
+    .flipped.L1-phones { 
+      background-position: -903px 0; 
+    } 
+    .flipped.L1-woman-docs { 
+      background-position: -1084px 0; 
+    } 
+    .flipped.L2-app-icons { 
+      background-position: -1265px 0; 
+    } 
+    .flipped.L2-boxing {
+      background-position: -1445px 0; 
+    } 
+    .flipped.L2-crowd {
+      background-position: -1626px 0; 
+    } 
+    .flipped.L2-decisions { 
+      background-position: -1806px 0; 
+    } 
+    .flipped.L2-jumping-guy { 
+      background-position: -1987px 0; 
+    } 
+    .flipped.L3-party-girl { 
+      background-position: -2167px 0; 
+    } 
+    .flipped.L3-sleeping-woman { 
+      background-position: -2348px 0; 
+    } 
+    .flipped.L3-super-woman { 
+      background-position: -2528px 0; 
+    } 
+    .flipped.L3-tired-guy { 
+      background-position: -2709px 0; 
+    }
+    @media only screen and (-webkit-min-device-pixel-ratio: 2), 
+      only screen and (min-device-pixel-ratio: 2) {
+      .flipped { 
+        background: url('../assets/images/sprite@2x.png');
+        background-size: 2884px 176px;
+      }
+    }
+  </style>
+
+  <!-- Page -->
+  <div class="page">
+    <div class="page-content container-fluid">
+      <div ng-hide="game.results">
+        <div class="card-container">
+          <div data-plugin="masonry" ng-init="newGame()">
+            <div ng-repeat="card in game.deck" class="masonry-item" ng-class="{flip: card.isFaceUp}" ng-click="game.check(card)">
+              <div class="card" ng-style="{'background-image': 'url(../assets/images/' + game.cardFront + ')' }">
+                <div class="back face flipped {{ card.item }}"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div ng-show="game.results">
+        <div ng-show="game.results.missing" class="results-view animsition text-center">
+          <header>
+            <h1 class="animation-slide-top">You Lost</h1>
+            <p>Only {{ game.results.missing }} more pair{{ game.results.missing > 1 ? 's' : '' }} to find.</p>
+          </header>
+          <p class="error-advise">
+            <a ng-hide="getinfo" class="btn btn-primary btn-round" ng-click="getinfo = true">GET A TIME BOOSTER</a>
+            <span ng-if="getinfo">
+              <label>Work Email: <input type="email" ng-pattern="/\./" ng-required ng-model="user.workEmail" autofocus></label>
+              <a class="btn btn-primary btn-go btn-round" ng-disabled="!user.workEmail" ng-click="getinfo = false; newGame(true)">GO</a>
+            </span>
+          </p>
+          <a class="btn btn-primary btn-round" ng-click="newGame()">PLAY AGAIN</a>
+        </div>
+        <div ng-hide="game.results.missing" class="results-view animsition text-center">
+          <header>
+            <h1 class="animation-slide-top">You Won</h1>
+            <p>Your time was {{ game.results.time }} seconds!</p>
+          </header>
+          <p class="error-advise">
+            <a ng-hide="getinfo" class="btn btn-primary btn-round" ng-click="getinfo = true">GO TO NEXT LEVEL</a>
+            <span ng-if="getinfo"> 
+              <label>Work Email: <input type="email" ng-pattern="/\./" ng-required ng-model="user.workEmail" autofocus></label>
+              <a class="btn btn-primary btn-go btn-round" ng-disabled="!user.workEmail" ng-click="getinfo = false; playLevel(2)">GO</a>
+            </span>
+          </p>
+          <a class="btn btn-primary btn-round" ng-click="newGame()">PLAY AGAIN</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page -->
+
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <span class="site-footer-legal">© Copyright 2009-2015 <a href="http://www.crowdcompass.com">CrowdCompass</a>. All Rights Reserved.</span>
+
+  </footer>
+
+  <!-- Core  -->
+  <script src="../assets/vendor/jquery/jquery.js"></script>
+  <script src="../assets/vendor/bootstrap/bootstrap.js"></script>
+  <script src="../assets/vendor/animsition/jquery.animsition.js"></script>
+  <script src="../assets/vendor/asscroll/jquery-asScroll.js"></script>
+  <script src="../assets/vendor/mousewheel/jquery.mousewheel.js"></script>
+  <script src="../assets/vendor/asscrollable/jquery.asScrollable.all.js"></script>
+  <script src="../assets/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
+  <script src="../assets/vendor/angular/angular.js"></script>
+
+  <!-- Plugins -->
+  <script src="../assets/vendor/switchery/switchery.min.js"></script>
+  <script src="../assets/vendor/intro-js/intro.js"></script>
+  <script src="../assets/vendor/screenfull/screenfull.js"></script>
+  <script src="../assets/vendor/slidepanel/jquery-slidePanel.js"></script>
+  <script src="../assets/js/components/mprogress.min.js"></script>
+
+  <!-- Plugins For This Page -->
+  <script src="../assets/vendor/masonry/masonry.pkgd.min.js"></script>
+
+  <!-- Scripts -->
+  <script src="../assets/js/core.js"></script>
+  <script src="../assets/js/site.js"></script>
+
+  <script src="../assets/js/sections/menu.js"></script>
+  <script src="../assets/js/sections/menubar.js"></script>
+  <script src="../assets/js/sections/gridmenu.js"></script>
+  <script src="../assets/js/sections/sidebar.js"></script>
+
+  <script src="../assets/js/configs/config-colors.js"></script>
+  <script src="../assets/js/configs/config-tour.js"></script>
+
+  <script src="../assets/js/components/asscrollable.js"></script>
+  <script src="../assets/js/components/animsition.js"></script>
+  <script src="../assets/js/components/slidepanel.js"></script>
+  <script src="../assets/js/components/switchery.js"></script>
+
+  <!-- Scripts For This Page -->
+
+  <script src="../assets/js/components/masonry.js"></script>
+  <script src="../assets/js/components/memorygame.js"></script>
+
+  <script src="../assets/examples/js/dashboard/v1.js"></script>
+  <!-- <script type="text/javascript">
+    (function(d,j,f,c,h,b,e){d.GoogleAnalyticsObject=h;d[h]=d[h]||function(){(d[h].q=d[h].q||[]).push(arguments)},d[h].l=1*new Date();b=j.createElement(f),e=j.getElementsByTagName(f)[0];b.async=1;b.src=c;e.parentNode.insertBefore(b,e)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create","UA-10002404-10","auto");ga("send","pageview");
+  </script> -->
+</body>
+
+</html>
