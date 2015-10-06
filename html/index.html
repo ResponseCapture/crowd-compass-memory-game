@@ -737,9 +737,26 @@ On event day, you’ve got less time to make key decisions – can you save the 
     </div>
   </div>
 
+  <script src="../assets/vendor/jquery/jquery.js"></script>
   <script src="../assets/vendor/angular/angular.min.js"></script>
   <script src="../assets/js/components/mprogress.min.js"></script>
   <script src="../assets/js/components/memorygame.min.js"></script>
+
+  <script type="text/javascript">
+    window.onload = function () {
+      $(window).resize(function() {
+        var container = $('.card-container'),
+          maxHeight = container.css('max-height').replace('px', ''),
+          parentHeight = container.parent().height(),
+          parentRatio = container.parent().width() / parentHeight,
+          ratio = container.width() / container.height();
+
+          container.width(parentRatio > ratio && parentHeight < maxHeight ? parentHeight * ratio * .99 : '');
+      });
+
+      $(window).trigger('resize');
+    }
+  </script>
 </body>
 
 </html>
