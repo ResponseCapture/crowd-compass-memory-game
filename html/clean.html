@@ -294,7 +294,7 @@
 
     .mg-sidemenu--open {
       transform: translateX(0px);
-      box-shadow: 14px 4px 10px rgba(0, 0, 0, .25);
+      box-shadow: 14px 4px 14px rgba(0, 0, 0, .2);
       transition: .25s ease-out;
     }
 
@@ -657,7 +657,7 @@
           <div class="clear"></div>
         </div>
 
-        <div ng-show="game.results">
+        <div class="mg-center" ng-show="game.results">
           <div ng-show="game.results.missing" class="results">
             <header>
               <h1 class="animation-slide-top">You Lost</h1>
