@@ -126,6 +126,7 @@
     height: 100vh;
     font-family: Roboto, sans-serif;
     font-weight: 300;
+    background-color: #AAA;
   }
   
   .mg-sidemenu {
@@ -259,6 +260,7 @@
   }
 
   .hamburger, .hamburger-close {
+    cursor: pointer;
     float: left;
     border: none;
     background-color: transparent;
@@ -266,6 +268,18 @@
     margin-right: 20px;
     padding:0;
     height: 66px;
+  }
+
+  .fade {
+    position: fixed;
+    pointer-events: none;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    opacity: 0;
+    z-index: 3;
   }
 
   @media screen and (max-width: 768px) {
@@ -278,11 +292,38 @@
       transition: .25s ease-out;
     }
 
+    .mg-sidemenu--open {
+      transform: translateX(0px);
+      box-shadow: 14px 4px 10px rgba(0, 0, 0, .25);
+      transition: .25s ease-out;
+    }
+
     .mg-main {
       margin-left: 0;
     }
 
-    .mg-main--menubar-open {
+    .mg-main nav {
+      display: none;
+    }
+
+    .mg-main {
+      transition: .25s ease-out;
+    }
+
+    .mg-main .fade {
+      transition: .25s ease-out;
+    }
+
+    .mg-main--sidemenu-open .fade {
+      transition: .25s ease-out;
+      pointer-events: all;
+      display: initial;
+      opacity: .15;
+    }
+    
+    .mg-main--sidemenu-open {
+      transform: scale(.98);
+      transition: .25s ease-out;
       pointer-events: none;
     }
   }
@@ -567,14 +608,14 @@
       <img src="../assets/portraits/5.jpg" alt="...">
     </span>
     <nav class="mg-mobilenav">
-      <button class="hamburger">
+      <button class="hamburger" ng-click="menuClose = !menuClose" ng-class="{'hamburger-close': menuClose}">
         <span class="sr-only">Toggle navigation</span>
         <span class="hamburger-bar"></span>
       </button>
       <img class="mg-sidemenu--logo" src="../assets/images/crowdcompass-brandmark-white.png" title="CrowdCompass">
       <h1 class="progress-timer--mobile">{{ game.remaining() | date: 'mm:ss'}}</h1>
     </nav>
-    <div class="mg-sidemenu">
+    <div class="mg-sidemenu" ng-class="{'mg-sidemenu--open': menuClose}">
       <nav class="mg-darknav">
         <img class="mg-sidemenu--logo" src="../assets/images/crowdcompass-logo-white.png" title="CrowdCompass">
       </nav>
@@ -595,7 +636,8 @@
         </div>
       </footer>
     </div>
-    <div class="mg-main">
+    <div class="mg-main" ng-class="{'mg-main--sidemenu-open': menuClose}">
+      <div class="fade"></div>
       <nav>
 
         <div ng-hide="game.results" class="navbar-center" ng-class="{'progress-danger': game.isCritical}">
@@ -605,7 +647,8 @@
       </nav>
       <section class="mg-content">
 
-        <div ng-hide="game.results" class="card-container mg-center" data-plugin="masonry" ng-init="newGame()">
+        <div ng-hide="game.results" class="card-container mg-center grid" data-plugin="masonry" ng-init="newGame()">
+          <div class="grid-sizer"></div>
           <div ng-repeat="card in game.deck" class="masonry-item" ng-class="{flip: card.isFaceUp}" ng-click="game.check(card)">
             <div class="card" ng-style="{'background-image': 'url(../assets/images/' + game.cardFront + ')' }">
               <div class="back face flipped {{ card.item }}"></div>
