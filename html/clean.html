@@ -332,12 +332,12 @@
     Social Customized
   */
 
-  .ssk-group {
+  footer .ssk-group {
     bottom: 0;
     position: absolute;
     width: 100%;
   }
-  .ssk {
+  footer .ssk {
     background-color: #2d3b42;
     width: 25%;
     padding: 15px 0;
@@ -347,8 +347,11 @@
   .ssk::before {
     font-size: 16px;
   }
-  .ssk:hover {
-    color: rgba(255,255,255, 1);
+
+  .share-ssk a {
+    padding: 10px;
+    border-radius: 25px;
+    margin: 0 2px 15px;
   }
 
   /*
@@ -438,6 +441,11 @@
     z-index: 10;
     overflow: hidden;
   }
+  hr {
+    width: 250px;
+    border: 2px dashed #CCC;
+    margin: 15px auto;
+  }
   .results {
     padding: 30px;
     text-align: center;
@@ -455,10 +463,9 @@
     margin-bottom: 11px
   }
   .results header p {
-    margin-bottom: 30px;
     font-size: 30px;
     text-transform: uppercase;
-    margin: 0 0 30px;
+    margin: 0 0 10px;
     line-height: 1.6;
     color: #76838f;
     font-weight: 300;
@@ -484,6 +491,14 @@
   .results .btn-go {
     padding: 1px 10px;
     margin: 0 0 2px 2px;
+  }
+  .btn-round[disabled] {
+    cursor: not-allowed;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: .65;
+    pointer-events:none;
   }
   .card-container {
     max-width: 756px;
@@ -613,7 +628,7 @@
         <span class="hamburger-bar"></span>
       </button>
       <img class="mg-sidemenu--logo" src="../assets/images/crowdcompass-brandmark-white.png" title="CrowdCompass">
-      <h1 class="progress-timer--mobile">{{ game.remaining() | date: 'mm:ss'}}</h1>
+      <h1 ng-hide="game.results" class="progress-timer--mobile">{{ game.remaining() | date: 'mm:ss'}}</h1>
     </nav>
     <div class="mg-sidemenu" ng-class="{'mg-sidemenu--open': menuClose}">
       <nav class="mg-darknav">
@@ -660,31 +675,58 @@
         <div class="mg-center" ng-show="game.results">
           <div ng-show="game.results.missing" class="results">
             <header>
-              <h1 class="animation-slide-top">You Lost</h1>
-              <p>Only {{ game.results.missing }} more pair{{ game.results.missing > 1 ? 's' : '' }} to find.</p>
+              <h1 class="animation-slide-top">Oh No, Time Is Up!</h1>
             </header>
-            <p class="error-advise">
-              <a ng-hide="getinfo" class="btn btn-primary btn-round" ng-click="getinfo = true">GET A TIME BOOSTER</a>
-              <span ng-if="getinfo">
-              <label>Work Email: <input type="email" ng-pattern="/\./" ng-required ng-model="user.workEmail" autofocus></label>
-              <a class="btn-go btn-round" ng-disabled="!user.workEmail" ng-click="getinfo = false; newGame(true)">GO</a>
-            </span>
-            </p>
-            <a class="btn-round" ng-click="newGame()">PLAY AGAIN</a>
+            <p>But, you can still share the fun with other event pros and challenge them to beat the game! </p>
+            <div class="share-ssk">
+              <a href="" class="ssk ssk-linkedin"></a>
+              <a href="" class="ssk ssk-twitter"></a>
+              <a href="" class="ssk ssk-pinterest"></a>
+              <a href="" class="ssk ssk-facebook"></a>
+            </div>
+            <hr>
+            <div class="error-advise">
+              <a ng-show="!getinfo && user.workEmail" class="btn-round" ng-click="newGame(5)">Get a Time Booster</a>
+              <a ng-hide="getinfo || user.workEmail" class="btn btn-primary btn-round" ng-click="getinfo = true">Get a Time Booster</a>
+              <div ng-show="getinfo">
+                <p>Enter your email to acquire an extra :05 seconds!</p>
+                <label>Work Email: <input type="email" ng-pattern="/\./" ng-required ng-model="user.workEmail" autofocus></label>
+                <label><input type="checkbox" ng-init="user.unlockedAssets = true" ng-model="user.unlockedAssets" checked> Unlock Additional Assets</label>
+                <a class="btn-go btn-round" ng-disabled="!user.workEmail" ng-click="getinfo = false; newGame(5)">GO</a>
+                <p>We’ll also send you additional games and quizzes to interact with, research reports and other fun stuff built for event pros like you.  Get Your goodies!</p>
+              </div>
+            </div>
+            <hr>
+            <a class="btn-round" ng-click="newGame()">Play Level {{level()}} Again</a>
+            <p>Want to take on level {{level()}} again without the time boost?  We’ll shuffle the deck and you can play again.</p>
           </div>
           <div ng-hide="game.results.missing" class="results">
             <header>
-              <h1 class="animation-slide-top">You Won</h1>
-              <p>Your time was {{ game.results.time }} seconds!</p>
+              <h1 class="animation-slide-top">You Won!</h1>
             </header>
-            <p class="error-advise">
-              <a ng-hide="getinfo" class="btn-round" ng-click="getinfo = true">GO TO NEXT LEVEL</a>
-              <span ng-if="getinfo"> 
-              <label>Work Email: <input type="email" ng-pattern="/\./" ng-required ng-model="user.workEmail" autofocus></label>
-              <a class="btn-go btn-round" ng-disabled="!user.workEmail" ng-click="getinfo = false; playLevel(2)">GO</a>
-            </span>
-            </p>
-            <a class="btn-round" ng-click="newGame()">PLAY AGAIN</a>
+            <div class="share-ssk">
+              <p>And it feels great to be a winner, right?  Share your speedy time and challenge other event pros to a game!</p>
+              <a href="" class="ssk ssk-linkedin"></a>
+              <a href="" class="ssk ssk-twitter"></a>
+              <a href="" class="ssk ssk-pinterest"></a>
+              <a href="" class="ssk ssk-facebook"></a>
+            </div>
+            <hr>
+            <div class="error-advise">
+              <a ng-show="!getinfo && user.workEmail" class="btn-round" ng-click="playNextLevel()">Take on Level {{level() + 1}}</a>
+              <a ng-hide="getinfo || user.workEmail" class="btn-round" ng-click="getinfo = true">Take on Level {{level() + 1}}</a>
+              <div ng-show="getinfo"> 
+                <p>It’s Event Day:  And It’s Guna Get Real!  
+On event day, you’ve got less time to make key decisions – can you save the show?!   Enter your email to find out.</p>
+                <label>Work Email: <input type="email" ng-pattern="/\./" ng-required ng-model="user.workEmail" autofocus></label>
+                <label><input type="checkbox" ng-init="user.unlockedAssets = true" ng-model="user.unlockedAssets" checked> Unlock Additional Assets</label>
+                <a class="btn-go btn-round" ng-disabled="!user.workEmail" ng-click="getinfo = false; playNextLevel()">GO</a>
+                <p>We’ll also send you additional games and quizzes to interact with, research reports and other fun stuff built for event pros like you.  Get Your goodies!</p>
+              </div>
+            </div>
+            <hr>
+            <a class="btn-round" ng-click="newGame()">Play Level {{level()}} Again</a>
+            <p>Not ready to dial up the pressure just yet?  We’ll shuffle the deck and you can play again.</p>
           </div>
         </div>
       

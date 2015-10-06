@@ -50,10 +50,12 @@ var level3 = [
 function MemoryGame(timeout, interval) {
   var games = [];
 
-  this.newGame = function (booster, level) {
+  this.level = 1;
+
+  this.newGame = function (booster) {
     booster = booster || 0;
 
-    switch (level) {
+    switch (this.level) {
       case 3:
         return Game({
           cards: level3,
@@ -188,12 +190,19 @@ var app = angular.module('memory-game', []);
 app.controller("CardController", function($scope, $timeout, $interval) {
   var memoryGame = new MemoryGame($timeout, $interval);
 
+  $scope.user = {};
+
   $scope.newGame = function (booster) {
     $scope.game = memoryGame.newGame(booster);
   };
 
-  $scope.playLevel = function (level) {
-    $scope.game = memoryGame.newGame(null, level);
+  $scope.level = function () {
+    return memoryGame.level;
+  };
+
+  $scope.playNextLevel = function () {
+    memoryGame.level += 1;
+    $scope.game = memoryGame.newGame();
   };
 }); 
 
