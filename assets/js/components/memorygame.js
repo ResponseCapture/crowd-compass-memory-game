@@ -226,19 +226,29 @@ app.directive('hierarchical', function() {
 app.controller("CardController", ['$scope', '$timeout', '$interval', 
   function($scope, $timeout, $interval) {
     var memoryGame = new MemoryGame($timeout, $interval);
+      availableLevels = {1:true};
 
     $scope.user = {};
+
+    $scope.newGameIfNotStarted = function () {
+      $scope.game = ($scope.game || memoryGame.newGame());
+    };
 
     $scope.newGame = function (booster) {
       $scope.game = memoryGame.newGame(booster);
     };
 
-    $scope.level = function () {
+    $scope.currentLevel = function () {
       return memoryGame.level;
     };
 
-    $scope.playNextLevel = function () {
-      memoryGame.level += 1;
+    $scope.levelIsAvailable = function (level) {
+      return !!availableLevels[level];
+    }
+
+    $scope.playLevel = function (level) {
+      availableLevels[level] = true;
+      memoryGame.level = level;
       $scope.game = memoryGame.newGame();
     };
   }]); 

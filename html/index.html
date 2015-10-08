@@ -217,21 +217,18 @@
     z-index: 4;
   }
 
-  .mg-sidemenu--content {
-    height: calc(100vh - 112px);
-    overflow: auto;
-    padding: 0 30px;
+  .mg-sidemenu--content-wrapper {
+    position: absolute;
     width: 100%;
-    position: relative;
+    padding: 0 30px;
+    height: calc(100vh - 112px);
   }
 
-  .mg-levels {
-    position: absolute;
-    bottom: 20px;
+  .mg-sidemenu--content {
     width: 100%;
-    height: 100px;
+    height: 100%;
     overflow: auto;
-    background-color: #AAA;
+    position: relative;
   }
 
   .mg-sidemenu h3 {
@@ -241,10 +238,6 @@
     text-shadow: rgba(0, 0, 0, .45) 0 3px 4px;
   }
 
-  .mg-sidemenu p {
-    font-size: 14px;
-  }
-
   .mg-center {
     position: relative;
     top: 50%;
@@ -252,6 +245,43 @@
     margin: 0 auto;
   }
   
+  .mg-levels {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    height: 100px;
+    overflow: auto;
+  }
+
+  .mg-levels--available {
+    fill: red;
+    cursor: pointer;
+  }
+
+  .mg-levels--current {
+    stroke: #AAA;
+    fill: green;
+    cursor: mouse;
+  }
+
+  .mg-levels--available:hover {
+    stroke: red;
+    stroke-width: 3px;
+  }
+
+  .mg-levels--available-path {
+    stroke: red;
+  }
+
+  .mg-levels h2 {
+    text-align: center;
+    margin: 0;
+  }
+
+  .mg-sidemenu p {
+    font-size: 14px;
+  }
+
   .mg-content {
     position: relative;
     padding-top: 66px;
@@ -733,16 +763,25 @@
       <nav class="mg-darknav">
         <img class="mg-sidemenu--logo" src="../assets/images/crowdcompass-logo-white.png" title="CrowdCompass">
       </nav>
-      <div class="mg-sidemenu--content">
-        <div class="mg-center">
-          <h3>
-            Alright {First Name},
-          </h3>
-          <p>Here’s the situation. It’s the night before the biggest event of your year – and your event day toolkit has gone missing! Can you find all your essentials in 30 seconds or less?</p>
-        </div><!-- 
-        <div class="mg-levels">
-          
-        </div> -->
+      <div class="mg-sidemenu--content-wrapper">
+        <div class="mg-sidemenu--content">
+          <div ng-show="game.results" class="mg-levels">
+            <h2>Level</h2>
+            <svg id="levels" width="270px" height="50px">
+              <path d=" M 30 25 L 135 25" ng-class="{'mg-levels--available-path': levelIsAvailable(2)}" stroke="grey" stroke-width="3" fill="none" />
+              <path d=" M 135 25 L 240 25" ng-class="{'mg-levels--available-path': levelIsAvailable(3)}"  stroke="grey" stroke-width="3" fill="none" />
+              <circle ng-click="currentLevel() !== 1 && playLevel(1)" ng-class="{'mg-levels--available': levelIsAvailable(1) && currentLevel() !== 1, 'mg-levels--current': currentLevel() === 1}" cx="30" cy="25" r="8" fill="grey"/>
+              <circle ng-click="currentLevel() !== 2 && playLevel(2)" ng-class="{'mg-levels--available': levelIsAvailable(2) && currentLevel() !== 2, 'mg-levels--current': currentLevel() === 2}" cx="135" cy="25" r="8" fill="grey"/>
+              <circle ng-click="currentLevel() !== 3 && playLevel(3)" ng-class="{'mg-levels--available': levelIsAvailable(3) && currentLevel() !== 3, 'mg-levels--current': currentLevel() === 3}" cx="240" cy="25" r="8" fill="grey"/>
+            </svg>
+          </div>
+          <div class="mg-center">
+            <h3>
+              Alright {First Name},
+            </h3>
+            <p>Here’s the situation. It’s the night before the biggest event of your year – and your event day toolkit has gone missing! Can you find all your essentials in 30 seconds or less?</p>
+          </div>
+        </div>
       </div>
       <footer>
         <div class="ssk-group">
@@ -764,7 +803,7 @@
       </nav>
       <section class="mg-content">
 
-        <div ng-if="!game.results" data-animation-in="bounceIn" class="card-container mg-center grid" ng-init="newGame()" masonry hierarchical>
+        <div ng-if="!game.results" data-animation-in="bounceIn" class="card-container mg-center grid" ng-init="newGameIfNotStarted()" masonry hierarchical>
           <div class="grid-sizer"></div>
           <div ng-repeat="card in game.deck" class="masonry-item" ng-class="{turncard: card.isFaceUp, tada: card.celebrate}" ng-click="game.check(card)" data-target=".card-container">
             <div class="card" ng-style="{'background-image': 'url(../assets/images/' + game.cardFront + ')' }" slidein>
@@ -798,8 +837,8 @@
               </div>
             </div>
             <hr>
-            <a class="btn-round" ng-click="newGame()">Play Level {{level()}} Again</a>
-            <p>Want to take on level {{level()}} again without the time boost?  We’ll shuffle the deck and you can play again.</p>
+            <a class="btn-round" ng-click="newGame()">Play Level {{currentLevel()}} Again</a>
+            <p>Want to take on level {{currentLevel()}} again without the time boost?  We’ll shuffle the deck and you can play again.</p>
           </div>
           <div ng-hide="game.results.missing" class="results">
             <header>
@@ -814,19 +853,19 @@
             </div>
             <hr>
             <div class="error-advise">
-              <a ng-show="!getinfo && user.workEmail" class="btn-round" ng-click="playNextLevel()">Take on Level {{level() + 1}}</a>
-              <a ng-hide="getinfo || user.workEmail" class="btn-round" ng-click="getinfo = true">Take on Level {{level() + 1}}</a>
+              <a ng-show="!getinfo && user.workEmail" class="btn-round" ng-click="playLevel(currentLevel() + 1)">Take on Level {{currentLevel() + 1}}</a>
+              <a ng-hide="getinfo || user.workEmail" class="btn-round" ng-click="getinfo = true">Take on Level {{currentLevel() + 1}}</a>
               <div ng-show="getinfo"> 
                 <p>It’s Event Day:  And It’s Guna Get Real!  
 On event day, you’ve got less time to make key decisions – can you save the show?!   Enter your email to find out.</p>
                 <label>Work Email: <input type="email" ng-pattern="/\./" ng-required ng-model="user.workEmail" autofocus></label>
                 <label><input type="checkbox" ng-init="user.unlockedAssets = true" ng-model="user.unlockedAssets" checked> Unlock Additional Assets</label>
-                <a class="btn-go btn-round" ng-disabled="!user.workEmail" ng-click="getinfo = false; playNextLevel()">GO</a>
+                <a class="btn-go btn-round" ng-disabled="!user.workEmail" ng-click="getinfo = false; playLevel(currentLevel() + 1)">GO</a>
                 <p>We’ll also send you additional games and quizzes to interact with, research reports and other fun stuff built for event pros like you.  Get Your goodies!</p>
               </div>
             </div>
             <hr>
-            <a class="btn-round" ng-click="newGame()">Play Level {{level()}} Again</a>
+            <a class="btn-round" ng-click="newGame()">Play Level {{currentLevel()}} Again</a>
             <p>Not ready to dial up the pressure just yet?  We’ll shuffle the deck and you can play again.</p>
           </div>
         </div>
@@ -838,12 +877,12 @@ On event day, you’ve got less time to make key decisions – can you save the 
     </div>
   </div>
 
-  <script src="../assets/vendor/jquery/jquery.js"></script>
+  <script src="../assets/vendor/jquery/jquery.min.js"></script>
   <script src="../assets/vendor/angular/angular.min.js"></script>
   <script src="../assets/js/components/mprogress.min.js"></script>
   <script src="../assets/js/components/memorygame.js"></script>
   <script src="../assets/vendor/masonry/masonry.pkgd.min.js"></script>
-  <script src="../assets/js/components/material-design-hierarchical.js"></script>
+  <script src="../assets/js/components/material-design-hierarchical.min.js"></script>
 </body>
 
 </html>
