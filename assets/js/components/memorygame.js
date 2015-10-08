@@ -195,6 +195,21 @@ $(document).on('shown.zmd.hierarchicalDisplay', function (e) {
 
 var app = angular.module('memory-game', []);
 
+app.directive('masonry', function () {
+  return {
+    restrict: 'AC',
+    link: function(scope, element) {
+        scope.$watch(element.children(), function () {
+          element.masonry({
+          itemSelector: '.masonry-item',
+          columnWidth: '.grid-sizer',
+          percentPosition: true
+        });
+      });
+    }
+  }
+});
+
 app.directive('hierarchical', function() {
   return {
     restrict: 'AC',
