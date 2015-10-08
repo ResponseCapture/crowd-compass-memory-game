@@ -35,7 +35,7 @@ var level2 = [
 
 var level3 = [
   'L1-placer',
-  'L3-jumping-guy',
+  'L2-jumping-guy',
   'L3-party-girl',
   'L3-sleeping-woman',
   'L3-super-woman',
@@ -182,23 +182,40 @@ function Game(options, timeout, interval) {
 
 var app = angular.module('memory-game', []);
 
-app.controller("CardController", function($scope, $timeout, $interval) {
-  var memoryGame = new MemoryGame($timeout, $interval);
+app.directive('hierarchical', function() {
+  return {
+    restrict: 'AC',
+    link: function(scope, element) {
+      scope.$watch(element.children(), function () {
+        element.hierarchicalDisplay();
+      });
 
-  $scope.user = {};
-
-  $scope.newGame = function (booster) {
-    $scope.game = memoryGame.newGame(booster);
+      scope.$destory(function () {
+        element.hierarchicalDisplay();
+      });
+    } 
   };
+});
 
-  $scope.level = function () {
-    return memoryGame.level;
-  };
 
-  $scope.playNextLevel = function () {
-    memoryGame.level += 1;
-    $scope.game = memoryGame.newGame();
-  };
-}); 
+app.controller("CardController", ['$scope', '$timeout', '$interval', 
+  function($scope, $timeout, $interval) {
+    var memoryGame = new MemoryGame($timeout, $interval);
+
+    $scope.user = {};
+
+    $scope.newGame = function (booster) {
+      $scope.game = memoryGame.newGame(booster);
+    };
+
+    $scope.level = function () {
+      return memoryGame.level;
+    };
+
+    $scope.playNextLevel = function () {
+      memoryGame.level += 1;
+      $scope.game = memoryGame.newGame();
+    };
+  }]); 
 
 
