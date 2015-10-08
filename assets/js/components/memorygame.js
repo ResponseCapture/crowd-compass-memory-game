@@ -110,6 +110,10 @@ function Game(options, timeout, interval) {
       checkNext = function(nextCard) {
         nextCard.isFaceUp = true;
         if (nextCard.item === card.item) {
+          nextCard.celebrate = card.celebrate = true;
+          timeout(function() {
+            nextCard.celebrate = card.celebrate = false;
+          }, 2000);
           checkNext = void 0;
         } else {
           timeout(function() {
@@ -185,6 +189,10 @@ function Game(options, timeout, interval) {
   return game;
 }
 
+$(document).on('shown.zmd.hierarchicalDisplay', function (e) {
+  $(e.target).hierarchicalDisplay('_removeAnimations');
+});
+
 var app = angular.module('memory-game', []);
 
 app.directive('hierarchical', function() {
@@ -197,6 +205,7 @@ app.directive('hierarchical', function() {
     } 
   };
 });
+
 
 
 app.controller("CardController", ['$scope', '$timeout', '$interval', 

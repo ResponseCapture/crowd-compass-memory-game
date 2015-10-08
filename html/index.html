@@ -627,7 +627,7 @@
     box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
     transform: rotateY(180deg);
   }
-  .flip .card {
+  .turncard .card {
     transform: rotateY(180deg);
   }
   .face {
@@ -764,22 +764,20 @@
       </nav>
       <section class="mg-content">
 
-        <div ng-if="!game.results" style="width: 100%; height: 100%;">
-          <div data-animation-in="bounceIn" class="card-container mg-center grid" ng-init="newGame()" hierarchical>
-            <div class="grid-sizer"></div>
-            <div ng-repeat="card in game.deck" class="masonry-item" ng-class="{flip: card.isFaceUp}" ng-click="game.check(card)" data-target=".card-container">
-              <div class="card" ng-style="{'background-image': 'url(../assets/images/' + game.cardFront + ')' }" slidein>
-                <div class="back face flipped {{ card.item }}"></div>
-              </div>
+        <div ng-if="!game.results" data-animation-in="bounceIn" class="card-container mg-center grid" ng-init="newGame()" hierarchical>
+          <div class="grid-sizer"></div>
+          <div ng-repeat="card in game.deck" class="masonry-item" ng-class="{turncard: card.isFaceUp, tada: card.celebrate}" ng-click="game.check(card)" data-target=".card-container">
+            <div class="card" ng-style="{'background-image': 'url(../assets/images/' + game.cardFront + ')' }" slidein>
+              <div class="back face flipped {{ card.item }}"></div>
             </div>
-            <div class="clear"></div>
           </div>
+          <div class="clear"></div>
         </div>
 
-        <div class="mg-center" ng-show="game.results">
+        <div class="mg-center" ng-if="game.results">
           <div ng-show="game.results.missing" class="results">
             <header>
-              <h1 class="animation-slide-top">Oh No, Time Is Up!</h1>
+              <h1 class="animated bounceInDown">Oh No, Time Is Up!</h1>
             </header>
             <p>But, you can still share the fun with other event pros and challenge them to beat the game! </p>
             <div class="share-ssk">
@@ -788,7 +786,6 @@
               <a href="" class="ssk ssk-pinterest"></a>
               <a href="" class="ssk ssk-facebook"></a>
             </div>
-            <hr>
             <div class="error-advise">
               <a ng-show="!getinfo && user.workEmail" class="btn-round" ng-click="newGame(5)">Get a Time Booster</a>
               <a ng-hide="getinfo || user.workEmail" class="btn btn-primary btn-round" ng-click="getinfo = true">Get a Time Booster</a>
@@ -806,7 +803,7 @@
           </div>
           <div ng-hide="game.results.missing" class="results">
             <header>
-              <h1 class="animation-slide-top">You Won!</h1>
+              <h1 class="animated bounceInDown">You Won!</h1>
             </header>
             <div class="share-ssk">
               <p>And it feels great to be a winner, right?  Share your speedy time and challenge other event pros to a game!</p>
@@ -844,30 +841,30 @@ On event day, you’ve got less time to make key decisions – can you save the 
   <script src="../assets/vendor/jquery/jquery.js"></script>
   <script src="../assets/vendor/angular/angular.min.js"></script>
   <script src="../assets/js/components/mprogress.min.js"></script>
-  <script src="../assets/js/components/memorygame.min.js"></script>
+  <script src="../assets/js/components/memorygame.js"></script>
   <script src="../assets/vendor/masonry/masonry.pkgd.min.js"></script>
   <script src="../assets/js/components/material-design-hierarchical.js"></script>
 
   <script type="text/javascript">
 
     window.onload = function () {
-      $(window).resize(function() {
-        var container = $('.card-container'),
-          maxHeight = container.css('max-height').replace('px', ''),
-          maxWidth = container.css('max-width').replace('px', ''),
-          parentHeight = container.parent().height(),
-          parentWidth = container.parent().width(),
-          parentRatio = parentWidth / parentHeight,
-          ratio = container.width() / container.height(),
-          heightClipped = parentRatio > ratio && parentHeight < maxHeight,
-          viewWidth = parentWidth < maxWidth ? parentWidth : maxWidth,
-          newWidth = heightClipped ? parentHeight * ratio : viewWidth;
+      // $(window).resize(function() {
+      //   var container = $('.card-container'),
+      //     maxHeight = container.css('max-height').replace('px', ''),
+      //     maxWidth = container.css('max-width').replace('px', ''),
+      //     parentHeight = container.parent().height(),
+      //     parentWidth = container.parent().width(),
+      //     parentRatio = parentWidth / parentHeight,
+      //     ratio = container.width() / container.height(),
+      //     heightClipped = parentRatio > ratio && parentHeight < maxHeight,
+      //     viewWidth = parentWidth < maxWidth ? parentWidth : maxWidth,
+      //     newWidth = heightClipped ? parentHeight * ratio : viewWidth;
 
-          container.width(newWidth * .99);
-      });
+      //     container.width(newWidth * .99);
+      // });
 
       $(window).trigger('resize');
-
+      
       $('.grid').masonry({
         itemSelector: '.masonry-item',
         columnWidth: '.grid-sizer',
