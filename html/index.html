@@ -805,7 +805,7 @@
 
         <div ng-if="!game.results" data-animation-in="bounceIn" class="card-container mg-center grid" ng-init="newGameIfNotStarted()" masonry hierarchical>
           <div class="grid-sizer"></div>
-          <div ng-repeat="card in game.deck" class="masonry-item" ng-class="{turncard: card.isFaceUp, tada: card.celebrate}" ng-click="game.check(card)" data-target=".card-container">
+          <div ng-repeat="card in game.deck" class="masonry-item" ng-class="{turncard: card.isFaceUp, pulse: card.celebrate}" ng-click="game.check(card)" data-target=".card-container">
             <div class="card" ng-style="{'background-image': 'url(../assets/images/' + game.cardFront + ')' }" slidein>
               <div class="back face flipped {{ card.item }}"></div>
             </div>
