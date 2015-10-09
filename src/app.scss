@@ -1,0 +1,550 @@
+
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #76838f;
+    font-family: Roboto, sans-serif;
+  }
+  
+  .mg-game {
+    width: 100vw;
+    height: 100vh;
+    font-family: Roboto, sans-serif;
+    font-weight: 300;
+    background-color: #f1f4f5;
+  }
+  
+  .mg-sidemenu {
+    background-color: #37474f;
+    position: fixed;
+    top: 0;
+    color: rgb(255, 255, 255);
+    width: 330px;
+    height: 100%;
+    z-index: 4;
+  }
+
+  .mg-sidemenu--content-wrapper {
+    width: 100%;
+    padding: 0 30px;
+    height: calc(100vh - 112px);
+  }
+
+  .mg-sidemenu--content {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    position: relative;
+  }
+
+  .mg-sidemenu h3 {
+    font-weight: 300;
+    font-size: 24px;
+    margin: 11px 0;
+    text-shadow: rgba(0, 0, 0, .45) 0 3px 4px;
+  }
+
+  .mg-center {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 auto;
+  }
+  
+  .mg-levels {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    height: 100px;
+    overflow: auto;
+  }
+
+  .mg-levels--available {
+    fill: red;
+    cursor: pointer;
+  }
+
+  .mg-levels--current {
+    stroke: #AAA;
+    fill: green;
+    cursor: mouse;
+  }
+
+  .mg-levels--available:hover {
+    stroke: red;
+    stroke-width: 3px;
+  }
+
+  .mg-levels--available-path {
+    stroke: red;
+  }
+
+  .mg-levels h2 {
+    text-align: center;
+    margin: 0;
+  }
+
+  .mg-sidemenu p {
+    font-size: 14px;
+  }
+
+  .mg-content {
+    position: relative;
+    padding-top: 66px;
+    overflow: auto;
+    background-color: #f1f4f5;
+    height: calc(100vh - 46px);
+    z-index: 1;
+  }
+  
+  .mg-main {
+    height: 100%;
+    margin-left: 330px;
+  }
+
+  nav {
+    height: 66px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
+  }
+
+  .mg-sidemenu--logo {
+    margin-top: 18px;
+    height: 28px;
+  }
+
+  .mg-main nav {
+    background-color: #fff;
+    position: fixed;
+    padding: 0 50px;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    left: 330px;
+  }
+
+  .mg-mobilenav {
+    padding-left: 30px;
+    background-color: #263238;
+    position: fixed;
+    display: none;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+  }
+
+  .mg-sidemenu nav {
+    padding-left: 30px;
+    background-color: #263238;
+  }
+
+  .mg-main--avatar {
+    width: 30px;
+    position: fixed;
+    top: 18px;
+    right: 15px;
+    z-index: 101;
+  }
+
+  .mg-main--avatar img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 1000px;
+  }
+
+  footer {
+    clear: both;
+    width: 100%;
+  }
+
+  .mg-main footer {
+    height: 46px;
+    padding: 15px 0;
+    border-top: 1px solid #e4eaec;
+    background-color: #fff;
+    text-align: center;
+    font-size: 11px;
+    color: #7a97a0;
+  }
+
+  .mg-game-container {
+    background-color: #AAA;
+    height: 100px;
+    width: 100px;
+    margin: auto;
+  }
+
+  .mg-main footer a {
+    color: #62a8ea;
+    text-decoration: none;
+  }
+
+  .mg-main footer a:hover {
+    color: #89bceb;
+    text-decoration: underline;
+  }
+
+  .hamburger, .hamburger-close {
+    cursor: pointer;
+    float: left;
+    border: none;
+    background-color: transparent;
+    margin: 0;
+    margin-right: 20px;
+    padding:0;
+    height: 66px;
+  }
+
+  .fade {
+    position: fixed;
+    pointer-events: none;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    opacity: 0;
+    z-index: 3;
+  }
+
+  @media screen and (max-width: 1086px) {
+    .mg-mobilenav {
+      display: block;
+    }
+
+    .mg-sidemenu {
+      transform: translateX(-330px);
+      transition: .25s ease-out;
+    }
+
+    .mg-sidemenu--open {
+      transform: translateX(0px);
+      box-shadow: 14px 4px 14px rgba(0, 0, 0, .2);
+      transition: .25s ease-out;
+    }
+
+    .mg-main {
+      margin-left: 0;
+    }
+
+    .mg-main nav {
+      display: none;
+    }
+
+    .mg-main {
+      transition: .25s ease-out;
+      box-shadow: 0 0 134px rgba(0, 0, 0, .8);
+    }
+
+    .mg-main .fade {
+      transition: .25s ease-out;
+    }
+
+    .mg-main--sidemenu-open .fade {
+      transition: .25s ease-out;
+      pointer-events: all;
+      display: initial;
+      opacity: .15;
+    }
+    
+    .mg-main--sidemenu-open {
+      transform: scale(.98);
+      transition: .25s ease-out;
+      pointer-events: none;
+    }
+  }
+
+  /*
+    Social Customized
+  */
+
+  footer .ssk-group {
+    width: 100%;
+  }
+  footer .ssk {
+    background-color: #2d3b42;
+    width: 25%;
+    padding: 15px 0;
+    margin: 0;
+    color: rgba(163,175,183,.9);
+  }
+  .ssk::before {
+    font-size: 16px;
+  }
+
+  .share-ssk a {
+    padding: 10px;
+    border-radius: 25px;
+    margin: 0 2px 15px;
+  }
+
+  /*
+    Game Styles
+  */
+
+  .ui-mprogress .deter-bar {
+    background: rgb(0, 153, 238);
+  }
+  .ui-mprogress .deter-bar .peg {
+    box-shadow: 0 0 10px rgb(0, 153, 238),0 0 14px #29d;
+    right: 2px;
+  }
+  .ui-mprogress .bar-bg {
+    background: rgba(153, 153, 153, .25);
+  }
+  .ui-mprogress .bar-bg, .ui-mprogress .deter-bar {
+    height: 7px;
+  }
+  .ui-mprogress .bar-bg, .ui-mprogress .deter-bar  {
+    border-radius: 15px;
+  }
+  .ui-mprogress .peg {
+    transform: rotate(3deg) translate(0, -6px);
+  }
+  .progress-danger .deter-bar {
+    background: rgb(244, 67, 54);
+  }
+  .progress-danger .deter-bar .peg {
+    box-shadow: 0 0 10px rgb(255, 0, 0),0 0 14px #29d;
+  }
+  .progress-danger .bar-bg {
+    background: rgba(244, 67, 54, 0.25);
+  }
+  .progress-danger .progress-timer,
+  .progress-danger .bar-bg {
+    color: rgb(244, 67, 54);
+  }
+  .progress-danger .bar-bg {
+    animation-duration: .4s;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+  @keyframes blink {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  .clear {
+    clear: both;
+  }
+  .navbar-center {
+    max-width: 756px;
+    margin: 28px auto 0;
+    padding: 0 1.7%;
+  }
+  .ui-mprogress {
+    width: 100%;
+  }
+  .progress-timer {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: .4;
+    margin: 0;
+    float: left;
+    padding-right: 5px;
+    color: rgb(0, 153, 238);
+  }
+  .progress-timer--mobile {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 400;
+    font-size: 30px;
+    line-height: .5;
+    color: #fff;
+  }
+  .progress-container {
+    margin-top: 10px;
+    border-radius: 1000px;
+    height: 7px;
+    z-index: 10;
+    overflow: hidden;
+  }
+  hr {
+    width: 250px;
+    border: 2px dashed #CCC;
+    margin: 15px auto;
+  }
+  .results {
+    padding: 30px;
+    text-align: center;
+  }
+  .results h1 {
+    animation-name: slide-top;
+    animation-duration: .5s;
+    animation-fill-mode: both;
+    animation-timing-function: ease-out;
+    font-size: 5em;
+    font-weight: 400;
+    color: #37474f;
+    line-height: 1.2;
+    margin-top: 22px;
+    margin-bottom: 11px
+  }
+  .results header p {
+    font-size: 30px;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+    line-height: 1.6;
+    color: #76838f;
+    font-weight: 300;
+  }
+  .results .error-advise {
+    margin: 0 0 11px;
+  }
+  .results .btn-round {
+    display: inline-block;
+    padding: 6px 15px;
+    font-size: 14px;
+    line-height: 1.57142857;
+    color: #fff;
+    background-color: #62a8ea;
+    border-color: #62a8ea;
+    font-weight: 300;
+    cursor: pointer;
+    border-radius: 1000px;
+    user-select: none;
+    border: 1px solid transparent;
+    text-decoration: none;
+  }
+  .results .btn-go {
+    padding: 1px 10px;
+    margin: 0 0 2px 2px;
+  }
+  .btn-round[disabled] {
+    cursor: not-allowed;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: .65;
+    pointer-events:none;
+  }
+  .card-container {
+    max-width: 756px;
+    max-height: 567px;
+    margin: auto;
+  }
+  .woah {
+    opacity: .5;
+  }
+  .masonry-item, .grid-sizer {
+    position: relative;
+    float: left;
+    width: 23%;
+    padding-bottom: 23%;
+    margin: 1%;
+  }
+  .grid-sizer {
+    position: absolute;
+  }
+  .card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-color: #fff;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform .25s linear, box-shadow .15s linear;
+    -webkit-backface-visibility: hidden; 
+    backface-visibility: hidden; 
+  }
+  .card:hover {
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
+    transform: scale(1.001);
+  }
+  .face.back {
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
+    transform: rotateY(180deg);
+  }
+  .turncard .card {
+    transform: rotateY(180deg);
+  }
+  .face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; 
+    backface-visibility: hidden; 
+  }
+  .flipped { 
+    background: url('assets/images/sprite.png');
+  }
+  .flipped.L1-placer { 
+    background-position: 0 0; 
+  } 
+  .flipped.L1-clock { 
+    background-position: 6.66% 0;
+  } 
+  .flipped.L1-personality { 
+    background-position: 13.33% 0; 
+  } 
+  .flipped.L1-frazzled { 
+    background-position: 20% 0; 
+  } 
+  .flipped.L1-supplies { 
+    background-position: 26.66% 0;
+  } 
+  .flipped.L1-phones { 
+    background-position: 33.33% 0; 
+  } 
+  .flipped.L1-woman-docs { 
+    background-position: 40% 0; 
+  } 
+  .flipped.L2-app-icons { 
+    background-position: 46.66% 0; 
+  } 
+  .flipped.L2-boxing {
+    background-position: 53.33% 0; 
+  } 
+  .flipped.L2-crowd {
+    background-position: 60% 0; 
+  } 
+  .flipped.L2-decisions { 
+    background-position: 66.66% 0; 
+  } 
+  .flipped.L2-jumping-guy { 
+    background-position: 73.33% 0; 
+  } 
+  .flipped.L3-party-girl { 
+    background-position: 80% 0; 
+  } 
+  .flipped.L3-sleeping-woman { 
+    background-position: 86.66% 0; 
+  } 
+  .flipped.L3-super-woman { 
+    background-position: 93.33% 0; 
+  } 
+  .flipped.L3-tired-guy { 
+    background-position: 100% 0; 
+  }
+  @media screen and (max-width: 768px) {
+    .masonry-item, .grid-sizer {
+      width: 31.33%;
+      padding-bottom: 31.33%;
+      margin: 1%;
+    }
+    .card-container {
+      max-height: 756px;
+      max-width: 567px;
+    }
+  }
+  @media only screen and (-webkit-min-device-pixel-ratio: 2), 
+    only screen and (min-device-pixel-ratio: 2) {
+    .flipped { 
+      background: url('assets/images/sprite@2x.png');
+      background-size: auto 100%;
+    }
+  }
+

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>CrowdCompass Memory Game</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="assets/images/favicon.ico">
+  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+  <script src="app.js"></script>
+</head>
+
+<body>
+  <div class="mg-game" ng-app="memory-game" ng-controller="CardController" ng-cloak>
+    <!--[if lt IE 9]>
+    <script src="assets/vendor/html5shiv/html5shiv.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 10]>
+    <script src="assets/vendor/media-match/media.match.min.js"></script>
+    <script src="assets/vendor/respond/respond.min.js"></script>
+    <![endif]-->
+    <span class="mg-main--avatar">
+      <img src="assets/portraits/5.jpg" alt="...">
+    </span>
+    <nav class="mg-mobilenav">
+      <button class="hamburger" ng-click="menuClose = !menuClose" ng-class="{'hamburger-close': menuClose}">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="hamburger-bar"></span>
+      </button>
+      <img class="mg-sidemenu--logo" src="assets/images/crowdcompass-brandmark-white.png" title="CrowdCompass">
+      <h1 ng-hide="game.results" class="progress-timer--mobile">{{ game.remaining() | date: 'mm:ss'}}</h1>
+    </nav>
+    <div class="mg-sidemenu" ng-class="{'mg-sidemenu--open': menuClose}">
+      <nav class="mg-darknav">
+        <img class="mg-sidemenu--logo" src="assets/images/crowdcompass-logo-white.png" title="CrowdCompass">
+      </nav>
+      <div class="mg-sidemenu--content-wrapper">
+        <div class="mg-sidemenu--content">
+          <div ng-show="game.results" class="mg-levels">
+            <h2>Level</h2>
+            <svg id="levels" width="270px" height="50px">
+              <path d=" M 30 25 L 135 25" ng-class="{'mg-levels--available-path': levelIsAvailable(2)}" stroke="grey" stroke-width="3" fill="none" />
+              <path d=" M 135 25 L 240 25" ng-class="{'mg-levels--available-path': levelIsAvailable(3)}" stroke="grey" stroke-width="3" fill="none" />
+              <circle ng-click="currentLevel() !== 1 && playLevel(1)" ng-class="{'mg-levels--available': levelIsAvailable(1) && currentLevel() !== 1, 'mg-levels--current': currentLevel() === 1}" cx="30" cy="25" r="8" fill="grey" />
+              <circle ng-click="currentLevel() !== 2 && playLevel(2)" ng-class="{'mg-levels--available': levelIsAvailable(2) && currentLevel() !== 2, 'mg-levels--current': currentLevel() === 2}" cx="135" cy="25" r="8" fill="grey" />
+              <circle ng-click="currentLevel() !== 3 && playLevel(3)" ng-class="{'mg-levels--available': levelIsAvailable(3) && currentLevel() !== 3, 'mg-levels--current': currentLevel() === 3}" cx="240" cy="25" r="8" fill="grey" />
+            </svg>
+          </div>
+          <div class="mg-center">
+            <h3>
+              Alright {First Name},
+            </h3>
+            <p>Here’s the situation. It’s the night before the biggest event of your year – and your event day toolkit has gone missing! Can you find all your essentials in 30 seconds or less?</p>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div class="ssk-group">
+          <a href="" class="ssk ssk-linkedin"></a>
+          <a href="" class="ssk ssk-twitter"></a>
+          <a href="" class="ssk ssk-pinterest"></a>
+          <a href="" class="ssk ssk-facebook"></a>
+        </div>
+      </footer>
+    </div>
+    <div class="mg-main" ng-class="{'mg-main--sidemenu-open': menuClose}">
+      <div class="fade"></div>
+      <nav>
+        <div ng-hide="game.results" class="navbar-center" ng-class="{'progress-danger': game.isCritical}">
+          <h3 class="progress-timer">{{ game.remaining() | date: 'mm:ss'}}</h3>
+          <div id="progress" class="progress-container"></div>
+        </div>
+      </nav>
+      <section class="mg-content">
+        <div ng-if="!game.results" data-animation-in="bounceIn" class="card-container mg-center grid" ng-init="newGameIfNotStarted()" masonry hierarchical>
+          <div class="grid-sizer"></div>
+          <div ng-repeat="card in game.deck" class="masonry-item" ng-class="{turncard: card.isFaceUp, pulse: card.celebrate}" ng-click="game.check(card)" data-target=".card-container">
+            <div class="card" ng-style="{'background-image': 'url(assets/images/' + game.cardFront + ')' }" slidein>
+              <div class="back face flipped {{ card.item }}"></div>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="mg-center" ng-if="game.results">
+          <div ng-show="game.results.missing" class="results">
+            <header>
+              <h1 class="animated hinge in">Oh No, Time Is Up!</h1>
+            </header>
+            <p>But, you can still share the fun with other event pros and challenge them to beat the game! </p>
+            <div class="share-ssk">
+              <a href="" class="ssk ssk-linkedin"></a>
+              <a href="" class="ssk ssk-twitter"></a>
+              <a href="" class="ssk ssk-pinterest"></a>
+              <a href="" class="ssk ssk-facebook"></a>
+            </div>
+            <div class="error-advise">
+              <a ng-show="!getinfo && user.workEmail" class="btn-round" ng-click="newGame(5)">Get a Time Booster</a>
+              <a ng-hide="getinfo || user.workEmail" class="btn btn-primary btn-round" ng-click="getinfo = true">Get a Time Booster</a>
+              <div ng-show="getinfo">
+                <p>Enter your email to acquire an extra :05 seconds!</p>
+                <label>Work Email:
+                  <input type="email" ng-pattern="/\./" ng-required ng-model="user.workEmail" autofocus>
+                </label>
+                <label>
+                  <input type="checkbox" ng-init="user.unlockedAssets = true" ng-model="user.unlockedAssets" checked> Unlock Additional Assets</label>
+                <a class="btn-go btn-round" ng-disabled="!user.workEmail" ng-click="getinfo = false; newGame(5)">GO</a>
+                <p>We’ll also send you additional games and quizzes to interact with, research reports and other fun stuff built for event pros like you. Get Your goodies!</p>
+              </div>
+            </div>
+            <hr>
+            <a class="btn-round" ng-click="newGame()">Play Level {{currentLevel()}} Again</a>
+            <p>Want to take on level {{currentLevel()}} again without the time boost? We’ll shuffle the deck and you can play again.</p>
+          </div>
+          <div ng-hide="game.results.missing" class="results">
+            <header>
+              <h1 class="animated flip">You Won!</h1>
+            </header>
+            <div class="share-ssk">
+              <p>And it feels great to be a winner, right? Share your speedy time and challenge other event pros to a game!</p>
+              <a href="" class="ssk ssk-linkedin"></a>
+              <a href="" class="ssk ssk-twitter"></a>
+              <a href="" class="ssk ssk-pinterest"></a>
+              <a href="" class="ssk ssk-facebook"></a>
+            </div>
+            <hr>
+            <div class="error-advise">
+              <a ng-show="!getinfo && user.workEmail" class="btn-round" ng-click="playLevel(currentLevel() + 1)">Take on Level {{currentLevel() + 1}}</a>
+              <a ng-hide="getinfo || user.workEmail" class="btn-round" ng-click="getinfo = true">Take on Level {{currentLevel() + 1}}</a>
+              <div ng-show="getinfo">
+                <p>It’s Event Day: And It’s Guna Get Real! On event day, you’ve got less time to make key decisions – can you save the show?! Enter your email to find out.</p>
+                <label>Work Email:
+                  <input type="email" ng-pattern="/\./" ng-required ng-model="user.workEmail" autofocus>
+                </label>
+                <label>
+                  <input type="checkbox" ng-init="user.unlockedAssets = true" ng-model="user.unlockedAssets" checked> Unlock Additional Assets</label>
+                <a class="btn-go btn-round" ng-disabled="!user.workEmail" ng-click="getinfo = false; playLevel(currentLevel() + 1)">GO</a>
+                <p>We’ll also send you additional games and quizzes to interact with, research reports and other fun stuff built for event pros like you. Get Your goodies!</p>
+              </div>
+            </div>
+            <hr>
+            <a class="btn-round" ng-click="newGame()">Play Level {{currentLevel()}} Again</a>
+            <p>Not ready to dial up the pressure just yet? We’ll shuffle the deck and you can play again.</p>
+          </div>
+        </div>
+      </section>
+      <footer>
+        <span>© Copyright 2009-2015 <a href="http://www.crowdcompass.com">CrowdCompass</a>. All Rights Reserved.</span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+</html>
