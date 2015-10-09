@@ -9,7 +9,6 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
   <link rel="shortcut icon" href="assets/images/favicon.ico">
-  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
   <script src="assets/app.js"></script>
 </head>
 
@@ -86,8 +85,8 @@
         </div>
         <div class="mg-center" ng-if="game.results">
           <div ng-show="game.results.missing" class="results">
-            <header>
-              <h1 class="animated hinge in">Oh No, Time Is Up!</h1>
+            <header class="animated fadeInDown">
+              <h1>Oh No, Time Is Up!</h1>
             </header>
             <p>But, you can still share the fun with other event pros and challenge them to beat the game! </p>
             <div class="share-ssk">
@@ -151,6 +150,7 @@
       </footer>
     </div>
   </div>
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic" async="async">
 </body>
 
 </html>
