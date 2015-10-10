@@ -1,0 +1,136 @@
+
+.card-wrapper,
+.grid-sizer {
+  position: relative;
+  float: left;
+  width: 23%;
+
+  padding-bottom: 23%;
+  margin: 1%;
+}
+
+.grid-sizer {
+  position: absolute;
+}
+
+.card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  background-size: cover;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform .25s linear, box-shadow .15s linear;
+  backface-visibility: hidden;
+
+  &:hover {
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
+    transform: scale(1.001);
+  }
+}
+
+.face.back {
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
+  transform: rotateY(180deg);
+}
+
+.turncard .card {
+  transform: rotateY(180deg);
+}
+
+.face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  
+  backface-visibility: hidden;
+}
+
+.flipped {
+  background: url('assets/images/sprite.png');
+}
+
+.flipped.L1-placer {
+  background-position: 0 0;
+}
+
+.flipped.L1-clock {
+  background-position: 6.66% 0;
+}
+
+.flipped.L1-personality {
+  background-position: 13.33% 0;
+}
+
+.flipped.L1-frazzled {
+  background-position: 20% 0;
+}
+
+.flipped.L1-supplies {
+  background-position: 26.66% 0;
+}
+
+.flipped.L1-phones {
+  background-position: 33.33% 0;
+}
+
+.flipped.L1-woman-docs {
+  background-position: 40% 0;
+}
+
+.flipped.L2-app-icons {
+  background-position: 46.66% 0;
+}
+
+.flipped.L2-boxing {
+  background-position: 53.33% 0;
+}
+
+.flipped.L2-crowd {
+  background-position: 60% 0;
+}
+
+.flipped.L2-decisions {
+  background-position: 66.66% 0;
+}
+
+.flipped.L2-jumping-guy {
+  background-position: 73.33% 0;
+}
+
+.flipped.L3-party-girl {
+  background-position: 80% 0;
+}
+
+.flipped.L3-sleeping-woman {
+  background-position: 86.66% 0;
+}
+
+.flipped.L3-super-woman {
+  background-position: 93.33% 0;
+}
+
+.flipped.L3-tired-guy {
+  background-position: 100% 0;
+}
+
+@media screen and (max-width: $game-content-width-portrait) and (orientation:portrait) {
+  .card-wrapper,
+  .grid-sizer {
+    width: 31.33%;
+    padding-bottom: 31.33%;
+    margin: 1%;
+  }
+  .card-container {
+    max-width: $game-content-width-portrait;
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-pixel-ratio: 2) {
+  .flipped {
+    background: url('assets/images/sprite@2x.png');
+    background-size: auto 100%;
+  }
+}

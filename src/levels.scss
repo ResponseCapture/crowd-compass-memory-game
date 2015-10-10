@@ -1,0 +1,33 @@
+
+.mg-levels {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  height: 100px;
+  overflow: auto;
+}
+
+.mg-levels--available {
+  fill: red;
+  cursor: pointer;
+}
+
+.mg-levels--current {
+  stroke: #AAA;
+  fill: green;
+  cursor: mouse;
+}
+
+.mg-levels--available:hover {
+  stroke: red;
+  stroke-width: 3px;
+}
+
+.mg-levels--available-path {
+  stroke: red;
+}
+
+.mg-levels h2 {
+  text-align: center;
+  margin: 0;
+}

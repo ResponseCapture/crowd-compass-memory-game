@@ -77,12 +77,12 @@
         <section class="mg-content">
           <div ng-if="!game.results" data-animation-in="bounceIn" class="card-container mg-center grid" ng-init="newGameIfNotStarted()" min-height hierarchical>
             <div class="grid-sizer"></div>
-            <div ng-repeat="card in game.deck" class="masonry-item" ng-class="{turncard: card.isFaceUp, bounce: card.celebrate}" ng-click="game.check(card)" data-target=".card-container">
-              <div class="card" ng-style="{'background-image': 'url(assets/images/' + game.cardFront + ')' }" slidein>
+            <div ng-repeat="card in game.deck" class="card-wrapper" ng-class="{turncard: card.isFaceUp, bounce: card.celebrate}" ng-click="game.check(card)" data-target=".card-container">
+              <div class="card" ng-style="{'background-image': 'url(assets/images/' + game.cardFront + ')' }">
                 <div class="back face flipped {{ card.item }}"></div>
               </div>
             </div>
-            <div class="clear"></div>
+            <div style="clear: both;"></div>
           </div>
           <div class="mg-center" ng-if="game.results">
             <div ng-show="game.results.missing" class="results">
@@ -110,7 +110,6 @@
                   <p>We’ll also send you additional games and quizzes to interact with, research reports and other fun stuff built for event pros like you. Get Your goodies!</p>
                 </div>
               </div>
-              <hr>
               <a class="btn-round" ng-click="newGame()">Play Level {{currentLevel()}} Again</a>
               <p>Want to take on level {{currentLevel()}} again without the time boost? We’ll shuffle the deck and you can play again.</p>
             </div>
@@ -125,7 +124,6 @@
                 <a href="" class="ssk ssk-pinterest"></a>
                 <a href="" class="ssk ssk-facebook"></a>
               </div>
-              <hr>
               <div class="error-advise">
                 <a ng-show="!getinfo && user.workEmail" class="btn-round" ng-click="playLevel(currentLevel() + 1)">Take on Level {{currentLevel() + 1}}</a>
                 <a ng-hide="getinfo || user.workEmail" class="btn-round" ng-click="getinfo = true">Take on Level {{currentLevel() + 1}}</a>
@@ -140,7 +138,6 @@
                   <p>We’ll also send you additional games and quizzes to interact with, research reports and other fun stuff built for event pros like you. Get Your goodies!</p>
                 </div>
               </div>
-              <hr>
               <a class="btn-round" ng-click="newGame()">Play Level {{currentLevel()}} Again</a>
               <p>Not ready to dial up the pressure just yet? We’ll shuffle the deck and you can play again.</p>
             </div>
