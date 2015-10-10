@@ -8,11 +8,11 @@ var MProgress = require('./src/mprogress'),
   $ = window.jQuery = window.$ = require('jquery'),
   angular = require('angular');
 
-require('masonry-layout/dist/masonry.pkgd');
 require('./src/hierarchical')($);
 
 function shuffle(array) {
-  var m = array.length, t, i;
+  var m = array.length,
+    t, i;
   while (m) {
     i = Math.floor(Math.random() * m--);
     t = array[m];
@@ -98,7 +98,7 @@ function Game(options, timeout, interval) {
   mprogress.set(.99999);
 
   game.deck = shuffle(options.cards.concat(options.cards))
-    .map(function(picture) {
+    .map(function (picture) {
       return {
         item: picture,
         isFaceUp: false
@@ -106,30 +106,30 @@ function Game(options, timeout, interval) {
     });
 
   var checkNext;
-  var check = function(card) {
+  var check = function (card) {
     if (card.isFaceUp) return;
     if (checkNext) {
       checkNext(card);
     } else {
       card.isFaceUp = true;
-      checkNext = function(nextCard) {
+      checkNext = function (nextCard) {
         nextCard.isFaceUp = true;
         if (nextCard.item === card.item) {
           nextCard.celebrate = card.celebrate = true;
-          timeout(function() {
+          timeout(function () {
             nextCard.celebrate = card.celebrate = false;
           }, 2000);
           checkNext = void 0;
         } else {
-          timeout(function() {
+          timeout(function () {
             nextCard.isFaceUp = card.isFaceUp = false;
             checkNext = void 0;
           }, 250);
         }
 
-        if (game.deck.every(function (c) { 
-          return c.isFaceUp; 
-        })) {
+        if (game.deck.every(function (c) {
+            return c.isFaceUp;
+          })) {
           stop();
         }
       };
@@ -160,17 +160,17 @@ function Game(options, timeout, interval) {
     game.check = noop;
     var end = new Date() - begin;
     var faceDown = game.deck
-      .filter(function (c) { 
-        return !c.isFaceUp; 
+      .filter(function (c) {
+        return !c.isFaceUp;
       }).length;
 
-      timeout(function() {
-        game.results = {
-          time: Math.ceil(end / 1000),
-          total: game.deck.length / 2,
-          missing: Math.ceil(faceDown / 2)
-        };
-      }, 1500);
+    timeout(function () {
+      game.results = {
+        time: Math.ceil(end / 1000),
+        total: game.deck.length / 2,
+        missing: Math.ceil(faceDown / 2)
+      };
+    }, 1500);
   };
 
   game.elapsedMs = function () {
@@ -194,44 +194,50 @@ function Game(options, timeout, interval) {
   return game;
 }
 
-$(document).on('shown.zmd.hierarchicalDisplay', function (e) {
-  setTimeout(function() {
-    $(e.target).hierarchicalDisplay('_removeAnimations');
-  }, 1000);
-});
-
 var app = angular.module('memory-game', []);
 
-app.directive('masonry', function () {
+app.directive('minHeight', ['$window', function ($window) {
   return {
     restrict: 'AC',
-    link: function(scope, element) {
-        scope.$watch(element.children(), function () {
-          element.masonry({
-            itemSelector: '.masonry-item',
-            columnWidth: '.grid-sizer',
-            percentPosition: true
-          });
+    link: {
+      post: function (scope, container) {
+        function resize() {
+          var maxHeight = container.css('max-height').replace('px', ''),
+            parent = container.parent(),
+            parentHeight = parent.height(),
+            parentRatio = parent.width() / parentHeight,
+            ratio = container.width() / container.height();
+
+          container.width(parentRatio > ratio && parentHeight < maxHeight ? parentHeight * ratio * .99 : '');
+        }
+
+        $($window).resize(resize);
+
+        scope.$watch(container.children(), function () {
+          $($window).trigger('resize');
+        });
+      }
+    }
+  };
+}]);
+
+app.directive('hierarchical', function () {
+  return {
+    restrict: 'AC',
+    link: function (scope, element) {
+      scope.$watch(element.children(), function () {
+        element.hierarchicalDisplay();
       });
     }
   };
 });
 
-app.directive('hierarchical', function() {
-  return {
-    restrict: 'AC',
-    link: function(scope, element) {
-      scope.$watch(element.children(), function () {
-        element.hierarchicalDisplay();
-      });
-    } 
-  };
-});
-
-app.controller('CardController', ['$scope', '$timeout', '$interval', 
-  function($scope, $timeout, $interval) {
+app.controller('CardController', ['$scope', '$timeout', '$interval',
+  function ($scope, $timeout, $interval) {
     var memoryGame = new MemoryGame($timeout, $interval),
-      availableLevels = {1:true};
+      availableLevels = {
+        1: true
+      };
 
     $scope.user = {};
 
@@ -256,6 +262,5 @@ app.controller('CardController', ['$scope', '$timeout', '$interval',
       memoryGame.level = level;
       $scope.game = memoryGame.newGame();
     };
-  }]); 
-
-
+  }
+]);

@@ -296,10 +296,6 @@ MProgress.prototype = {
 
     progress.offsetWidth; /* Repaint */
 
-    /**
-     * indeterminate and query just has 'start' and 'end' method 
-     */
-
     Utils.queue(function (next) {
       // Set positionUsing if it hasn't already been set
       if (that.options.positionUsing === '') that.options.positionUsing = that._getPositioningCSS();

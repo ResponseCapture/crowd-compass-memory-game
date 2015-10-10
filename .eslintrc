@@ -14,12 +14,11 @@
     ]
   },
   "env": {
-    "es6": true,
     "browser": true,
     "node": true
   },  
   "globals": {
-    "console": false,
+    "console": true,
     "describe": false,
     "localStorage": false,
     "it": false,

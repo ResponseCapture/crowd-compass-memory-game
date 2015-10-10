@@ -44,11 +44,14 @@
     position: relative;
   }
 
+  .mg-sidemenu p {
+    font-size: 14px;
+  }
+
   .mg-sidemenu h3 {
     font-weight: 300;
-    font-size: 24px;
+    font-size: 21px;
     margin: 11px 0;
-    text-shadow: rgba(0, 0, 0, .45) 0 3px 4px;
   }
 
   .mg-center {
@@ -89,10 +92,6 @@
   .mg-levels h2 {
     text-align: center;
     margin: 0;
-  }
-
-  .mg-sidemenu p {
-    font-size: 14px;
   }
 
   .mg-content {
@@ -529,7 +528,7 @@
   .flipped.L3-tired-guy { 
     background-position: 100% 0; 
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 768px) and (orientation:portrait) {
     .masonry-item, .grid-sizer {
       width: 31.33%;
       padding-bottom: 31.33%;
