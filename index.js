@@ -2,25 +2,14 @@
  * @license MIT */
 'use strict';
 
+window.jQuery = window.$ = require('jquery');
 require('./index.scss');
 
 var MProgress = require('./src/mprogress'),
-  $ = window.jQuery = window.$ = require('jquery'),
-  angular = require('angular');
-
-require('./src/hierarchical')($);
-
-function shuffle(array) {
-  var m = array.length,
-    t, i;
-  while (m) {
-    i = Math.floor(Math.random() * m--);
-    t = array[m];
-    array[m] = array[i];
-    array[i] = t;
-  }
-  return array;
-}
+  angular = require('angular'),
+  shuffle = require('./src/shuffle'),
+  hierarchical = require('./src/hierarchical.directive'),
+  minHeight = require('./src/minHeight.directive');
 
 var level1 = [
   'L1-placer',
@@ -194,76 +183,38 @@ function Game(options, timeout, interval) {
   return game;
 }
 
-var app = angular.module('memory-game', []);
+angular.module('memory-game', [])
+  .directive('minHeight', ['$window', minHeight])
+  .directive('hierarchical', hierarchical)
+  .controller('CardController', ['$scope', '$timeout', '$interval',
+    function ($scope, $timeout, $interval) {
+      var memoryGame = new MemoryGame($timeout, $interval),
+        availableLevels = {
+          1: true
+        };
 
-app.directive('minHeight', ['$window', function ($window) {
-  return {
-    restrict: 'AC',
-    link: {
-      post: function (scope, container) {
-        function resize() {
-          var maxHeight = container.css('max-height').replace('px', ''),
-            maxWidth = container.css('max-width').replace('px', ''),
-            parent = container.parent(),
-            parentHeight = parent.height(),
-            parentRatio = parent.width() / parentHeight,
-            ratio = container.width() / container.height();
-
-          var width = parentHeight * ratio * .99;
-          container.width(parentRatio > ratio && parentHeight < maxHeight && maxWidth > width ? width : '');
-        }
-
-        $($window).resize(resize);
-
-        scope.$watch(container.children(), function () {
-          $($window).trigger('resize');
-        });
-      }
-    }
-  };
-}]);
-
-app.directive('hierarchical', function () {
-  return {
-    restrict: 'AC',
-    link: function (scope, element) {
-      scope.$watch(element.children(), function () {
-        element.hierarchicalDisplay();
-      });
-    }
-  };
-});
-
-app.controller('CardController', ['$scope', '$timeout', '$interval',
-  function ($scope, $timeout, $interval) {
-    var memoryGame = new MemoryGame($timeout, $interval),
-      availableLevels = {
-        1: true
+      $scope.user = {};
+      $scope.menuClose = true;
+      
+      $scope.newGameIfNotStarted = function () {
+        $scope.game = ($scope.game || memoryGame.newGame());
       };
 
-    $scope.user = {};
-    $scope.menuClose = true;
-    
-    $scope.newGameIfNotStarted = function () {
-      $scope.game = ($scope.game || memoryGame.newGame());
-    };
+      $scope.newGame = function (booster) {
+        $scope.game = memoryGame.newGame(booster);
+      };
 
-    $scope.newGame = function (booster) {
-      $scope.game = memoryGame.newGame(booster);
-    };
+      $scope.currentLevel = function () {
+        return memoryGame.level;
+      };
 
-    $scope.currentLevel = function () {
-      return memoryGame.level;
-    };
+      $scope.levelIsAvailable = function (level) {
+        return !!availableLevels[level];
+      };
 
-    $scope.levelIsAvailable = function (level) {
-      return !!availableLevels[level];
-    };
-
-    $scope.playLevel = function (level) {
-      availableLevels[level] = true;
-      memoryGame.level = level;
-      $scope.game = memoryGame.newGame();
-    };
-  }
-]);
+      $scope.playLevel = function (level) {
+        availableLevels[level] = true;
+        memoryGame.level = level;
+        $scope.game = memoryGame.newGame();
+      };
+    }]);
