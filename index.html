@@ -39,7 +39,7 @@
         </nav>
         <div class="mg-sidemenu--content-wrapper">
           <div class="mg-sidemenu--content">
-            <div class="mg-levels">
+            <div ng-show="game.results" class="mg-levels">
               <h4>Level Progress</h4>
               <svg id="levels" width="270px" height="32px">
                 <path d=" M 30 10 L 135 10" ng-class="{'mg-levels--available-path': levelIsAvailable(2)}" stroke="grey" stroke-width="2" fill="none" />

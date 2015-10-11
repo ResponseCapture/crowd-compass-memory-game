@@ -203,12 +203,14 @@ app.directive('minHeight', ['$window', function ($window) {
       post: function (scope, container) {
         function resize() {
           var maxHeight = container.css('max-height').replace('px', ''),
+            maxWidth = container.css('max-width').replace('px', ''),
             parent = container.parent(),
             parentHeight = parent.height(),
             parentRatio = parent.width() / parentHeight,
             ratio = container.width() / container.height();
 
-          container.width(parentRatio > ratio && parentHeight < maxHeight ? parentHeight * ratio * .99 : '');
+          var width = parentHeight * ratio * .99;
+          container.width(parentRatio > ratio && parentHeight < maxHeight && maxWidth > width ? width : '');
         }
 
         $($window).resize(resize);
@@ -240,7 +242,8 @@ app.controller('CardController', ['$scope', '$timeout', '$interval',
       };
 
     $scope.user = {};
-
+    $scope.menuClose = true;
+    
     $scope.newGameIfNotStarted = function () {
       $scope.game = ($scope.game || memoryGame.newGame());
     };

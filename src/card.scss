@@ -124,6 +124,7 @@
   }
   .card-container {
     max-width: $game-content-width-portrait;
+    max-height: $game-content-width-landscape;
   }
 }
 
