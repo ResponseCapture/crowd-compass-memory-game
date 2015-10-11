@@ -1,9 +1,11 @@
+$hover-transition: .15s;
 
 .mg-levels {
   position: absolute;
   bottom: 20px;
   width: 100%;
   overflow: auto;
+  transition: all $hover-transition;
 
   g {
     pointer-events: none;
@@ -17,6 +19,7 @@
   }
 
   text, circle {
+    transition: all $hover-transition;
     fill: #AAA;
   }
 
@@ -28,6 +31,7 @@
     fill: hsl(201, 100, 45);
     pointer-events: all;
     cursor: pointer;
+    transition: all $hover-transition;
   }
 
   .mg-levels--current circle {
@@ -39,10 +43,12 @@
   .mg-levels--available:hover circle {
     stroke: hsl(201, 100, 45);
     stroke-width: 3px;
+    transition: all $hover-transition;
   }
 
   .mg-levels--available:hover text {
     fill: hsl(201, 100, 100);
+    transition: all $hover-transition;
   }
 
   .mg-levels--available-path {
