@@ -213,6 +213,7 @@ angular.module('memory-game', [])
       };
 
       $scope.playLevel = function (level) {
+        $scope.menuClose = false;
         availableLevels[level] = true;
         memoryGame.level = level;
         $scope.game = memoryGame.newGame();
