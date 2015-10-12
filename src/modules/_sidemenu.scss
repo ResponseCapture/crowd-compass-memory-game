@@ -28,6 +28,8 @@
     position: fixed;
     bottom: 0;
     height: $footer-height;
+    width: $sidemenu-width;
+    left: 0;
   }
 }
 
@@ -50,7 +52,6 @@
 }
 
 footer .ssk-group {
-  position: fixed;
   width: 100%;
 }
 
