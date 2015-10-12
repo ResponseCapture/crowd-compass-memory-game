@@ -3,6 +3,12 @@
 'use strict';
 
 window.jQuery = window.$ = require('jquery');
+window.responseCapture = (window.responseCapture || {
+  updateUser: function (data) {
+    window.console.log('called updateUser with', data);
+  }
+});
+
 require('./index.scss');
 
 var MProgress = require('./src/mprogress'),
