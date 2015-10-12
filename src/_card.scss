@@ -1,3 +1,8 @@
+.card-container {
+  max-width: $game-content-width-landscape;
+  max-height: $game-content-width-portrait;
+  margin: auto;
+}
 
 .card-wrapper,
 .grid-sizer {

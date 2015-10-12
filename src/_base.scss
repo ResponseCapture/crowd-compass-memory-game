@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #76838f;
+  background-color: #f1f4f5;
+  font-family: Roboto, sans-serif;
+}
+
+.mg-game {
+  width: 100vw;
+  height: 100vh;
+}
+
+.mg-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0 auto;
+}
+
+nav {
+  height: $nav-height;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
+}
+
+footer {
+  clear: both;
+  width: 100%;
+}

@@ -1,0 +1,86 @@
+
+.mg-sidemenu {
+  background-color: #37474f;
+  position: fixed;
+  top: 0;
+  color: rgb(255, 255, 255);
+  width: $sidemenu-width;
+  height: 100%;
+  z-index: 4;
+  padding-bottom: $footer-height;
+
+  p {
+   font-size: 14px;
+  }
+
+  h3 {
+    font-weight: 300;
+    font-size: 21px;
+    margin: 11px 0;
+  }
+
+  nav {
+    padding-left: 30px;
+    background-color: #263238;
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0;
+    height: $footer-height;
+  }
+}
+
+.mg-sidemenu--content-wrapper {
+  width: 100%;
+  padding: 0 30px;
+  height: calc(100vh - #{$height-sans-content});
+}
+
+.mg-sidemenu--content {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  position: relative;
+}
+
+.mg-sidemenu--logo {
+  margin-top: 18px;
+  height: 28px;
+}
+
+footer .ssk-group {
+  position: fixed;
+  width: 100%;
+}
+
+footer .ssk {
+  background-color: #2d3b42;
+  width: 25%;
+  padding: 15px 0;
+  margin: 0;
+  color: rgba(163,175,183,.9);
+}
+
+.ssk::before {
+  font-size: 16px;
+}
+
+.share-ssk a {
+  padding: 10px;
+  border-radius: 25px;
+  margin: 0 2px 15px;
+}
+
+@media screen and (max-width: $collapse-sidemenu-width) {
+  .mg-sidemenu {
+    transform: translateX(-$sidemenu-width);
+    transition: .25s ease-out;
+  }
+
+  .mg-sidemenu--open {
+    transform: translateX(0px);
+    box-shadow: 14px 4px 14px rgba(0, 0, 0, .2);
+    transition: .25s ease-out;
+  }
+}

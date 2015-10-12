@@ -140,33 +140,3 @@
 .ui-mprogress {
   width: 100%;
 }
-
-.progress-timer {
-  font-size: 24px;
-  font-weight: 400;
-  line-height: .4;
-  margin: 0;
-  float: left;
-  padding-right: 5px;
-  color: rgb(0, 153, 238);
-}
-
-.progress-timer--mobile {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  font-weight: 400;
-  font-size: 30px;
-  line-height: .5;
-  color: #fff;
-}
-
-.progress-container {
-  margin-top: 10px;
-  border-radius: 1000px;
-  height: 7px;
-  z-index: 10;
-  overflow: hidden;
-}
-
