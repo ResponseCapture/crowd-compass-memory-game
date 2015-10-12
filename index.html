@@ -96,6 +96,20 @@
             <h3 class="progress-timer">{{ game.remaining() | date: 'mm:ss'}}</h3>
             <div id="progress" class="progress-container"></div>
           </div>
+          <ul ng-show="currentLevel() === 3 && game.results" class="crowdcompass-nav">
+            <li>
+              <a href="http://www.crowdcompass.com/features/" target="_blank">Features</a>
+            </li>
+            <li>
+              <a href="http://www.crowdcompass.com/resources/" target="_blank">Resources</a>
+            </li>           
+            <li>
+              <a href="http://www.crowdcompass.com/clients.shtml" target="_blank">Our Clients</a>
+            </li>
+            <li>
+              <a href="http://www.crowdcompass.com/about.shtml" target="_blank">About Us</a>
+            </li>
+          </ul>
         </nav>
         <section class="mg-content">
           <div ng-if="!game.results" data-animation-in="bounceIn" class="card-container mg-center grid" ng-init="newGameIfNotStarted()" min-height hierarchical>
