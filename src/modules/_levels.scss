@@ -1,10 +1,8 @@
 $hover-transition: .15s;
 
 .mg-levels {
-  position: absolute;
-  bottom: 20px;
-  width: 100%;
-  overflow: auto;
+  position: fixed;
+  bottom: $footer-height + 30px;
   transition: all $hover-transition;
 
   g {
@@ -53,5 +51,12 @@ $hover-transition: .15s;
 
   .mg-levels--available-path {
     stroke: hsl(201, 100, 29);
+  }
+}
+
+
+@media screen and (max-height: 440px) {
+  .mg-levels {
+    position: static;
   }
 }

@@ -28,7 +28,7 @@ angular.module('memory-game', [])
         };
 
       $scope.user = {};
-      $scope.menuClose = true;
+      $scope.menuOpen = true;
       
       $scope.newGameIfNotStarted = function () {
         $scope.game = ($scope.game || memoryGame.newGame());
@@ -47,7 +47,7 @@ angular.module('memory-game', [])
       };
 
       $scope.playLevel = function (level) {
-        $scope.menuClose = false;
+        $scope.menuOpen = false;
         availableLevels[level] = true;
         memoryGame.level = level;
         $scope.game = memoryGame.newGame();

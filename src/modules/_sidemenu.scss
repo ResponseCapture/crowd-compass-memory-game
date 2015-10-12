@@ -35,14 +35,14 @@
 
 .mg-sidemenu--content-wrapper {
   width: 100%;
-  padding: 0 30px;
+  padding: 30px;
   height: calc(100vh - #{$height-sans-content});
+  overflow: auto;
 }
 
 .mg-sidemenu--content {
   width: 100%;
   height: 100%;
-  overflow: auto;
   position: relative;
 }
 
@@ -71,6 +71,16 @@ footer .ssk {
   padding: 10px;
   border-radius: 25px;
   margin: 0 2px 15px;
+}
+
+@media screen and (max-height: 440px) {
+  .mg-sidemenu {
+    .mg-center {
+      position: relative;
+      top: initial;
+      transform: translateY(0%);
+    }
+  }
 }
 
 @media screen and (max-width: $collapse-sidemenu-width) {

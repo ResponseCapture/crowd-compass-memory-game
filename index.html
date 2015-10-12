@@ -2,6 +2,71 @@
 <html>
 
 <head>
+  <script type="text/javascript">
+    window.WebFontConfig = {
+      google: { families: [ 'Roboto:400,500,300,100,300italic:latin' ] }
+    };
+
+    (function() {
+
+      function loadScript(script, cb) {
+        var tk = document.createElement('script');
+        tk.src = 'assets/app.js';
+        tk.type = 'text/javascript';
+        tk.async = 'true';
+
+        tk.onload = tk.onreadystatechange = function() {
+          var rs = this.readyState;
+          if (rs && rs != 'complete' && rs != 'loaded') return;
+          if (cb) cb();
+        };
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(tk, s);
+      }
+
+      loadScript(('https:' == document.location.protocol ? 'https' : 'http') +
+        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js');
+      loadScript('assets/app.js', function () {
+        var loading = document.getElementById('loading');
+        setTimeout(function() {
+          loading.className = 'loaded';
+          setTimeout(function () {
+            loading.style.display = 'none';
+          }, 500);
+        }, 0);
+      });
+
+    })();
+  </script>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+    #loading {
+      position: fixed;
+      z-index: 999999;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #263238;
+      text-align: center;
+    }
+    #loading img {
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translate(-50%);
+      transform: translate(-50%);
+    }
+    .loaded {
+      -webkit-transition: opacity .5s;
+      transition: opacity .5s;
+      opacity: 0;
+    }
+  </style>
   <title>CrowdCompass Memory Game</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,6 +85,9 @@
     <script src="assets/vendor/media-match/media.match.min.js"></script>
     <script src="assets/vendor/respond/respond.min.js"></script>
     <![endif]-->
+    <div id="loading">
+      <img src="assets/images/loading.gif" width="32" height="32">
+    </div>
     <div class="mg-entry">
       
     </div>
@@ -28,19 +96,26 @@
         <img src="assets/portraits/5.jpg" alt="...">
       </span>
       <nav class="mg-mobilenav">
-        <button class="hamburger" ng-click="menuClose = !menuClose" ng-class="{'hamburger-close': menuClose}">
+        <button class="hamburger" ng-click="menuOpen = !menuOpen" ng-class="{'hamburger-close': menuOpen}">
           <span class="sr-only">Toggle navigation</span>
           <span class="hamburger-bar"></span>
         </button>
         <img class="mg-sidemenu--logo" src="assets/images/crowdcompass-brandmark-white.png" title="CrowdCompass">
         <h1 ng-hide="game.results" class="progress-timer--mobile">{{ game.remaining() | date: 'mm:ss'}}</h1>
       </nav>
-      <div class="mg-sidemenu" ng-class="{'mg-sidemenu--open': menuClose}">
+      <div class="mg-sidemenu" ng-class="{'mg-sidemenu--open': menuOpen}">
         <nav class="mg-darknav">
           <img class="mg-sidemenu--logo" src="assets/images/crowdcompass-logo-white.png" title="CrowdCompass">
         </nav>
         <div class="mg-sidemenu--content-wrapper">
           <div class="mg-sidemenu--content">
+            <div class="mg-center">
+              <h3>
+                Alright {First Name},
+              </h3>
+              <p>Here’s the situation. It’s the night before the biggest event of your year – and your event day toolkit has gone missing! Can you find all your essentials in 30 seconds or less?</p>
+            </div>
+          
             <div ng-show="game.results" class="mg-levels">
               <h4>Level Progress</h4>
               <svg id="levels" width="270px" height="32px">
@@ -75,12 +150,6 @@
                 </g>
               </svg>
             </div>
-            <div class="mg-center">
-              <h3>
-                Alright {First Name},
-              </h3>
-              <p>Here’s the situation. It’s the night before the biggest event of your year – and your event day toolkit has gone missing! Can you find all your essentials in 30 seconds or less?</p>
-            </div>
           </div>
         </div>
         <footer>
@@ -92,7 +161,7 @@
           </div>
         </footer>
       </div>
-      <div class="mg-main" ng-class="{'mg-main--sidemenu-open': menuClose}">
+      <div class="mg-main" ng-class="{'mg-main--sidemenu-open': menuOpen}">
         <div class="fade"></div>
         <nav>
           <div ng-hide="game.results" class="navbar-center" ng-class="{'progress-danger': game.isCritical}">
@@ -202,10 +271,6 @@
       </div>
     </div>
   </div>
-  <script>
-  </script>
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic" async="async">
-  <script src="assets/app.js" async></script>
 </body>
 
 </html>

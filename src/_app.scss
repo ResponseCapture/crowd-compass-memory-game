@@ -1,5 +1,12 @@
 @import 'components';
 
-@import 'vars';
+$collapse-sidemenu-width: 1086px;
+$sidemenu-width: 330px;
+$game-content-width-landscape: 756px;
+$game-content-width-portrait: 567px;
+$nav-height: 66px;
+$footer-height: 46px;
+$height-sans-content: $nav-height + $footer-height;
+
 @import 'base';
 @import 'modules';
