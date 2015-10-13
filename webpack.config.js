@@ -19,7 +19,7 @@ module.exports = {
       loaders: ['style', 'css', 'autoprefixer', 'sass']
     }, {
       test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-      loader: 'url-loader?limit=100000'
+      loader: 'url-loader?limit=100000&name=[name].[ext]'
     }]
   },
   resolve: {

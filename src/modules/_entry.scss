@@ -1,0 +1,12 @@
+.mg-entry {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: #AAA;
+  z-index: 9000;
+}
+
+.loaded {
+  transition: opacity .5s;
+  opacity: 0;
+}

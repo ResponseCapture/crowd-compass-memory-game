@@ -27,7 +27,10 @@ angular.module('memory-game', [])
           1: true
         };
 
-      $scope.user = {};
+      $scope.user = {
+        picture: 'assets/portraits/5.jpg'
+      };
+      
       $scope.menuOpen = true;
       
       $scope.newGameIfNotStarted = function () {

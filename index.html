@@ -2,46 +2,9 @@
 <html>
 
 <head>
-  <script type="text/javascript">
-    window.WebFontConfig = {
-      google: { families: [ 'Roboto:400,500,300,100,300italic:latin' ] }
-    };
-
-    (function() {
-
-      function loadScript(script, cb) {
-        var tk = document.createElement('script');
-        tk.src = 'assets/app.js';
-        tk.type = 'text/javascript';
-        tk.async = 'true';
-
-        tk.onload = tk.onreadystatechange = function() {
-          var rs = this.readyState;
-          if (rs && rs != 'complete' && rs != 'loaded') return;
-          if (cb) cb();
-        };
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(tk, s);
-      }
-
-      loadScript(('https:' == document.location.protocol ? 'https' : 'http') +
-        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js');
-      loadScript('assets/app.js', function () {
-        var loading = document.getElementById('loading');
-        setTimeout(function() {
-          loading.className = 'loaded';
-          setTimeout(function () {
-            loading.style.display = 'none';
-          }, 500);
-        }, 0);
-      });
-
-    })();
-  </script>
   <style>
     body {
-      padding: 0;
-      margin: 0;
+      background-color: #263238;
     }
     #loading {
       position: fixed;
@@ -52,21 +15,76 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background-color: #263238;
-      text-align: center;
-    }
-    #loading img {
-      position: absolute;
-      top: 50%;
-      -webkit-transform: translate(-50%);
-      transform: translate(-50%);
-    }
-    .loaded {
-      -webkit-transition: opacity .5s;
-      transition: opacity .5s;
-      opacity: 0;
+      background: url('assets/images/loading.gif') #263238 no-repeat center; 
+      background-size: 32px 32px;
     }
   </style>
+  <script type="text/javascript">
+    window.WebFontConfig = {
+      google: { families: [ 'Roboto:400,500,300,100,300italic:latin' ] }
+    };
+
+    var calls = 0;
+
+    (function() {
+      function load(file, cb) {
+        if (cb) calls++;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', file, true);
+
+        xhr.onload = function() {
+          if (xhr.readyState == 4) {
+            if (xhr.status === 200) {
+              if (cb && --calls === 0) cb();
+            } else {
+              window.console.error(xhr.statusText);
+            }
+          }
+        };
+
+        xhr.onerror = function () {
+          window.console.error(xhr.statusText);
+        };
+
+        xhr.send(null);
+      }
+
+      function loadScript(script, cb) {
+        load(script, cb);
+        var tk = document.createElement('script');
+        tk.src = script;
+        tk.type = 'text/javascript';
+        tk.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(tk, s);
+      }
+
+      function isRetina(){
+          return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx), only screen and (min-resolution: 75.6dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)').matches)) || (window.devicePixelRatio && window.devicePixelRatio >= 2)) && /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+      }
+
+      function loadingComplete() {
+        var loading = document.getElementById('loading');
+        setTimeout(function() {
+          loading.className = 'loaded';
+          setTimeout(function () {
+            loading.style.display = 'none';
+          }, 500);
+        }, 500);
+      }
+
+      if (isRetina()) {
+        load('assets/sprite@2x.png', loadingComplete);
+      } else {
+        load('assets/sprite.png', loadingComplete);
+      }
+      loadScript('assets/app.js', loadingComplete);
+      loadScript(('https:' == document.location.protocol ? 'https' : 'http') +
+        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js');
+
+    })();
+  </script>
   <title>CrowdCompass Memory Game</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -85,15 +103,58 @@
     <script src="assets/vendor/media-match/media.match.min.js"></script>
     <script src="assets/vendor/respond/respond.min.js"></script>
     <![endif]-->
-    <div id="loading">
-      <img src="assets/images/loading.gif" width="32" height="32">
-    </div>
-    <div class="mg-entry">
-      
+    <div id="loading"></div>
+    <div ng-hide="user" class="mg-entry">
+      <div class="page-content vertical-align-middle">
+        <div class="brand">
+          <img class="brand-img" src="assets/images/logo.png" alt="...">
+          <h2 class="brand-text">Remark</h2>
+        </div>
+        <p>Sign into your pages account</p>
+        <form method="post">
+          <div class="form-group">
+            <label class="sr-only" for="inputName">Name</label>
+            <input type="text" class="form-control" id="inputName" name="name" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="inputEmail">Email</label>
+            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="inputPassword">Password</label>
+            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
+          </div>
+          <div class="form-group clearfix">
+            <div class="checkbox-custom checkbox-inline checkbox-primary pull-left">
+              <input type="checkbox" id="inputCheckbox" name="remember">
+              <label for="inputCheckbox">Remember me</label>
+            </div>
+            <a class="pull-right" href="forgot-password.html">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+        </form>
+        <p>Still no account? Please go to <a href="register.html">Register</a></p>
+
+        <footer class="page-copyright page-copyright-inverse">
+          <p>WEBSITE BY amazingSurge</p>
+          <p>© 2015. All RIGHT RESERVED.</p>
+          <div class="social">
+            <a href="javascript:void(0)">
+              <i class="icon bd-twitter" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0)">
+              <i class="icon bd-facebook" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0)">
+              <i class="icon bd-dribbble" aria-hidden="true"></i>
+            </a>
+          </div>
+        </footer>
+      </div>
     </div>
     <div ng-show="user" class="mg-gamescreen">
-      <span class="mg-main--avatar">
-        <img src="assets/portraits/5.jpg" alt="...">
+      <span ng-show="user.picture" class="mg-main--avatar">
+        <img src="{{user.picture}}" alt="...">
       </span>
       <nav class="mg-mobilenav">
         <button class="hamburger" ng-click="menuOpen = !menuOpen" ng-class="{'hamburger-close': menuOpen}">
