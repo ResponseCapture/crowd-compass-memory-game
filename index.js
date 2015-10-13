@@ -22,15 +22,15 @@ angular.module('memory-game', [])
   .directive('hierarchical', hierarchical)
   .controller('CardController', ['$scope', '$timeout', '$interval',
     function ($scope, $timeout, $interval) {
-      var memoryGame = new MemoryGame($timeout, $interval),
-        availableLevels = {
-          1: true
-        };
-
       $scope.user = {
         picture: 'assets/portraits/5.jpg'
       };
       
+      var memoryGame = new MemoryGame($timeout, $interval, $scope.user),
+        availableLevels = {
+          1: true
+        };
+
       $scope.menuOpen = true;
       
       $scope.newGameIfNotStarted = function () {

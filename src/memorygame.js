@@ -3,59 +3,28 @@
 var MProgress = require('./mprogress'),
   shuffle = require('./shuffle');
 
-var level1 = [
-  'L1-placer',
-  'L1-clock',
-  'L1-personality',
-  'L1-frazzled',
-  'L1-supplies',
-  'L1-phones'
-];
+function MemoryGame(timeout, interval, user) {
+  var cardCount = 18;
 
-var level2 = [
-  'L1-placer',
-  'L1-woman-docs',
-  'L2-app-icons',
-  'L2-boxing',
-  'L2-crowd',
-  'L2-decisions'
-];
-
-var level3 = [
-  'L1-placer',
-  'L2-jumping-guy',
-  'L3-party-girl',
-  'L3-sleeping-woman',
-  'L3-super-woman',
-  'L3-tired-guy'
-];
-
-function MemoryGame(timeout, interval) {
   this.level = 1;
+
+  function getCards(level) {
+    var startingAt = ((level - 1) * 6),
+      emptyCards = Array.apply(null, Array(cardCount));
+    return emptyCards.map(function (_, i) {
+      return ((i / (cardCount - 1)) * 100) + '% 0';
+    }).slice(startingAt, startingAt + 6);
+  }
 
   this.newGame = function (booster) {
     booster = booster || 0;
 
-    switch (this.level) {
-      case 3:
-        return Game({
-          cards: level3,
-          limit: 10 + booster,
-          cardFront: 'card-front-3.png'
-        }, timeout, interval);
-      case 2:
-        return Game({
-          cards: level2,
-          limit: 20 + booster,
-          cardFront: 'card-front-2.png'
-        }, timeout, interval);
-      default:
-        return Game({
-          cards: level1,
-          limit: 30 + booster,
-          cardFront: 'card-front-1.png'
-        }, timeout, interval);
-    }
+    return Game({
+      cards: getCards(this.level),
+      picture: user.picture,
+      limit: 30 - (this.level - 1) * 10,
+      cardFront: 'card-front-' + this.level + '.png'
+    }, timeout, interval);
   };
 }
 
@@ -72,19 +41,32 @@ function Game(options, timeout, interval) {
     limit = options.limit,
     limitMs = limit * 1000,
     noop = function () {},
+    profileCard = {
+      picture: 'url(' + options.picture + ')',
+      position: '0% 0'
+    },
     game = {};
+
+  window.console.log(options.cards);
 
   game.cardFront = options.cardFront;
   mprogress.start();
   mprogress.set(.99999);
 
-  game.deck = shuffle(options.cards.concat(options.cards))
-    .map(function (picture) {
-      return {
-        item: picture,
-        isFaceUp: false
-      };
-    });
+  var deck = options.cards.map(function (position, index) {
+    return {
+      position: position,
+      index: index
+    };
+  });
+
+  game.deck = shuffle(deck.concat(deck).map(function (card) {
+    window.console.log(options.picture && card.index === 0 ? profileCard : card);
+    return {
+      item: options.picture && card.index === 0 ? profileCard : card,
+      isFaceUp: false
+    };
+  }));
 
   var checkNext;
   var check = function (card) {

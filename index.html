@@ -18,73 +18,12 @@
       background: url('assets/images/loading.gif') #263238 no-repeat center; 
       background-size: 32px 32px;
     }
+
+    .loaded {
+      transition: opacity .5s;
+      opacity: 0;
+    }
   </style>
-  <script type="text/javascript">
-    window.WebFontConfig = {
-      google: { families: [ 'Roboto:400,500,300,100,300italic:latin' ] }
-    };
-
-    var calls = 0;
-
-    (function() {
-      function load(file, cb) {
-        if (cb) calls++;
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', file, true);
-
-        xhr.onload = function() {
-          if (xhr.readyState == 4) {
-            if (xhr.status === 200) {
-              if (cb && --calls === 0) cb();
-            } else {
-              window.console.error(xhr.statusText);
-            }
-          }
-        };
-
-        xhr.onerror = function () {
-          window.console.error(xhr.statusText);
-        };
-
-        xhr.send(null);
-      }
-
-      function loadScript(script, cb) {
-        load(script, cb);
-        var tk = document.createElement('script');
-        tk.src = script;
-        tk.type = 'text/javascript';
-        tk.async = 'true';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(tk, s);
-      }
-
-      function isRetina(){
-          return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx), only screen and (min-resolution: 75.6dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)').matches)) || (window.devicePixelRatio && window.devicePixelRatio >= 2)) && /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
-      }
-
-      function loadingComplete() {
-        var loading = document.getElementById('loading');
-        setTimeout(function() {
-          loading.className = 'loaded';
-          setTimeout(function () {
-            loading.style.display = 'none';
-          }, 500);
-        }, 500);
-      }
-
-      if (isRetina()) {
-        load('assets/sprite@2x.png', loadingComplete);
-      } else {
-        load('assets/sprite.png', loadingComplete);
-      }
-      loadScript('assets/app.js', loadingComplete);
-      loadScript(('https:' == document.location.protocol ? 'https' : 'http') +
-        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js');
-
-    })();
-  </script>
   <title>CrowdCompass Memory Game</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -154,7 +93,7 @@
     </div>
     <div ng-show="user" class="mg-gamescreen">
       <span ng-show="user.picture" class="mg-main--avatar">
-        <img src="{{user.picture}}" alt="...">
+        <img ng-src="{{user.picture}}" alt="...">
       </span>
       <nav class="mg-mobilenav">
         <button class="hamburger" ng-click="menuOpen = !menuOpen" ng-class="{'hamburger-close': menuOpen}">
@@ -249,7 +188,7 @@
             <div class="grid-sizer"></div>
             <div ng-repeat="card in game.deck" class="card-wrapper" ng-class="{turncard: card.isFaceUp, bounce: card.celebrate}" ng-click="game.check(card)" data-target=".card-container">
               <div class="card" ng-style="{'background-image': 'url(assets/images/' + game.cardFront + ')' }">
-                <div class="back face flipped {{ card.item }}"></div>
+                <div class="back face flipped" ng-style="{'background-position': card.item.position, 'background-image': card.item.picture, 'background-size': card.item.picture ? 'cover' : ''}"></div>
               </div>
             </div>
             <div style="clear: both;"></div>
@@ -332,6 +271,73 @@
       </div>
     </div>
   </div>
+  
+  <script type="text/javascript">
+    window.WebFontConfig = {
+      google: { families: [ 'Roboto:400,500,300,100,300italic:latin' ] }
+    };
+
+    var calls = 0;
+
+    (function() {
+      function load(file, cb) {
+        if (cb) calls++;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', file, true);
+
+        xhr.onload = function() {
+          if (xhr.readyState == 4) {
+            if (xhr.status === 200) {
+              if (cb && --calls === 0) cb();
+            } else {
+              window.console.error(xhr.statusText);
+            }
+          }
+        };
+
+        xhr.onerror = function () {
+          window.console.error(xhr.statusText);
+        };
+
+        xhr.send(null);
+      }
+
+      function loadScript(script, cb) {
+        load(script, cb);
+        var tk = document.createElement('script');
+        tk.src = script;
+        tk.type = 'text/javascript';
+        tk.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(tk, s);
+      }
+
+      function isRetina(){
+          return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx), only screen and (min-resolution: 75.6dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)').matches)) || (window.devicePixelRatio && window.devicePixelRatio >= 2)) && /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+      }
+
+      function loadingComplete() {
+        var loading = document.getElementById('loading');
+        setTimeout(function() {
+          loading.className = 'loaded';
+          setTimeout(function () {
+            loading.style.display = 'none';
+          }, 500);
+        }, 500);
+      }
+
+      if (isRetina()) {
+        load('assets/sprite@2x.png', loadingComplete);
+      } else {
+        load('assets/sprite.png', loadingComplete);
+      }
+      loadScript('assets/app.js', loadingComplete);
+      loadScript(('https:' == document.location.protocol ? 'https' : 'http') +
+        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js');
+
+    })();
+  </script>
 </body>
 
 </html>
