@@ -27,6 +27,7 @@
   <title>CrowdCompass Memory Game</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
@@ -44,39 +45,44 @@
     <![endif]-->
     <div id="loading"></div>
     <div ng-hide="user" class="mg-entry">
-      <div class="page-content vertical-align-middle">
-        <div class="brand">
-          <img class="brand-img" src="assets/images/logo.png" alt="...">
-          <h2 class="brand-text">Remark</h2>
+      <div class="mg-entryform">
+        <div>
+          <img src="assets/images/crowdcompass-logo-white.png" title="CrowdCompass">
+          <h1 class="brand-text">Memory Game</h1>
         </div>
-        <p>Sign into your pages account</p>
-        <form method="post">
-          <div class="form-group">
-            <label class="sr-only" for="inputName">Name</label>
-            <input type="text" class="form-control" id="inputName" name="name" placeholder="Name">
-          </div>
-          <div class="form-group">
-            <label class="sr-only" for="inputEmail">Email</label>
-            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
-          </div>
-          <div class="form-group">
-            <label class="sr-only" for="inputPassword">Password</label>
-            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
-          </div>
-          <div class="form-group clearfix">
-            <div class="checkbox-custom checkbox-inline checkbox-primary pull-left">
-              <input type="checkbox" id="inputCheckbox" name="remember">
-              <label for="inputCheckbox">Remember me</label>
-            </div>
-            <a class="pull-right" href="forgot-password.html">Forgot password?</a>
-          </div>
-          <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-        </form>
-        <p>Still no account? Please go to <a href="register.html">Register</a></p>
+        <div></div>
+        <h3>Personalize Your Experience!</h3>
+        <p>Get a one-of-a-kind game experience, designed just for you, by signing in on social.</p>
+        <p>(Don’t worry. Nothing posts to your accounts.)</p>
 
-        <footer class="page-copyright page-copyright-inverse">
-          <p>WEBSITE BY amazingSurge</p>
-          <p>© 2015. All RIGHT RESERVED.</p>
+        <div ng-hide="enterName">
+          <div class="mg-line">
+            <button type="submit" class="btn btn-primary btn-block">Sign in with Facebook</button>
+          </div>
+          <div class="mg-line">
+            <button type="submit" class="btn btn-primary btn-block">Sign in with LinkedIn</button>
+          </div>
+          <div class="mg-line">
+            <a ng-click="attemptSocial = true">Sign in with name</a>
+          </div>
+        </div>
+        <div ng-show="enterName">
+          <form name="userForm" ng-submit="user = {firstName: firstname, lastName: lastname}">
+            <div class="mg-line">
+              <label class="sr-only" for="firstname">First Name</label>
+              <input name="firstname" type="text" required ng-model="firstname" placeholder="First Name">
+            </div>
+            <div class="mg-line">
+              <label class="sr-only" for="lastname">Last Name</label>
+              <input name="lastname" type="text" required ng-model="lastname" placeholder="Last Name">
+            </div>
+            <div class="mg-line">
+              <button ng-disabled="!userForm.$valid" type="submit">Let's Play!</button>
+            </div>
+          </form>
+        </div>
+
+        <footer class="mg-legal mg-line">
           <div class="social">
             <a href="javascript:void(0)">
               <i class="icon bd-twitter" aria-hidden="true"></i>
@@ -85,13 +91,26 @@
               <i class="icon bd-facebook" aria-hidden="true"></i>
             </a>
             <a href="javascript:void(0)">
-              <i class="icon bd-dribbble" aria-hidden="true"></i>
+              <i class="icon bd-pinterest" aria-hidden="true"></i>
             </a>
           </div>
         </footer>
+        <div class="mg-attemptsocial" ng-class="{areyousure: attemptSocial}">
+          <div class="mg-line">
+            <img src="assets/images/sadcat.jpg">
+            <h3>Don’t Make Stanley Sad...</h3>
+            <p>Stanley doesn’t want you to miss out on the one-of-a-kind experience! Don’t make him sad. Sign in on social! (Seriously – nothing posts to your account!)</p>
+          </div>
+          <div class="mg-line">
+            <a ng-click="attemptSocial = false;">Okay, I'll use social.</a>
+          </div>
+          <div class="mg-line">
+            <a ng-click="attemptSocial = false; enterName = true;">Continue</a>
+          </div>
+        </div>
       </div>
     </div>
-    <div ng-show="user" class="mg-gamescreen">
+    <div ng-if="user" class="mg-gamescreen">
       <span ng-show="user.picture" class="mg-main--avatar">
         <img ng-src="{{user.picture}}" alt="...">
       </span>
@@ -100,18 +119,18 @@
           <span class="sr-only">Toggle navigation</span>
           <span class="hamburger-bar"></span>
         </button>
-        <img class="mg-sidemenu--logo" src="assets/images/crowdcompass-brandmark-white.png" title="CrowdCompass">
+        <img class="mg-logo" src="assets/images/crowdcompass-brandmark-white.png" title="CrowdCompass">
         <h1 ng-hide="game.results" class="progress-timer--mobile">{{ game.remaining() | date: 'mm:ss'}}</h1>
       </nav>
       <div class="mg-sidemenu" ng-class="{'mg-sidemenu--open': menuOpen}">
         <nav class="mg-darknav">
-          <img class="mg-sidemenu--logo" src="assets/images/crowdcompass-logo-white.png" title="CrowdCompass">
+          <img class="mg-logo" src="assets/images/crowdcompass-logo-white.png" title="CrowdCompass">
         </nav>
         <div class="mg-sidemenu--content-wrapper">
           <div class="mg-sidemenu--content">
             <div class="mg-center">
               <h3>
-                Alright {First Name},
+                Alright {{user.firstName}} {{user.lastName}},
               </h3>
               <p>Here’s the situation. It’s the night before the biggest event of your year – and your event day toolkit has gone missing! Can you find all your essentials in 30 seconds or less?</p>
             </div>
@@ -265,13 +284,13 @@
             </div>
           </div>
         </section>
-        <footer>
+        <footer class="mg-legal">
           <span>© Copyright 2009-2015 <a href="http://www.crowdcompass.com">CrowdCompass</a>. All Rights Reserved.</span>
         </footer>
       </div>
     </div>
   </div>
-  
+
   <script type="text/javascript">
     window.WebFontConfig = {
       google: { families: [ 'Roboto:400,500,300,100,300italic:latin' ] }

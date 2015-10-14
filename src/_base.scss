@@ -8,9 +8,14 @@ body {
   font-weight: 300;
   font-size: 14px;
   line-height: 1.6;
+  font-family: Roboto, sans-serif;
   color: #76838f;
   background-color: #263238;
-  font-family: Roboto, sans-serif;
+}
+
+.mg-logo {
+  margin-top: 18px;
+  height: 28px;
 }
 
 .mg-game {
@@ -23,6 +28,23 @@ body {
   top: 50%;
   transform: translateY(-50%);
   margin: 0 auto;
+}
+
+.mg-legal {
+  color: #7a97a0;
+  text-align: center;
+  font-size: 11px;
+}
+
+a {
+  color: #62a8ea;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    color: #89bceb;
+    text-decoration: underline;
+  }
 }
 
 nav {

@@ -3,8 +3,8 @@
 var MProgress = require('./mprogress'),
   shuffle = require('./shuffle');
 
-function MemoryGame(timeout, interval, user) {
-  var cardCount = 18;
+function MemoryGame(timeout, interval) {
+  var user = {}, cardCount = 18;
 
   this.level = 1;
 
@@ -15,6 +15,10 @@ function MemoryGame(timeout, interval, user) {
       return ((i / (cardCount - 1)) * 100) + '% 0';
     }).slice(startingAt, startingAt + 6);
   }
+
+  this.addUser = function (enteredUser) {
+    user = enteredUser;
+  };
 
   this.newGame = function (booster) {
     booster = booster || 0;
@@ -47,8 +51,6 @@ function Game(options, timeout, interval) {
     },
     game = {};
 
-  window.console.log(options.cards);
-
   game.cardFront = options.cardFront;
   mprogress.start();
   mprogress.set(.99999);
@@ -61,7 +63,6 @@ function Game(options, timeout, interval) {
   });
 
   game.deck = shuffle(deck.concat(deck).map(function (card) {
-    window.console.log(options.picture && card.index === 0 ? profileCard : card);
     return {
       item: options.picture && card.index === 0 ? profileCard : card,
       isFaceUp: false
