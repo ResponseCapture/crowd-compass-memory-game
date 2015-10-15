@@ -1,10 +1,7 @@
 'use strict';
 
 module.exports = function ($window) {
-  var FB;
-  
   $window.fbAsyncInit = function() {
-    FB = $window.FB;
     $window.FB.init({
       appId: window.app.facebook,
       xfbml: true,
@@ -13,6 +10,7 @@ module.exports = function ($window) {
   };
 
   return function (callback) {
+    var FB = $window.FB;
     return function() {
       FB.login(function(response) {
         if (response && !response.error) {
