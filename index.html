@@ -50,6 +50,21 @@
   }
   </style>
   <script type="text/javascript">
+  /// SOCIAL API KEYS
+
+  var testFb = '1006057956124954',
+    prodFb = '1002580369806046',
+    host = window.location.host,
+    fbkey = host.indexOf('localhost') > -1 ? testFb : prodFb;
+
+  window.app = {
+    linkedin: '75x6qh86y0zsdg',
+    facebook: fbkey
+  };
+
+  /// END SOCIAL API KEYS
+  </script>
+  <script type="text/javascript">
   'use strict';
 
   (function() {
@@ -60,17 +75,7 @@
       }
     };
 
-    var testFb = '1006057956124954',
-      prodFb = '1002580369806046',
-      host = window.location.host,
-      fbkey = host.indexOf('localhost') > -1 ? testFb : prodFb;
-
-    window.app = {
-      linkedin: '75x6qh86y0zsdg',
-      facebook: fbkey
-    };
-
-    function scriptLoader(scripts, files, callback) {
+    function Loader(scripts, files, callback) {
       var i,
         loadCount = 0,
         totalRequired = scripts.length + files.length;
@@ -128,17 +133,17 @@
 
     var image = isRetina() ? 'assets/sprite@2x.png' : 'assets/sprite.png';
     var innerHTML = 'api_key: ' + window.app.linkedin + '\nonLoad: onLinkedInLoad';
-    //var innerHTML = 'api_key: ' + $window.app.linkedin + '\nauthorize: true\nonLoad: onLinkedInLoad';
-
+    //var innerHTML = 'api_key: ' + window.app.linkedin + '\nauthorize: true\nonLoad: onLinkedInLoad';
     var protocol = ('https:' == document.location.protocol ? 'https' : 'http');
-    window.loadingPromise = scriptLoader([
+
+    Loader([
       protocol + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js',
       '//connect.facebook.net/en_US/sdk.js', {
         src: '//platform.linkedin.com/in.js',
         innerHTML: innerHTML
       },
       'assets/app.js'
-    ], [image], function () {
+    ], [image], function() {
       var ele = document.getElementById('loading');
       setTimeout(function() {
         ele.className = 'loaded';
@@ -178,7 +183,7 @@
           </div>
         </div>
         <div ng-show="enterName">
-          <form name="userForm" ng-submit="user = {firstName: firstname, lastName: lastname}">
+          <form name="userForm" ng-submit="updateUser({firstName: firstname, lastName: lastname})">
             <div class="mg-line">
               <label class="sr-only" for="firstname">First Name</label>
               <input name="firstname" type="text" required ng-model="firstname" placeholder="First Name">

@@ -21,29 +21,27 @@ var linkedin = require('./src/linkedin')(window);
 angular.module('memory-game', [])
   .directive('minHeight', ['$window', minHeight])
   .directive('hierarchical', hierarchical)
-  .controller('CardController', ['$scope', '$timeout', '$interval', '$window',
-    function ($scope, $timeout, $interval, $window) {
+  .controller('CardController', ['$scope', '$timeout', '$interval',
+    function ($scope, $timeout, $interval) {
       var memoryGame = new MemoryGame($timeout, $interval),
         availableLevels = {
           1: true
         };
 
-      $scope.social = {
-        linkedin: linkedin,
-        facebook: facebook
+      $scope.updateUser = function(user) {
+        if (user) {
+          $scope.user = user;
+          memoryGame.addUser(user);
+          $timeout(function () {
+            $scope.$digest();
+          });
+        }
       };
 
-      $scope.$watch(function () {
-        return $window.user;
-      }, function (user) {
-        $scope.user = user;
-      });
-
-      $scope.$watch('user', function (user) {
-        if (user) {
-          memoryGame.addUser(user);
-        }
-      }, true);
+      $scope.social = {
+        linkedin: linkedin($scope.updateUser),
+        facebook: facebook($scope.updateUser)
+      };
 
       $scope.menuOpen = true;
       
