@@ -443,7 +443,7 @@
       var ele = document.getElementById('loading');
       setTimeout(function() {
         ele.className = 'loaded';
-      }, 500);
+      }, 700);
     });
 
   })();
@@ -518,8 +518,8 @@
         <div class="mg-attemptsocial" ng-class="{areyousure: attemptSocial}">
           <div class="mg-line">
             <img src="assets/images/sadcat.jpg">
-            <h3>Don’t Make Stanley Sad...</h3>
-            <p>Stanley doesn’t want you to miss out on the one-of-a-kind experience! Don’t make him sad. Sign in on social! (Seriously – nothing posts to your account!)</p>
+            <h3>Don’t Make Sebastian Sad...</h3>
+            <p>Sebastian doesn’t want you to miss out on the one-of-a-kind experience! Don’t make him sad. Sign in on social! (Seriously – nothing posts to your account!)</p>
           </div>
           <div class="mg-line">
             <a ng-click="attemptSocial = false;">Okay, I'll use social.</a>
@@ -531,7 +531,7 @@
       </div>
     </div>
     <div ng-if="user" class="mg-gamescreen">
-      <span ng-show="user.picture" class="mg-main--avatar">
+      <span ng-show="user.picture && currentLevel() !== 3" class="mg-main--avatar">
         <img ng-src="{{user.picture}}" alt="...">
       </span>
       <nav class="mg-mobilenav">
@@ -550,7 +550,7 @@
           <div class="mg-sidemenu--content">
             <div class="mg-center">
               <h3>
-                Alright {{user.firstName}} {{user.lastName}},
+                Alright {{user.firstName}},
               </h3>
               <p>Here’s the situation. It’s the night before the biggest event of your year – and your event day toolkit has gone missing! Can you find all your essentials in 30 seconds or less?</p>
               <button class="mg-play" ng-click="menuOpen = false">Go!</button>
@@ -637,8 +637,8 @@
                 <a href="" class="ssk ssk-facebook"></a>
               </div>
               <div class="error-advise">
-                <a ng-show="!getinfo && ((user.workEmail && currentLevel() === 1) || (user.company && currentLevel() === 2) || currentLevel() === 3)" class="btn-round" ng-click="newGame(5)">Get a Time Booster</a>
-                <a ng-hide="getinfo || ((user.workEmail && currentLevel() === 1) || (user.company && currentLevel() === 2) || currentLevel() === 3)" class="btn btn-primary btn-round" ng-click="getinfo = true">Get a Time Booster</a>
+                <a ng-show="!getinfo && ((user.workEmail && currentLevel() === 1) || (user.company && currentLevel() === 2) || currentLevel() === 3)" class="btn-round" ng-click="newGame(5)">Use a Time Booster</a>
+                <a ng-hide="getinfo || ((user.workEmail && currentLevel() === 1) || (user.company && currentLevel() === 2) || currentLevel() === 3)" class="btn btn-primary btn-round" ng-click="getinfo = true">Use a Time Booster</a>
                 <div ng-show="getinfo && currentLevel() === 1">
                   <p>Enter your email to acquire an extra :05 seconds!</p>
                   <label>Work Email:
@@ -696,7 +696,7 @@
           </div>
         </section>
         <footer class="mg-legal">
-          <span>© Copyright 2009-2015 <a href="http://www.crowdcompass.com">CrowdCompass</a>. All Rights Reserved.</span>
+          <span>© Copyright 2009-2016 <a href="http://www.crowdcompass.com">CrowdCompass</a>. All Rights Reserved.</span>
         </footer>
       </div>
     </div>
