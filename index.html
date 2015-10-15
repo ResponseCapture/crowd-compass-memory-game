@@ -41,7 +41,6 @@
   
   .cont div {
     position: absolute;
-    box-sizing: content-box;
     border-radius: 0px 0px 0px 0px;
     -moz-border-radius: 0px 0px 0px 0px;
     -webkit-border-radius: 0px 0px 0px 0px;
@@ -50,19 +49,9 @@
   }
   
   .cont div:not(:last-child) {
-    border: 2.5px solid #76838f;
+    border: 2px solid #76838f;
   }
 
-  .square6 {
-    margin-left: 25px;
-    margin-top: 25px;
-    width: 5px;
-    height: 5px;
-    background: #76838f;
-    -webkit-animation: spin6 3s infinite;
-    animation: spin6 3s infinite;
-  }
-  
   .square1 {
     width: 50px;
     height: 50px;
@@ -74,8 +63,8 @@
   }
   
   .square2 {
-    margin-left: 5px;
-    margin-top: 5px;
+    left: 5px;
+    top: 5px;
     width: 40px;
     height: 40px;
     -webkit-animation: spin2 3s infinite;
@@ -86,8 +75,8 @@
   }
   
   .square3 {
-    margin-left: 10px;
-    margin-top: 10px;
+    left: 10px;
+    top: 10px;
     width: 30px;
     height: 30px;
     -webkit-animation: spin 3s infinite;
@@ -97,8 +86,8 @@
   }
   
   .square4 {
-    margin-left: 15px;
-    margin-top: 15px;
+    left: 15px;
+    top: 15px;
     width: 20px;
     height: 20px;
     -webkit-animation: spin4 3s infinite;
@@ -108,8 +97,8 @@
   }
   
   .square5 {
-    margin-left: 20px;
-    margin-top: 20px;
+    left: 20px;
+    top: 20px;
     width: 10px;
     height: 10px;
     -webkit-animation: spin5 3s infinite;
@@ -118,6 +107,16 @@
     animation-delay: 0.1s;
   }
 
+  .square6 {
+    left: 24px;
+    top: 24px;
+    width: 2px;
+    height: 2px;
+    background: #76838f;
+    -webkit-animation: spin6 3s infinite;
+    animation: spin6 3s infinite;
+  }
+  
   @-webkit-keyframes spin {
     0% {
       -webkit-transform: rotate(0deg);
