@@ -2,17 +2,6 @@
 <html>
 
 <head>
-  <title>CrowdCompass Memory Game</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-  <link rel="shortcut icon" href="assets/images/favicon.ico">
-</head>
-
-<body>
   <style>
   * {
     box-sizing: border-box;
@@ -23,7 +12,6 @@
     padding: 0;
     font-weight: 300;
     font-size: 14px;
-    line-height: 1.6;
     font-family: Roboto, sans-serif;
     color: #76838f;
     background-color: #263238;
@@ -32,14 +20,11 @@
   #loading {
     position: fixed;
     z-index: 999999;
-    width: 100vw;
-    height: 100vh;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    background: url('assets/images/loading.gif') #263238 no-repeat center;
-    background-size: 32px 32px;
+    background: #263238;
   }
   
   .loaded {
@@ -47,6 +32,308 @@
     -webkit-transition: opacity .5s;
     pointer-events: none;
     opacity: 0;
+  }
+  
+  @-webkit-keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    85% {
+      -webkit-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    85% {
+      -webkit-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  
+  @-webkit-keyframes spin2 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    85% {
+      -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      transform: rotate(180deg);
+    }
+    100% {
+      -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      transform: rotate(180deg);
+    }
+  }
+  
+  @keyframes spin2 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    85% {
+      -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      transform: rotate(180deg);
+    }
+    100% {
+      -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      transform: rotate(180deg);
+    }
+  }
+  
+  @-webkit-keyframes spin3 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    85% {
+      -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+    100% {
+      -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+  }
+  
+  @keyframes spin3 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    85% {
+      -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+    100% {
+      -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+  }
+  
+  @-webkit-keyframes spin4 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    85% {
+      -webkit-transform: rotate(450deg);
+      -ms-transform: rotate(450deg);
+      transform: rotate(450deg);
+    }
+    100% {
+      -webkit-transform: rotate(450deg);
+      -ms-transform: rotate(450deg);
+      transform: rotate(450deg);
+    }
+  }
+  
+  @keyframes spin4 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    85% {
+      -webkit-transform: rotate(450deg);
+      -ms-transform: rotate(450deg);
+      transform: rotate(450deg);
+    }
+    100% {
+      -webkit-transform: rotate(450deg);
+      -ms-transform: rotate(450deg);
+      transform: rotate(450deg);
+    }
+  }
+  
+  @-webkit-keyframes spin5 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    85% {
+      -webkit-transform: rotate(540deg);
+      -ms-transform: rotate(540deg);
+      transform: rotate(540deg);
+    }
+    100% {
+      -webkit-transform: rotate(540deg);
+      -ms-transform: rotate(540deg);
+      transform: rotate(540deg);
+    }
+  }
+  
+  @keyframes spin5 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    85% {
+      -webkit-transform: rotate(540deg);
+      -ms-transform: rotate(540deg);
+      transform: rotate(540deg);
+    }
+    100% {
+      -webkit-transform: rotate(540deg);
+      -ms-transform: rotate(540deg);
+      transform: rotate(540deg);
+    }
+  }
+  
+  @-webkit-keyframes spin6 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    85% {
+      -webkit-transform: rotate(630deg);
+      -ms-transform: rotate(630deg);
+      transform: rotate(630deg);
+    }
+    100% {
+      -webkit-transform: rotate(630deg);
+      -ms-transform: rotate(630deg);
+      transform: rotate(630deg);
+    }
+  }
+  
+  @keyframes spin6 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    85% {
+      -webkit-transform: rotate(630deg);
+      -ms-transform: rotate(630deg);
+      transform: rotate(630deg);
+    }
+    100% {
+      -webkit-transform: rotate(630deg);
+      -ms-transform: rotate(630deg);
+      transform: rotate(630deg);
+    }
+  }
+  
+  .cont {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -100px 0 0 -100px;
+  }
+  
+  .cont div:not(:last-child) {
+    border: 10px solid #76838f;
+  }
+  
+  .square6 {
+    margin-left: 100px;
+    margin-top: 100px;
+    width: 20px;
+    height: 20px;
+    background: #76838f;
+    -webkit-animation: spin6 3s infinite;
+    animation: spin6 3s infinite;
+  }
+  
+  .cont div {
+    position: absolute;
+    box-sizing: content-box;
+    border-radius: 0px 0px 0px 0px;
+    -moz-border-radius: 0px 0px 0px 0px;
+    -webkit-border-radius: 0px 0px 0px 0px;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+  }
+  
+  .square1 {
+    width: 200px;
+    height: 200px;
+    -webkit-animation: spin3 3s infinite;
+    animation: spin3 3s infinite;
+    -webkit-animation-delay: 0.5s;
+    /* Chrome, Safari, Opera */
+    animation-delay: 0.5s;
+  }
+  
+  .square2 {
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 160px;
+    height: 160px;
+    -webkit-animation: spin2 3s infinite;
+    animation: spin2 3s infinite;
+    -webkit-animation-delay: 0.4s;
+    /* Chrome, Safari, Opera */
+    animation-delay: 0.4s;
+  }
+  
+  .square3 {
+    margin-left: 40px;
+    margin-top: 40px;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 3s infinite;
+    animation: spin 3s infinite;
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+  }
+  
+  .square4 {
+    margin-left: 60px;
+    margin-top: 60px;
+    width: 80px;
+    height: 80px;
+    -webkit-animation: spin4 3s infinite;
+    animation: spin4 3s infinite;
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+  }
+  
+  .square5 {
+    margin-left: 80px;
+    margin-top: 80px;
+    width: 40px;
+    height: 40px;
+    -webkit-animation: spin5 3s infinite;
+    animation: spin5 3s infinite;
+    -webkit-animation-delay: 0.1s;
+    animation-delay: 0.1s;
   }
   </style>
   <script type="text/javascript">
@@ -64,6 +351,17 @@
 
   /// END SOCIAL API KEYS
   </script>
+  <title>CrowdCompass Memory Game</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="assets/images/favicon.ico">
+</head>
+
+<body>
   <script type="text/javascript">
   'use strict';
 
@@ -152,7 +450,16 @@
 
   })();
   </script>
-  <div id="loading"></div>
+  <div id="loading">
+    <div class="cont">
+      <div class="square1"></div>
+      <div class="square2"></div>
+      <div class="square3"></div>
+      <div class="square4"></div>
+      <div class="square5"></div>
+      <div class="square6"></div>
+    </div>
+  </div>
   <div class="mg-game" ng-app="memory-game" ng-controller="CardController" ng-cloak>
     <!--[if lt IE 9]>
     <script src="assets/vendor/html5shiv/html5shiv.min.js"></script>
