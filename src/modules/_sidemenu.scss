@@ -13,6 +13,30 @@
    font-size: 14px;
   }
 
+  button {
+    color: #fff;
+    padding: 6px 15px;
+    border: 1px solid transparent;
+    background-color: #62a8ea;
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 1.6;
+    border-radius: 3px;
+    outline: 0;
+    display: block;
+    width: 100%;
+    user-select: none;
+    box-shadow: none;
+    -webkit-font-smoothing: subpixel-antialiased;
+    transition: border .2s linear, color .2s linear, width .2s linear, background-color .2s linear;
+
+    &[disabled] {
+      background-color: #AAA;
+      color: #CCC;
+      border: 1px solid transparent;
+    }
+  }
+
   h3 {
     font-weight: 300;
     font-size: 21px;
@@ -22,6 +46,10 @@
   nav {
     padding-left: 30px;
     background-color: #263238;
+  }
+
+  .mg-play {
+    display: none;
   }
 
   footer {
@@ -82,6 +110,10 @@ footer .ssk {
   .mg-sidemenu {
     transform: translateX(-$sidemenu-width);
     transition: .25s ease-out;
+    
+    .mg-play {
+      display: initial;
+    }
   }
 
   .mg-sidemenu--open {
