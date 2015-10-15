@@ -25,6 +25,7 @@
     left: 0;
     right: 0;
     background: #263238;
+    text-align: center;
   }
   
   .loaded {
@@ -34,6 +35,96 @@
     opacity: 0;
   }
   
+  
+  .cont {
+    position: absolute;
+    display: inline-block;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    width: 220px;
+    height: 220px;
+  }
+  
+  .cont div {
+    position: absolute;
+    box-sizing: content-box;
+    border-radius: 0px 0px 0px 0px;
+    -moz-border-radius: 0px 0px 0px 0px;
+    -webkit-border-radius: 0px 0px 0px 0px;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+  }
+  
+  .cont div:not(:last-child) {
+    border: 10px solid #76838f;
+  }
+
+  .square6 {
+    margin-left: 100px;
+    margin-top: 100px;
+    width: 20px;
+    height: 20px;
+    background: #76838f;
+    -webkit-animation: spin6 3s infinite;
+    animation: spin6 3s infinite;
+  }
+  
+  .square1 {
+    width: 200px;
+    height: 200px;
+    -webkit-animation: spin3 3s infinite;
+    animation: spin3 3s infinite;
+    -webkit-animation-delay: 0.5s;
+    /* Chrome, Safari, Opera */
+    animation-delay: 0.5s;
+  }
+  
+  .square2 {
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 160px;
+    height: 160px;
+    -webkit-animation: spin2 3s infinite;
+    animation: spin2 3s infinite;
+    -webkit-animation-delay: 0.4s;
+    /* Chrome, Safari, Opera */
+    animation-delay: 0.4s;
+  }
+  
+  .square3 {
+    margin-left: 40px;
+    margin-top: 40px;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 3s infinite;
+    animation: spin 3s infinite;
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+  }
+  
+  .square4 {
+    margin-left: 60px;
+    margin-top: 60px;
+    width: 80px;
+    height: 80px;
+    -webkit-animation: spin4 3s infinite;
+    animation: spin4 3s infinite;
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+  }
+  
+  .square5 {
+    margin-left: 80px;
+    margin-top: 80px;
+    width: 40px;
+    height: 40px;
+    -webkit-animation: spin5 3s infinite;
+    animation: spin5 3s infinite;
+    -webkit-animation-delay: 0.1s;
+    animation-delay: 0.1s;
+  }
+
   @-webkit-keyframes spin {
     0% {
       -webkit-transform: rotate(0deg);
@@ -249,92 +340,6 @@
       transform: rotate(630deg);
     }
   }
-  
-  .cont {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin: -100px 0 0 -100px;
-  }
-  
-  .cont div:not(:last-child) {
-    border: 10px solid #76838f;
-  }
-  
-  .square6 {
-    margin-left: 100px;
-    margin-top: 100px;
-    width: 20px;
-    height: 20px;
-    background: #76838f;
-    -webkit-animation: spin6 3s infinite;
-    animation: spin6 3s infinite;
-  }
-  
-  .cont div {
-    position: absolute;
-    box-sizing: content-box;
-    border-radius: 0px 0px 0px 0px;
-    -moz-border-radius: 0px 0px 0px 0px;
-    -webkit-border-radius: 0px 0px 0px 0px;
-    -webkit-animation-timing-function: ease-in-out;
-    animation-timing-function: ease-in-out;
-  }
-  
-  .square1 {
-    width: 200px;
-    height: 200px;
-    -webkit-animation: spin3 3s infinite;
-    animation: spin3 3s infinite;
-    -webkit-animation-delay: 0.5s;
-    /* Chrome, Safari, Opera */
-    animation-delay: 0.5s;
-  }
-  
-  .square2 {
-    margin-left: 20px;
-    margin-top: 20px;
-    width: 160px;
-    height: 160px;
-    -webkit-animation: spin2 3s infinite;
-    animation: spin2 3s infinite;
-    -webkit-animation-delay: 0.4s;
-    /* Chrome, Safari, Opera */
-    animation-delay: 0.4s;
-  }
-  
-  .square3 {
-    margin-left: 40px;
-    margin-top: 40px;
-    width: 120px;
-    height: 120px;
-    -webkit-animation: spin 3s infinite;
-    animation: spin 3s infinite;
-    -webkit-animation-delay: 0.3s;
-    animation-delay: 0.3s;
-  }
-  
-  .square4 {
-    margin-left: 60px;
-    margin-top: 60px;
-    width: 80px;
-    height: 80px;
-    -webkit-animation: spin4 3s infinite;
-    animation: spin4 3s infinite;
-    -webkit-animation-delay: 0.2s;
-    animation-delay: 0.2s;
-  }
-  
-  .square5 {
-    margin-left: 80px;
-    margin-top: 80px;
-    width: 40px;
-    height: 40px;
-    -webkit-animation: spin5 3s infinite;
-    animation: spin5 3s infinite;
-    -webkit-animation-delay: 0.1s;
-    animation-delay: 0.1s;
-  }
   </style>
   <script type="text/javascript">
   /// SOCIAL API KEYS
@@ -445,7 +450,7 @@
       var ele = document.getElementById('loading');
       setTimeout(function() {
         ele.className = 'loaded';
-      }, 500);
+      }, 50000);
     });
 
   })();
@@ -480,10 +485,10 @@
         <p>(Don’t worry. Nothing posts to your accounts.)</p>
         <div ng-hide="enterName">
           <div class="mg-line">
-            <button id="fb-login-btn" type="submit" ng-click="social.facebook()">Sign in with Facebook</button>
+            <button id="fb-login-btn" class="ssk-facebook" type="submit" ng-click="social.facebook()">Sign in with Facebook</button>
           </div>
           <div class="mg-line">
-            <button id="li-login-btn" type="submit" ng-click="social.linkedin()">Sign in with LinkedIn</button>
+            <button id="li-login-btn" class="ssk-linkedin" type="submit" ng-click="social.linkedin()">Sign in with LinkedIn</button>
           </div>
           <div class="mg-line">
             <a ng-click="attemptSocial = true">Sign in with name</a>
