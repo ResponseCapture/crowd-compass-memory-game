@@ -12,7 +12,7 @@
     padding: 0;
     font-weight: 300;
     font-size: 14px;
-    font-family: Roboto, sans-serif;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     color: #76838f;
     background-color: #263238;
   }
@@ -51,7 +51,7 @@
   .cont div:not(:last-child) {
     border: 2px solid rgb(0, 200, 83);
   }
-
+  
   .square1 {
     width: 50px;
     height: 50px;
@@ -106,7 +106,7 @@
     -webkit-animation-delay: 0.1s;
     animation-delay: 0.1s;
   }
-
+  
   .square6 {
     left: 24px;
     top: 24px;
@@ -647,15 +647,105 @@
                 </div>
               </div>
               <div style="clear: both;"></div>
+            </div>
           </div>
+          <!-- LEVEL 1 RESULTS -->
+          <div class="mg-center" ng-if="game.results && currentLevel() === 1">
+            <div ng-hide="game.results.missing" class="results">
+              <div class="result-progress">
+                
+              </div>
+              <header>
+                <h1 class="animated flip">Victory!</h1>
+              </header>
+              <p>And it feels great to be a winner, right? Share your speedy time and challenge other event pros to a game!</p>
+              <div class="share-ssk">
+                <a href="" class="ssk ssk-linkedin"></a>
+                <a href="" class="ssk ssk-twitter"></a>
+                <a href="" class="ssk ssk-pinterest"></a>
+                <a href="" class="ssk ssk-facebook"></a>
+              </div>
+              <div class="error-advise">
+                <a ng-show="user.workEmail" class="btn-round" ng-click="playLevel(2)">Take on Level 2</a>
+                <div ng-hide="user.workEmail">
+                  <h3>Unlock Level 2 & Other Awesome Goodies!</h3>
+                  <p>Loving this game? Enter your email to unlock Level 2 and we’ll also send you more games, quizzes, exclusive research and other awesome goodies!</p>
+                  <label>Work Email:
+                    <input type="email" ng-pattern="/\./" ng-required ng-model="userWorkEmail" autofocus>
+                  </label>
+                  <label>
+                    <input type="checkbox" ng-init="user.unlockedAssets = true" ng-model="user.unlockedAssets" checked> Send Me Goodies!
+                  </label>
+                  <a class="btn-go btn-round" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; playLevel(2)">GO</a>
+                </div>
+              </div>
+              <h3>Addicted to Level 1? No Problem, Play Again!</h3>
+              <p>We get it!  We’ll shuffle the deck and you can play again!</p>
+              <a class="btn-round" ng-click="newGame()">Play Again</a>
+            </div>
+            <div ng-show="game.results.missing" class="results">
+              <header class="animated fadeInDown">
+                <h1>Oh No, Time's Up!</h1>
+              </header>
+              <p>Don’t give up! Use the time booster's extra time to win!</p>
+              <div class="share-ssk">
+                <a href="" class="ssk ssk-linkedin"></a>
+                <a href="" class="ssk ssk-twitter"></a>
+                <a href="" class="ssk ssk-pinterest"></a>
+                <a href="" class="ssk ssk-facebook"></a>
+              </div>
+              <div class="error-advise">
+                <a ng-show="user.company" class="btn-round" ng-click="newGame(5)">Use Your Time Booster</a>
+                <div ng-hide="user.company" ng-show="getinfo">
+                  <h3>Unlock Your Time Booster!</h3>
+                  <p>Enter your email and get extra time to win!  And if you’re loving this game, we’ll send you more games, quizzes, exclusive research and other awesome goodies!</p>
+                  <label>Work Email:
+                    <input type="email" ng-pattern="/\./" ng-required ng-model="userWorkEmail" autofocus>
+                  </label>
+                  <label>
+                    <input type="checkbox" ng-init="user.unlockedAssets = true" ng-model="user.unlockedAssets" checked> Send Me Goodies!
+                  </label>
+                  <a class="btn-go btn-round" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; newGame(5)">GO</a>
+                </div>
+              </div>
+              <h3>I Don’t Need No Stinkin Time Booster!</h3>
+              <p>No prob!  We’ll shuffle the deck and you can play again!</p>
+              <a class="btn-round" ng-click="newGame()">Play Again</a>
+            </div>
           </div>
-          {{ window.screen.availWidth }}
-          <div class="mg-center" ng-if="game.results">
+          <!-- LEVEL 2 RESULTS -->
+          <div class="mg-center" ng-if="game.results && currentLevel() === 2">
+            <div ng-hide="game.results.missing" class="results">
+              <header>
+                <h1 class="animated flip">Victory!</h1>
+              </header>
+              <p>Congrats! Ummm, you’re like, the fastest event pro, EVER. But now… Drumroll… It’s about to get tough. Meaning, we’re going to test you. It’s time to put on your big kid pants.</p>
+              <div class="share-ssk">
+                <a href="" class="ssk ssk-linkedin"></a>
+                <a href="" class="ssk ssk-twitter"></a>
+                <a href="" class="ssk ssk-pinterest"></a>
+                <a href="" class="ssk ssk-facebook"></a>
+              </div>
+              <div class="error-advise">
+                <a ng-show="user.company" class="btn-round" ng-click="playLevel(3)">Take on Level 3</a>
+                <div ng-hide="user.company" ng-show="getinfo">
+                  <h3>The Time Has Come… The Ultimate Test of Memory + Speed!</h3>
+                  <p>Get your running shoes on because now we’re gonna see how fast you are! Tell us the company name on your paychecks, and we’ll magically teleport you to another dimension (some peeps just call it Level 3. BORING).</p>
+                  <label>Company Name:
+                    <input type="text" ng-required ng-model="userCompany" autofocus>
+                  </label>
+                  <a class="btn-go btn-round" ng-disabled="!userCompany" ng-click="user.company = userCompany; playLevel(3)">GO</a>
+                </div>
+              </div>
+              <h3>Addicted to Level 2? No Problem, Play Again!</h3>
+              <p>We get it! We’ll shuffle the deck and you can play again!</p>
+              <a class="btn-round" ng-click="newGame()">Play Again</a>
+            </div>
             <div ng-show="game.results.missing" class="results">
               <header class="animated fadeInDown">
                 <h1>Oh No, Time Is Up!</h1>
               </header>
-              <p>But, you can still share the fun with other event pros and challenge them to beat the game! </p>
+              <p>Don’t give up! Use the time booster and play again for the win!</p>
               <div class="share-ssk">
                 <a href="" class="ssk ssk-linkedin"></a>
                 <a href="" class="ssk ssk-twitter"></a>
@@ -663,61 +753,76 @@
                 <a href="" class="ssk ssk-facebook"></a>
               </div>
               <div class="error-advise">
-                <a ng-show="!getinfo && ((user.workEmail && currentLevel() === 1) || (user.company && currentLevel() === 2) || currentLevel() === 3)" class="btn-round" ng-click="newGame(5)">Use a Time Booster</a>
-                <a ng-hide="getinfo || ((user.workEmail && currentLevel() === 1) || (user.company && currentLevel() === 2) || currentLevel() === 3)" class="btn btn-primary btn-round" ng-click="getinfo = true">Use a Time Booster</a>
-                <div ng-show="getinfo && currentLevel() === 1">
-                  <p>Enter your email to acquire an extra :05 seconds!</p>
-                  <label>Work Email:
-                    <input type="email" ng-pattern="/\./" ng-required ng-model="user.workEmail" autofocus>
-                  </label>
-                  <label>
-                    <input type="checkbox" ng-init="user.unlockedAssets = true" ng-model="user.unlockedAssets" checked> Unlock Additional Assets</label>
-                  <a class="btn-go btn-round" ng-disabled="!user.workEmail" ng-click="getinfo = false; newGame(5)">GO</a>
-                  <p>We’ll also send you additional games and quizzes to interact with, research reports and other fun stuff built for event pros like you. Get Your goodies!</p>
-                </div>
-                <div ng-show="getinfo && currentLevel() === 2">
-                  <p>Enter your company name to acquire an extra :05 seconds!</p>
+                <a ng-show="user.company" class="btn-round" ng-click="newGame(5)">Use a Time Booster</a>
+                <div ng-hide="user.company">
+                  <h3>Unlock Your Time Booster!</h3>
+                  <p>Enter your company name and get extra time to win!  And if you’re loving this game, we’ll send you more games, quizzes, exclusive research and other awesome goodies!</p>
                   <label>Company Name:
-                    <input type="text" ng-required ng-model="user.company" autofocus>
-                  </label><a class="btn-go btn-round" ng-disabled="!user.company" ng-click="getinfo = false; newGame(5)">GO</a>
+                    <input type="text" ng-required ng-model="userCompany" autofocus>
+                  </label>
+                  <a class="btn-go btn-round" ng-disabled="!userCompany" ng-click="user.company = userCompany; newGame(5)">GO</a>
                 </div>
               </div>
-              <a class="btn-round" ng-click="newGame()">Play Level {{currentLevel()}} Again</a>
-              <p>Want to take on level {{currentLevel()}} again without the time boost? We’ll shuffle the deck and you can play again.</p>
+              <h3>I Don’t Need No Stinkin Time Booster!</h3>
+              <p>No prob!  We’ll shuffle the deck and you can play again!</p>
+              <a class="btn-round" ng-click="newGame()">Play Again</a>
             </div>
+          </div>
+          <!-- LEVEL 3 RESULTS -->
+          <div class="mg-center" ng-if="game.results && currentLevel() === 3">
             <div ng-hide="game.results.missing" class="results">
               <header>
-                <h1 class="animated flip">You Won!</h1>
+                <h1 class="animated flip">Congratulations!</h1>
               </header>
+              <h3>You Just Conquered the Ultimate, Ultimate Game of Memory Skillz!</h3>
+              <p>Take a deep breath. Sweet, sweet victory. You’re among the few people tough enough, proud enough and skillful enough to make it this far (and somewhere… An audience is on it’s feet).</p>
+              <p>But wait.  Are you faster than your friends and colleagues?! (Gasp!) It’s time to find out. Share this puppy (aren’t puppies the cutest?!) with another human (robots are also cool) and let’s see if their memory prowess is as good as yours!</p>
               <div class="share-ssk">
-                <p>And it feels great to be a winner, right? Share your speedy time and challenge other event pros to a game!</p>
                 <a href="" class="ssk ssk-linkedin"></a>
                 <a href="" class="ssk ssk-twitter"></a>
                 <a href="" class="ssk ssk-pinterest"></a>
                 <a href="" class="ssk ssk-facebook"></a>
               </div>
               <div class="error-advise">
-                <a ng-show="!getinfo && ((user.workEmail && currentLevel() === 1) || (user.company && currentLevel() === 2))" class="btn-round" ng-click="playLevel(currentLevel() + 1)">Take on Level {{currentLevel() + 1}}</a>
-                <a ng-hide="getinfo || ((user.workEmail && currentLevel() === 1) || (user.company && currentLevel() === 2) || currentLevel() === 3)" class="btn-round" ng-click="getinfo = true">Take on Level {{currentLevel() + 1}}</a>
-                <div ng-show="getinfo && currentLevel() === 1">
-                  <p>It’s Event Day: And It’s Guna Get Real! On event day, you’ve got less time to make key decisions – can you save the show?! Enter your email to find out.</p>
-                  <label>Work Email:
-                    <input type="email" ng-pattern="/\./" ng-required ng-model="user.workEmail" autofocus>
-                  </label>
-                  <label>
-                    <input type="checkbox" ng-init="user.unlockedAssets = true" ng-model="user.unlockedAssets" checked> Unlock Additional Assets</label>
-                  <a class="btn-go btn-round" ng-disabled="!user.workEmail" ng-click="getinfo = false; playLevel(currentLevel() + 1)">GO</a>
-                  <p>We’ll also send you additional games and quizzes to interact with, research reports and other fun stuff built for event pros like you. Get Your goodies!</p>
-                </div>
-                <div ng-show="getinfo && currentLevel() === 2">
-                  <p>It’s Event Day: And It’s Guna Get Real! On event day, you’ve got less time to make key decisions – can you save the show?! Enter your company name to find out.</p>
-                  <label>Company Name:
-                    <input type="text" ng-required ng-model="user.company" autofocus>
-                  </label><a class="btn-go btn-round" ng-disabled="!user.company" ng-click="getinfo = false; playLevel(currentLevel() + 1)">GO</a>
-                </div>
+                <h3>There’s More in Store!</h3>
+                <p>The fun doesn’t stop after Level 3! Play again to improve your time and stay tuned for additional card packs, levels and new features. In the meantime, play our other games below and make sure to check out the goodies we emailed you!</p>
+                <h3>What’s Your Planner Personality?</h3>
+                <p>The Maestro… The Trendsetter… Which of the four “event planner personalities” describes you? Take the quiz to find out.</p>
+                <a target="_blank" href="http://www.crowdcompassquiz.com">Find Out</a>
+                <h3>What’s Your Mobile Apps Star Power?</h3>
+                <p>Ever wondered what attendees really think of your mobile event app? Take this quiz to find out!</p>
+                <a target="_blank" href="http://www.eventappstarpower.com">Take the Quiz</a>
               </div>
-              <a class="btn-round" ng-click="newGame()">Play Level {{currentLevel()}} Again</a>
-              <p>Not ready to dial up the pressure just yet? We’ll shuffle the deck and you can play again.</p>
+              <h3>Addicted to Level 3? No Problem, Play Again!</h3>
+              <p>We get it! We’ll shuffle the deck and you can play again!</p>
+              <a class="btn-round" ng-click="newGame()">Play Again</a>
+            </div>
+            <div ng-show="game.results.missing" class="results">
+              <header class="animated fadeInDown">
+                <h1>Oh No, Time Is Up!</h1>
+              </header>
+              <p>You were sooo close with only had {{ game.results.missing }} pairs of cards left! Don’t give up though! Play again for the win!</p>
+              <div class="share-ssk">
+                <a href="" class="ssk ssk-linkedin"></a>
+                <a href="" class="ssk ssk-twitter"></a>
+                <a href="" class="ssk ssk-pinterest"></a>
+                <a href="" class="ssk ssk-facebook"></a>
+              </div>
+              <div class="error-advise">
+                <h3>There’s More in Store!</h3>
+                <p>The fun doesn’t stop after Level 3! Play again to improve your time and stay tuned for additional card packs, levels and new features. In the meantime, play our other games below and make sure to check out the goodies we emailed you!</p>
+                <h3>What’s Your Planner Personality?</h3>
+                <p>The Maestro… The Trendsetter… Which of the four “event planner personalities” describes you? Take the quiz to find out.</p>
+                <a target="_blank" href="http://www.crowdcompassquiz.com">Find Out</a>
+                <h3>What’s Your Mobile Apps Star Power?</h3>
+                <p>Ever wondered what attendees really think of your mobile event app? Take this quiz to find out!</p>
+                <a target="_blank" href="http://www.eventappstarpower.com">Take the Quiz</a>
+                <p></p>
+                <a class="btn-round" ng-click="newGame(5)">Use a Time Booster</a>
+              </div>
+              <h3>I Don’t Need No Stinkin Time Booster!</h3>
+              <p>No prob!  We’ll shuffle the deck and you can play again!</p>
+              <a class="btn-round" ng-click="newGame()">Play Again</a>
             </div>
           </div>
         </section>
