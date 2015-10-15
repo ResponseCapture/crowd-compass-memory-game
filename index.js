@@ -28,6 +28,8 @@ angular.module('memory-game', [])
           1: true
         };
 
+      $scope.intro = {};
+
       $scope.updateUser = function(user) {
         if (user) {
           $scope.user = user;
@@ -48,7 +50,11 @@ angular.module('memory-game', [])
       function newGame(booster) {
         $scope.gameLoading = true;
         $timeout(function () {
+          $scope.showIntro = false;
           $scope.gameLoading = false;
+          $timeout(function() {
+            $scope.showIntro = true;
+          }, 500);
         }, 1000);
         return memoryGame.newGame(booster);
       }
