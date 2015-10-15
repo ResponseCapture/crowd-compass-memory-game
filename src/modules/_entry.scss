@@ -105,23 +105,21 @@
   }
 }
 
- @for $i from 1 through 7 {
-   @if $i < 7 {
-    .loaded .cont .square#{$i} {
-      animation: initial;
-      transition: all .5s ease-in-out;
-      transition-delay: calc(#{$i}s / 10);
-      transform: translateY(100vh);
-    }
-   }
-   @else {
-    .loaded {
-      transition: all .5s;
-      opacity: 0;
-      transition-delay: calc(#{$i}s / 10);
-      pointer-events: none;
-    }
-   }
- }
+
+.loaded {
+  transition: all .5s;
+  opacity: 0;
+  transition-delay: calc(7s / 10);
+  pointer-events: none;
+}
+
+@for $i from 1 through 6 {
+  .loaded .square#{$i} {
+    animation: initial;
+    transition: all .5s ease-in-out;
+    transition-delay: calc(#{$i}s / 10);
+    transform: translateY(100vh);
+  }
+}
   
 

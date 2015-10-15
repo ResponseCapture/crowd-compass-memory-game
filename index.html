@@ -58,7 +58,6 @@
     -webkit-animation: spin3 3s infinite;
     animation: spin3 3s infinite;
     -webkit-animation-delay: 0.5s;
-    /* Chrome, Safari, Opera */
     animation-delay: 0.5s;
   }
   
@@ -70,7 +69,6 @@
     -webkit-animation: spin2 3s infinite;
     animation: spin2 3s infinite;
     -webkit-animation-delay: 0.4s;
-    /* Chrome, Safari, Opera */
     animation-delay: 0.4s;
   }
   
@@ -434,8 +432,8 @@
 
     Loader([
       protocol + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js',
-      '//connect.facebook.net/en_US/sdk.js', {
-        src: '//platform.linkedin.com/in.js',
+      protocol + '://connect.facebook.net/en_US/sdk.js', {
+        src: protocol + '://platform.linkedin.com/in.js',
         innerHTML: innerHTML
       },
       'assets/app.js'
