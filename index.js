@@ -44,13 +44,21 @@ angular.module('memory-game', [])
       };
 
       $scope.menuOpen = true;
+
+      function newGame(booster) {
+        $scope.gameLoading = true;
+        $timeout(function () {
+          $scope.gameLoading = false;
+        }, 1000);
+        return memoryGame.newGame(booster);
+      }
       
       $scope.newGameIfNotStarted = function () {
-        $scope.game = ($scope.game || memoryGame.newGame());
+        $scope.game = ($scope.game || newGame());
       };
 
       $scope.newGame = function (booster) {
-        $scope.game = memoryGame.newGame(booster);
+        $scope.game = newGame(booster);
       };
 
       $scope.currentLevel = function () {
@@ -65,6 +73,6 @@ angular.module('memory-game', [])
         $scope.menuOpen = false;
         availableLevels[level] = true;
         memoryGame.level = level;
-        $scope.game = memoryGame.newGame();
+        $scope.game = newGame();
       };
     }]);

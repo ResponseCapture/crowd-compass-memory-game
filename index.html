@@ -554,7 +554,7 @@
               <p>Here’s the situation. It’s the night before the biggest event of your year – and your event day toolkit has gone missing! Can you find all your essentials in 30 seconds or less?</p>
               <button class="mg-play" ng-click="menuOpen = false">Go!</button>
             </div>
-            <div ng-show="game.results" class="mg-levels">
+            <div class="mg-levels">
               <h4>Level Progress</h4>
               <svg id="levels" width="270px" height="32px">
                 <path d=" M 30 10 L 135 10" ng-class="{'mg-levels--available-path': levelIsAvailable(2)}" stroke="grey" stroke-width="2" fill="none" />
@@ -613,7 +613,8 @@
           </ul>
         </nav>
         <section class="mg-content">
-          <div ng-if="!game.results" data-animation-in="bounceIn" class="card-container mg-center grid" ng-init="newGameIfNotStarted()" min-height hierarchical>
+          <div ng-if="gameLoading"></div>
+          <div ng-if="!game.results && !gameLoading" data-animation-in="bounceIn" class="card-container mg-center grid" ng-init="newGameIfNotStarted()" min-height hierarchical>
             <div class="grid-sizer"></div>
             <div ng-repeat="card in game.deck" class="card-wrapper" ng-class="{turncard: card.isFaceUp, bounce: card.celebrate}" ng-click="game.check(card)" data-target=".card-container">
               <div class="card" ng-style="{'background-image': 'url(assets/images/' + game.cardFront + ')' }">
