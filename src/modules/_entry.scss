@@ -107,10 +107,29 @@
 }
 
 .loaded {
-  transition: transform .5s;
-  transform: translateY(100%);
-  pointer-events: none;
-  opacity: 0;
+    transition: transform .5s ease-in-out;
+    transition-delay: 4s;
+    transform: translateY(100vh);
+    animation: initial;
+}
+
+@for $i from 1 through 7 {
+  @if $i < 7 {
+    .loaded .cont .square#{$i} {
+      transition: all .5s ease-in-out;
+      transform: translateY(100vh);
+      animation: initial;
+      transition-delay: calc(#{$i}s / 10);
+    }
+  }
+  @else {
+    .loaded {
+      transition: all .5s;
+      opacity: 0;
+      transition-delay: calc(#{$i}s / 10);
+      pointer-events: none;
+    }
+  }
 }
   
 
