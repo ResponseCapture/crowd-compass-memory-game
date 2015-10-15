@@ -2,28 +2,6 @@
 <html>
 
 <head>
-  <style>
-    body {
-      background-color: #263238;
-    }
-    #loading {
-      position: fixed;
-      z-index: 999999;
-      width: 100vw;
-      height: 100vh;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: url('assets/images/loading.gif') #263238 no-repeat center; 
-      background-size: 32px 32px;
-    }
-
-    .loaded {
-      transition: opacity .5s;
-      opacity: 0;
-    }
-  </style>
   <title>CrowdCompass Memory Game</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,6 +13,141 @@
 </head>
 
 <body>
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.6;
+    font-family: Roboto, sans-serif;
+    color: #76838f;
+    background-color: #263238;
+  }
+  
+  #loading {
+    position: fixed;
+    z-index: 999999;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: url('assets/images/loading.gif') #263238 no-repeat center;
+    background-size: 32px 32px;
+  }
+  
+  .loaded {
+    transition: opacity .5s;
+    -webkit-transition: opacity .5s;
+    pointer-events: none;
+    opacity: 0;
+  }
+  </style>
+  <script type="text/javascript">
+  'use strict';
+
+  (function() {
+
+    window.WebFontConfig = {
+      google: {
+        families: ['Roboto:400,500,300,100,300italic:latin']
+      }
+    };
+
+    var testFb = '1006057956124954',
+      prodFb = '1002580369806046',
+      host = window.location.host,
+      fbkey = host.indexOf('localhost') > -1 ? testFb : prodFb;
+
+    window.app = {
+      linkedin: '75x6qh86y0zsdg',
+      facebook: fbkey
+    };
+
+    function scriptLoader(scripts, files, callback) {
+      var i,
+        loadCount = 0,
+        totalRequired = scripts.length + files.length;
+
+      for (i = 0; i < scripts.length; i++) {
+        writeScript(scripts[i]);
+      }
+
+      for (i = 0; i < files.length; i++) {
+        loadFile(files[i]);
+      }
+
+      function loaded() {
+        loadCount++;
+        if (loadCount == totalRequired) {
+          setTimeout(function() {
+            callback();
+          }, 2000);
+        }
+      }
+
+      function loadFile(file) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', file, true);
+
+        xhr.onload = function() {
+          if (xhr.readyState == 4 && xhr.status === 200) {
+            loaded();
+          }
+        };
+
+        xhr.send(null);
+      }
+
+      function writeScript(srcObj) {
+        var src = srcObj.src || srcObj;
+        var s = document.createElement('script');
+        if (srcObj.innerHTML) {
+          s.innerHTML = srcObj.innerHTML;
+        }
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = src;
+        s.addEventListener('load', function() {
+          loaded();
+        }, false);
+        var head = document.getElementsByTagName('body')[0];
+        head.appendChild(s);
+      }
+    }
+
+    function isRetina() {
+      return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx), only screen and (min-resolution: 75.6dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)').matches)) || (window.devicePixelRatio && window.devicePixelRatio >= 2)) && /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+    }
+
+    var image = isRetina() ? 'assets/sprite@2x.png' : 'assets/sprite.png';
+    var innerHTML = 'api_key: ' + window.app.linkedin + '\nonLoad: onLinkedInLoad';
+    //var innerHTML = 'api_key: ' + $window.app.linkedin + '\nauthorize: true\nonLoad: onLinkedInLoad';
+
+    var protocol = ('https:' == document.location.protocol ? 'https' : 'http');
+    window.loadingPromise = scriptLoader([
+      protocol + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js',
+      '//connect.facebook.net/en_US/sdk.js', {
+        src: '//platform.linkedin.com/in.js',
+        innerHTML: innerHTML
+      },
+      'assets/app.js'
+    ], [image], function () {
+      var ele = document.getElementById('loading');
+      setTimeout(function() {
+        ele.className = 'loaded';
+      }, 500);
+    });
+
+  })();
+  </script>
+  <div id="loading"></div>
   <div class="mg-game" ng-app="memory-game" ng-controller="CardController" ng-cloak>
     <!--[if lt IE 9]>
     <script src="assets/vendor/html5shiv/html5shiv.min.js"></script>
@@ -43,7 +156,6 @@
     <script src="assets/vendor/media-match/media.match.min.js"></script>
     <script src="assets/vendor/respond/respond.min.js"></script>
     <![endif]-->
-    <div id="loading"></div>
     <div ng-hide="user" class="mg-entry">
       <div class="mg-entryform">
         <div>
@@ -54,13 +166,12 @@
         <h3>Personalize Your Experience!</h3>
         <p>Get a one-of-a-kind game experience, designed just for you, by signing in on social.</p>
         <p>(Don’t worry. Nothing posts to your accounts.)</p>
-
         <div ng-hide="enterName">
           <div class="mg-line">
-            <button type="submit" class="btn btn-primary btn-block">Sign in with Facebook</button>
+            <button id="fb-login-btn" type="submit" ng-click="social.facebook()">Sign in with Facebook</button>
           </div>
           <div class="mg-line">
-            <button type="submit" class="btn btn-primary btn-block">Sign in with LinkedIn</button>
+            <button id="li-login-btn" type="submit" ng-click="social.linkedin()">Sign in with LinkedIn</button>
           </div>
           <div class="mg-line">
             <a ng-click="attemptSocial = true">Sign in with name</a>
@@ -81,7 +192,6 @@
             </div>
           </form>
         </div>
-
         <footer class="mg-legal mg-line">
           <div class="social">
             <a href="javascript:void(0)">
@@ -134,7 +244,6 @@
               </h3>
               <p>Here’s the situation. It’s the night before the biggest event of your year – and your event day toolkit has gone missing! Can you find all your essentials in 30 seconds or less?</p>
             </div>
-          
             <div ng-show="game.results" class="mg-levels">
               <h4>Level Progress</h4>
               <svg id="levels" width="270px" height="32px">
@@ -142,28 +251,19 @@
                 <path d=" M 135 10 L 240 10" ng-class="{'mg-levels--available-path': levelIsAvailable(3)}" stroke="grey" stroke-width="2" fill="none" />
                 <g ng-click="currentLevel() !== 1 && playLevel(1)" ng-class="{'mg-levels--available': levelIsAvailable(1) && currentLevel() !== 1, 'mg-levels--current': currentLevel() === 1}">
                   <circle cx="30" cy="10" r="8" fill="grey" />
-                  <text x="30" y="32" text-anchor="middle" fill="white"
-                        font-family="Roboto"
-                        font-weight="300"
-                        font-size="12">
+                  <text x="30" y="32" text-anchor="middle" fill="white" font-family="Roboto" font-weight="300" font-size="12">
                     Level 1
                   </text>
                 </g>
                 <g ng-click="currentLevel() !== 2 && playLevel(2)" ng-class="{'mg-levels--available': levelIsAvailable(2) && currentLevel() !== 2, 'mg-levels--current': currentLevel() === 2}">
                   <circle cx="135" cy="10" r="8" fill="grey" />
-                  <text x="135" y="32" text-anchor="middle" fill="white"
-                        font-family="Roboto"
-                        font-weight="300"
-                        font-size="12">
+                  <text x="135" y="32" text-anchor="middle" fill="white" font-family="Roboto" font-weight="300" font-size="12">
                     Level 2
                   </text>
                 </g>
-                <g ng-click="currentLevel() !== 3 && playLevel(3)"  ng-class="{'mg-levels--available': levelIsAvailable(3) && currentLevel() !== 3, 'mg-levels--current': currentLevel() === 3}">
+                <g ng-click="currentLevel() !== 3 && playLevel(3)" ng-class="{'mg-levels--available': levelIsAvailable(3) && currentLevel() !== 3, 'mg-levels--current': currentLevel() === 3}">
                   <circle cx="240" cy="10" r="8" fill="grey" />
-                  <text x="240" y="32" text-anchor="middle" fill="white"
-                        font-family="Roboto"
-                        font-weight="300"
-                        font-size="12">
+                  <text x="240" y="32" text-anchor="middle" fill="white" font-family="Roboto" font-weight="300" font-size="12">
                     Level 3
                   </text>
                 </g>
@@ -193,7 +293,7 @@
             </li>
             <li>
               <a href="http://www.crowdcompass.com/resources/" target="_blank">Resources</a>
-            </li>           
+            </li>
             <li>
               <a href="http://www.crowdcompass.com/clients.shtml" target="_blank">Our Clients</a>
             </li>
@@ -290,73 +390,6 @@
       </div>
     </div>
   </div>
-
-  <script type="text/javascript">
-    window.WebFontConfig = {
-      google: { families: [ 'Roboto:400,500,300,100,300italic:latin' ] }
-    };
-
-    var calls = 0;
-
-    (function() {
-      function load(file, cb) {
-        if (cb) calls++;
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', file, true);
-
-        xhr.onload = function() {
-          if (xhr.readyState == 4) {
-            if (xhr.status === 200) {
-              if (cb && --calls === 0) cb();
-            } else {
-              window.console.error(xhr.statusText);
-            }
-          }
-        };
-
-        xhr.onerror = function () {
-          window.console.error(xhr.statusText);
-        };
-
-        xhr.send(null);
-      }
-
-      function loadScript(script, cb) {
-        load(script, cb);
-        var tk = document.createElement('script');
-        tk.src = script;
-        tk.type = 'text/javascript';
-        tk.async = 'true';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(tk, s);
-      }
-
-      function isRetina(){
-          return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx), only screen and (min-resolution: 75.6dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)').matches)) || (window.devicePixelRatio && window.devicePixelRatio >= 2)) && /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
-      }
-
-      function loadingComplete() {
-        var loading = document.getElementById('loading');
-        setTimeout(function() {
-          loading.className = 'loaded';
-          setTimeout(function () {
-            loading.style.display = 'none';
-          }, 500);
-        }, 500);
-      }
-
-      if (isRetina()) {
-        load('assets/sprite@2x.png', loadingComplete);
-      } else {
-        load('assets/sprite.png', loadingComplete);
-      }
-      loadScript('assets/app.js', loadingComplete);
-      loadScript(('https:' == document.location.protocol ? 'https' : 'http') +
-        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js');
-
-    })();
-  </script>
 </body>
 
 </html>
