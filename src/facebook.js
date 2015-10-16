@@ -2,10 +2,12 @@
 
 module.exports = function ($window) {
   $window.fbAsyncInit = function() {
-    $window.FB.init({
-      appId: window.app.facebook,
+    $window.FB.init({ 
+      appId: $window.app.facebook,
+      status: true, 
+      cookie: true, 
       xfbml: true,
-      version: 'v2.5'
+      version: 'v2.4'
     });
   };
 

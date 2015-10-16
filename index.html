@@ -493,11 +493,11 @@
 
     Loader([
       protocol + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js',
+      'assets/app.js',
       protocol + '://connect.facebook.net/en_US/sdk.js', {
         src: protocol + '://platform.linkedin.com/in.js',
         innerHTML: innerHTML
-      },
-      'assets/app.js'
+      }
     ], [image], function() {
       var ele = document.getElementById('loading');
       setTimeout(function() {
