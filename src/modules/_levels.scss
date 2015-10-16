@@ -1,13 +1,12 @@
 $hover-transition: .15s;
 
 .mg-levels {
-  position: fixed;
-  bottom: $footer-height + 30px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   transition: all $hover-transition;
-
-  g {
-    pointer-events: none;
-  }
+  width: 100%;
+  overflow: hidden;
 
   h4 {
     font-weight: 500;
@@ -16,47 +15,91 @@ $hover-transition: .15s;
     padding: 0;
   }
 
-  text, circle {
+  .mg-level {
     transition: all $hover-transition;
-    fill: #AAA;
+    margin: 15% auto;
+    text-align: center;
+    border-radius: 1000px;
+    display: inline-block;
+    position: relative;
+    width: 70px;
+    height: 70px;
+    background: #263238;
+    color: #37474f;
+    user-select: none;
+    cursor:default;
+    border: 5px double;
+    pointer-events: none;
+
+    span {
+      position: absolute;
+      transform: translateY(-50%) translateX(-50%);
+      top: 50%;
+      left: 50%;
+      font-size: 2em;
+      user-select: none;
+    }
   }
 
-  path {
-    stroke: #AAA;
-  }
-
-  .mg-levels--available circle {
-    fill: hsl(201, 100, 45);
+  .mg-levels--available {
     pointer-events: all;
     cursor: pointer;
-    transition: all $hover-transition;
   }
 
-  .mg-levels--current circle {
-    stroke: #AAA;
-    fill:  hsl(201, 100, 29);
-    cursor: mouse;
+  .mg-levels--current {
+    transform: scale(2);
   }
 
-  .mg-levels--available:hover circle {
-    stroke: hsl(201, 100, 45);
-    stroke-width: 3px;
-    transition: all $hover-transition;
+  .mg-levels--available:hover {
+    transform: scale(1.5);
   }
 
-  .mg-levels--available:hover text {
-    fill: hsl(201, 100, 100);
-    transition: all $hover-transition;
+  .mg-level:nth-of-type(1).mg-levels--current {
+    background: rgb(123, 76, 255);
+  }
+
+  .mg-level:nth-of-type(1).mg-levels--available:hover {
+    background: rgb(123, 76, 255);
+  }
+
+  .mg-level:nth-of-type(2).mg-levels--current {
+    background: rgb(0, 229, 117);
+  }
+
+  .mg-level:nth-of-type(2).mg-levels--available:hover {
+    background: rgb(0, 229, 117);
+  }
+
+  .mg-level:nth-of-type(3).mg-levels--current {
+    background: rgb(0, 228, 255);
+  }
+
+  .mg-level:nth-of-type(3).mg-levels--available:hover {
+    background: rgb(0, 228, 255);
   }
 
   .mg-levels--available-path {
-    stroke: hsl(201, 100, 29);
+    border: hsl(201, 100, 29);
   }
 }
 
+@media screen and (max-height: 600px) {
+  .mg-levels  {
 
-@media screen and (max-height: 440px) {
-  .mg-levels {
-    position: static;
+    .mg-levels--current {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .mg-level {
+      margin: 7% auto;
+      width: 50px;
+      height: 50px;
+    }
+
+    span {
+      font-size: 1em;
+    }
   }
+
 }

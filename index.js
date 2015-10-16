@@ -45,8 +45,6 @@ angular.module('memory-game', [])
         facebook: facebook($scope.updateUser)
       };
 
-      $scope.menuOpen = true;
-
       function newGame(booster) {
         $scope.gameLoading = true;
         $scope.showIntro = false;
