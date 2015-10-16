@@ -26,13 +26,84 @@ a {
   color: #62a8ea;
   text-decoration: none;
   cursor: pointer;
-
   &:hover {
     color: #89bceb;
     text-decoration: underline;
   }
 }
 
+h1 {
+  font-size: 112px;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+
+h2, h3, h4, h5 {
+  font-weight: 400;
+}
+
+h2, h3, h4 {
+  margin: 0;
+}
+
+h5, h6 {
+  margin: 12px 0;
+}
+
+h6, button, strong {
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 56px;
+  letter-spacing: -.02em;
+}
+
+h3 {
+  font-size: 45px;
+}
+
+h4 {
+  font-size: 34px;
+}
+
+h5 {
+  font-size: 24px;
+}
+
+h6 {
+  font-size: 20px;
+}
+
+hr {
+  margin: 22px 0;
+  border: .5px solid #76838f;
+}
+
+subhead, p {
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+subhead {
+  font-size: 16px;
+  display: inline-block;
+  margin: 10px 0;
+}
+
+p {
+  font-size: 14px;
+}
+
+caption {
+  font-size: 12px;
+}
+
+button {
+  font-size: 14px;
+  text-transformation: uppercase;
+}
 
 nav {
   height: $nav-height;

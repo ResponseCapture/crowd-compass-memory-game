@@ -52,7 +52,7 @@ angular.module('memory-game', [])
           $scope.gameLoading = false;
           $timeout(function() {
             $scope.showIntro = true;
-          }, 500);
+          }, 250);
         }, 100);
         return memoryGame.newGame(booster);
       }

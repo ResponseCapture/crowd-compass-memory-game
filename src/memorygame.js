@@ -22,11 +22,12 @@ function MemoryGame(timeout, interval) {
 
   this.newGame = function (booster) {
     booster = booster || 0;
+    var levelTimes = [35, 20, 10];
 
     return Game({
       cards: getCards(this.level),
       picture: user.picture,
-      limit: 30 - (this.level - 1) * 10,
+      limit: levelTimes[this.level - 1] + booster,
       cardFront: 'card-front-' + this.level + '.png'
     }, timeout, interval);
   };
