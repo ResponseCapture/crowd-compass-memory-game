@@ -696,7 +696,7 @@
             </div>
           </div>
           <!-- LEVEL 1 RESULTS -->
-          <div class="mg-center" ng-if="game.results && currentLevel() === 1">
+          <div ng-if="game.results && currentLevel() === 1">
             <div ng-hide="game.results.missing" class="results">
               <div class="result-progress">
               </div>
@@ -759,7 +759,7 @@
             </div>
           </div>
           <!-- LEVEL 2 RESULTS -->
-          <div class="mg-center" ng-if="game.results && currentLevel() === 2">
+          <div ng-if="game.results && currentLevel() === 2">
             <div ng-hide="game.results.missing" class="results">
               <header>
                 <h1 class="animated flip">Victory!</h1>
@@ -814,7 +814,7 @@
             </div>
           </div>
           <!-- LEVEL 3 RESULTS -->
-          <div class="mg-center" ng-if="game.results && currentLevel() === 3">
+          <div ng-if="game.results && currentLevel() === 3">
             <div ng-hide="game.results.missing" class="results">
               <header>
                 <h1 class="animated flip">Congratulations!</h1>
