@@ -49,13 +49,13 @@ angular.module('memory-game', [])
 
       function newGame(booster) {
         $scope.gameLoading = true;
+        $scope.showIntro = false;
         $timeout(function () {
-          $scope.showIntro = false;
           $scope.gameLoading = false;
           $timeout(function() {
             $scope.showIntro = true;
           }, 500);
-        }, 1000);
+        }, 100);
         return memoryGame.newGame(booster);
       }
       
