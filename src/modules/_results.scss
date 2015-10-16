@@ -3,7 +3,7 @@
   max-width: 800px;
   margin: 0 auto;
 
-  h2, h3 {
+  h2, h4, h5, h6, p, label, subhead {
     color: #37474f;
   }
 }
@@ -41,6 +41,23 @@
     position: absolute;
     bottom: 0;
   }
+}
+
+.mg-resultspage {
+  height: 100%;
+  overflow: auto;
+}
+
+.mg-resultspage:nth-of-type(1) {
+  background: rgb(126, 148, 255);
+}
+
+.mg-resultspage:nth-of-type(2) {
+  background: rgb(101, 239, 172);
+}
+
+.mg-resultspage:nth-of-type(3) {
+  background: rgb(101, 239, 255);
 }
 
 @media screen and (max-width: 450px) {

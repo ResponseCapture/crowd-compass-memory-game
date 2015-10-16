@@ -594,11 +594,11 @@
         <img ng-src="{{user.picture}}" alt="...">
       </span>
       <nav class="mg-mobilenav">
-        <button class="hamburger" ng-click="menuOpen = !menuOpen" ng-class="{'hamburger-close': menuOpen}">
+        <img class="mg-logo" src="assets/images/crowdcompass-brandmark-white.png" title="CrowdCompass">
+        <a class="hamburger" ng-click="menuOpen = !menuOpen" ng-class="{'hamburger-close': menuOpen}">
           <span class="sr-only">Toggle navigation</span>
           <span class="hamburger-bar"></span>
-        </button>
-        <img class="mg-logo" src="assets/images/crowdcompass-brandmark-white.png" title="CrowdCompass">
+        </a>
         <h1 ng-hide="game.results" class="progress-timer--mobile">{{ game.remaining() | date: 'mm:ss'}}</h1>
       </nav>
       <div class="mg-sidemenu" ng-class="{'mg-sidemenu--open': menuOpen}">
@@ -655,7 +655,7 @@
           </ul>
         </nav>
         <section class="mg-content">
-          <div ng-if="gameLoading"></div>
+          <div class="mg-gameloading" ng-if="gameLoading"></div>
           <div ng-if="!game.results && !gameLoading" class="mg-game-wrapper">
             <div ng-show="currentLevel() === 1" class="mg-levelintro" ng-class="{show: showIntro && !intro['1']}">
               <h2>Level 1</h2>
@@ -695,8 +695,9 @@
               <div style="clear: both;"></div>
             </div>
           </div>
+          <div class="mg-resultsloading" ng-if="resultsLoading"></div>
           <!-- LEVEL 1 RESULTS -->
-          <div ng-if="game.results && currentLevel() === 1">
+          <div class="mg-resultspage" ng-if="game.results && !resultsLoading && currentLevel() === 1">
             <div ng-hide="game.results.missing" class="results">
               <div class="result-progress">
               </div>
@@ -769,7 +770,7 @@
             </div>
           </div>
           <!-- LEVEL 2 RESULTS -->
-          <div ng-if="game.results && currentLevel() === 2">
+          <div class="mg-resultspage" ng-if="game.results && !resultsLoading && currentLevel() === 2">
             <div ng-hide="game.results.missing" class="results">
               <header>
                 <h2><span class="animated flip">Victory!</span></h2>
@@ -834,7 +835,7 @@
             </div>
           </div>
           <!-- LEVEL 3 RESULTS -->
-          <div ng-if="game.results && currentLevel() === 3">
+          <div class="mg-resultspage" ng-if="game.results && !resultsLoading && currentLevel() === 3">
             <div ng-hide="game.results.missing" class="results">
               <header>
                 <h2><span class="animated flip">Congratulations!</span></h2>
