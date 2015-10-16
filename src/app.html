@@ -1,0 +1,397 @@
+<div class="mg-game" ng-controller="CardController" ng-cloak>
+  <div ng-hide="user" class="mg-entry">
+    <div class="mg-entryform">
+      <div>
+        <img src="assets/images/crowdcompass-logo-white.png" title="CrowdCompass">
+        <h1 class="brand-text">Memory Game</h1>
+      </div>
+      <div></div>
+      <h6>Personalize Your Experience!</h6>
+      <p>Get a one-of-a-kind game experience, designed just for you, by signing in on social.</p>
+      <p>(Don’t worry. Nothing posts to your accounts.)</p>
+      <div ng-hide="enterName">
+        <div class="mg-line">
+          <button id="fb-login-btn" class="login-facebook" type="submit" ng-click="social.facebook()">Sign in with Facebook</button>
+        </div>
+        <div class="mg-line">
+          <button id="li-login-btn" class="login-linkedin" type="submit" ng-click="social.linkedin()">Sign in with LinkedIn</button>
+        </div>
+        <div class="mg-line">
+          <a ng-click="attemptSocial = true">Sign in with name</a>
+        </div>
+      </div>
+      <div ng-show="enterName">
+        <form name="userForm" ng-submit="updateUser({firstName: firstname, lastName: lastname})">
+          <div class="mg-line">
+            <label class="sr-only" for="firstname">First Name</label>
+            <input name="firstname" type="text" required ng-model="firstname" placeholder="First Name">
+          </div>
+          <div class="mg-line">
+            <label class="sr-only" for="lastname">Last Name</label>
+            <input name="lastname" type="text" required ng-model="lastname" placeholder="Last Name">
+          </div>
+          <div class="mg-line">
+            <button class="button-full" ng-disabled="!userForm.$valid" type="submit">Let's Play!</button>
+          </div>
+        </form>
+      </div>
+      <footer class="mg-legal mg-line">
+        <div class="social">
+          <a href="javascript:void(0)">
+            <i class="icon bd-twitter" aria-hidden="true"></i>
+          </a>
+          <a href="javascript:void(0)">
+            <i class="icon bd-facebook" aria-hidden="true"></i>
+          </a>
+          <a href="javascript:void(0)">
+            <i class="icon bd-pinterest" aria-hidden="true"></i>
+          </a>
+        </div>
+      </footer>
+      <div class="mg-attemptsocial" ng-class="{areyousure: attemptSocial}">
+        <div class="mg-line">
+          <img src="assets/images/sadcat.jpg">
+          <h3>Don’t Make Sebastian Sad...</h3>
+          <p>Sebastian doesn’t want you to miss out on the one-of-a-kind experience! Don’t make him sad. Sign in on social! (Seriously – nothing posts to your account!)</p>
+        </div>
+        <div class="mg-line">
+          <a ng-click="attemptSocial = false;">Okay, I'll use social.</a>
+        </div>
+        <div class="mg-line">
+          <a ng-click="attemptSocial = false; enterName = true;">Continue</a>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <div ng-if="user" class="mg-gamescreen">
+    <span ng-show="user.picture && ((!game.results && currentLevel() === 3) || currentLevel() !== 3)" class="mg-main--avatar">
+      <img ng-src="{{user.picture}}" alt="...">
+    </span>
+    <nav class="mg-mobilenav">
+      <img class="mg-logo" src="assets/images/crowdcompass-brandmark-white.png" title="CrowdCompass">
+      <a class="hamburger" ng-click="menuOpen = !menuOpen" ng-class="{'hamburger-close': menuOpen}">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="hamburger-bar"></span>
+      </a>
+      <h1 ng-hide="game.results" class="progress-timer--mobile">{{ game.remaining() | date: 'mm:ss'}}</h1>
+    </nav>
+    <div class="mg-sidemenu" ng-class="{'mg-sidemenu--open': menuOpen}">
+      <nav class="mg-darknav">
+        <img class="mg-logo" src="assets/images/crowdcompass-logo-white.png" title="CrowdCompass">
+      </nav>
+      <div class="mg-sidemenu--content-wrapper">
+        <div class="mg-sidemenu--content">
+          <div class="mg-levels">
+            <br>
+            <div class="mg-level" ng-click="currentLevel() !== 1 && playLevel(1)" ng-class="{'mg-levels--available': levelIsAvailable(1) && currentLevel() !== 1, 'mg-levels--current': currentLevel() === 1}">
+              <span>1</span>
+            </div>
+            <br>
+            <div class="mg-level" ng-click="currentLevel() !== 2 && playLevel(2)" ng-class="{'mg-levels--available': levelIsAvailable(2) && currentLevel() !== 2, 'mg-levels--current': currentLevel() === 2}">
+              <span>2</span>
+            </div>
+            <br>
+            <div class="mg-level" ng-click="currentLevel() !== 3 && playLevel(3)" ng-class="{'mg-levels--available': levelIsAvailable(3) && currentLevel() !== 3, 'mg-levels--current': currentLevel() === 3}">
+              <span>3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div class="ssk-group">
+          <a href="" class="ssk ssk-linkedin"></a>
+          <a href="" class="ssk ssk-twitter"></a>
+          <a href="" class="ssk ssk-pinterest"></a>
+          <a href="" class="ssk ssk-facebook"></a>
+        </div>
+      </footer>
+    </div>
+    <div class="mg-main" ng-class="{'mg-main--sidemenu-open': menuOpen}">
+      <div class="fade"></div>
+      <nav>
+        <div ng-hide="game.results" class="navbar-center" ng-class="{'progress-danger': game.isCritical}">
+          <h3 class="progress-timer">{{ game.remaining() | date: 'mm:ss'}}</h3>
+          <div id="progress" class="progress-container"></div>
+        </div>
+        <ul ng-show="currentLevel() === 3 && game.results" class="crowdcompass-nav">
+          <li>
+            <a href="http://www.crowdcompass.com/features/" target="_blank">Features</a>
+          </li>
+          <li>
+            <a href="http://www.crowdcompass.com/resources/" target="_blank">Resources</a>
+          </li>
+          <li>
+            <a href="http://www.crowdcompass.com/clients.shtml" target="_blank">Our Clients</a>
+          </li>
+          <li>
+            <a href="http://www.crowdcompass.com/about.shtml" target="_blank">About Us</a>
+          </li>
+        </ul>
+      </nav>
+      <section class="mg-content">
+        <div class="mg-gameloading" ng-if="gameLoading"></div>
+        <div class="mg-resultsloading mg-resultspage-{{currentLevel()}}" ng-if="resultsLoading"></div>
+        <div ng-if="!game.results && !gameLoading" class="mg-game-wrapper">
+          <div ng-show="currentLevel() === 1" class="mg-levelintro" ng-class="{show: showIntro && !intro['1']}">
+            <h2>Level 1</h2>
+            <h6>
+              Alright {{user.firstName}},
+            </h6>
+            <p>Here’s the situation. It’s the night before the biggest event of your year – and your event day toolkit has gone missing!</p>
+            <p>Can you find all your essentials in <strong>35 seconds</strong> or less?</p>
+            <p>Click any card to start the game.</p>
+            <button class="mg-play" ng-click="intro['1'] = true">Got it!</button>
+          </div>
+          <div ng-show="currentLevel() === 2" class="mg-levelintro" ng-class="{show: showIntro && !intro['2']}">
+            <h2>Level 2</h2>
+            <h6>
+              Okay {{user.firstName}},
+            </h6>
+            <p><strong>Event day has finally arrived… And things are about to get real!</strong> With the pressure on, you’ve got less time to make decisions so you need to be on your game!</p>
+            <p>Can you save the show in <strong>20 seconds</strong> or less?</p>
+            <button class="mg-play" ng-click="intro['2'] = true">Got it!</button>
+          </div>
+          <div ng-show="currentLevel() === 3" class="mg-levelintro" ng-class="{show: showIntro && !intro['3']}">
+            <h2>Level 3</h2>
+            <h6>
+              Wow {{user.firstName}} {{user.lastName}}!
+            </h6>
+            <p><strong>Whew! The Event is Finally Over.</strong> You need a drink, a nap and an epic dance party just to unwind from that!</p>
+            <p>Can you uncover your post-event stress relievers in <strong>10 seconds</strong> or less?</p>
+            <button class="mg-play" ng-click="intro['3'] = true">Got it!</button>
+          </div>
+          <div ng-style="{'pointer-events': !intro[currentLevel()] ? 'none' : 'all'}" data-animation-in="bounceIn" class="card-container mg-center grid" ng-init="newGameIfNotStarted()" min-height hierarchical>
+            <div class="grid-sizer"></div>
+            <div ng-repeat="card in game.deck" class="card-wrapper" ng-class="{turncard: card.isFaceUp, bounce: card.celebrate}" ng-click="game.check(card)" data-target=".card-container">
+              <div class="card" ng-style="{'background-image': 'url(assets/images/' + game.cardFront + ')' }">
+                <div class="back face flipped" ng-style="{'background-position': card.item.position, 'background-image': card.item.picture, 'background-size': card.item.picture ? 'cover' : ''}"></div>
+              </div>
+            </div>
+            <div style="clear: both;"></div>
+          </div>
+        </div>
+        <!-- LEVEL 1 RESULTS -->
+        <div class="mg-resultspage mg-resultspage-1" ng-if="game.results && !resultsLoading && currentLevel() === 1">
+          <div ng-hide="game.results.missing" class="results">
+            <div class="result-progress">
+            </div>
+            <header>
+              <h2><span class="animated flip">Victory!</span></h2>
+            </header>
+            <subhead>And it feels great to be a winner, right? Share your speedy time and challenge other event pros to a game!</subhead>
+            <p></p>
+            <div class="share-ssk">
+              <a href="" class="ssk ssk-linkedin"></a>
+              <a href="" class="ssk ssk-twitter"></a>
+              <a href="" class="ssk ssk-pinterest"></a>
+              <a href="" class="ssk ssk-facebook"></a>
+            </div>
+            <hr>
+            <div style="text-align: center">
+              <a ng-show="user.workEmail" class="button" ng-click="playLevel(2)">Take on Level 2</a>
+            </div>
+            <div ng-hide="user.workEmail">
+              <h6>Unlock Level 2 & Other Awesome Goodies!</h6>
+              <p>Loving this game? Enter your email to unlock Level 2 and we’ll also send you more games, quizzes, exclusive research and other awesome goodies!</p>
+              <label>Work Email:
+                <input type="email" ng-pattern="/\./" ng-required ng-model="userWorkEmail">
+              </label>
+              <label>
+                <input type="checkbox" ng-init="user.unlockedAssets = true" ng-model="user.unlockedAssets" checked> Send Me Goodies!
+              </label>
+              <a class="button-inline button" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; playLevel(2)">GO</a>
+            </div>
+            <hr>
+            <div style="text-align: center">
+              <h6>Addicted to Level 1? No Problem, Play Again!</h6>
+              <p>We get it! We’ll shuffle the deck and you can play again!</p>
+              <a class="button" ng-click="newGame()">Play Again</a>
+            </div>
+          </div>
+          <div ng-show="game.results.missing" class="results">
+            <header class="animated fadeInDown">
+              <h2>Oh No, Time's Up!</h2>
+            </header>
+            <subhead>Don’t give up! Use the time booster's extra time to win!</subhead>
+            <p></p>
+            <div class="share-ssk">
+              <a href="" class="ssk ssk-linkedin"></a>
+              <a href="" class="ssk ssk-twitter"></a>
+              <a href="" class="ssk ssk-pinterest"></a>
+              <a href="" class="ssk ssk-facebook"></a>
+            </div>
+            <hr>
+            <div style="text-align: center">
+              <a ng-show="user.company" class="button" ng-click="newGame(5)">Use Your Time Booster</a>
+            </div>
+            <div ng-hide="user.company" ng-show="getinfo">
+              <h6>Unlock Your Time Booster!</h6>
+              <p>Enter your email and get extra time to win! And if you’re loving this game, we’ll send you more games, quizzes, exclusive research and other awesome goodies!</p>
+              <label>Work Email:
+                <input type="email" ng-pattern="/\./" ng-required ng-model="userWorkEmail">
+              </label>
+              <label>
+                <input type="checkbox" ng-init="user.unlockedAssets = true" ng-model="user.unlockedAssets" checked> Send Me Goodies!
+              </label>
+              <a class="button-inline button" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; newGame(5)">GO</a>
+            </div>
+            <hr>
+            <div style="text-align: center">
+              <h6>I Don’t Need No Stinkin Time Booster!</h6>
+              <p>No prob! We’ll shuffle the deck and you can play again!</p>
+              <a class="button" ng-click="newGame()">Play Again</a>
+            </div>
+          </div>
+        </div>
+        <!-- LEVEL 2 RESULTS -->
+        <div class="mg-resultspage mg-resultspage-2" ng-if="game.results && !resultsLoading && currentLevel() === 2">
+          <div ng-hide="game.results.missing" class="results">
+            <header>
+              <h2><span class="animated flip">Victory!</span></h2>
+            </header>
+            <subhead>Congrats! Ummm, you’re like, the fastest event pro, EVER. But now… Drumroll… It’s about to get tough. Meaning, we’re going to test you. It’s time to put on your big kid pants.</subhead>
+            <p></p>
+            <div class="share-ssk">
+              <a href="" class="ssk ssk-linkedin"></a>
+              <a href="" class="ssk ssk-twitter"></a>
+              <a href="" class="ssk ssk-pinterest"></a>
+              <a href="" class="ssk ssk-facebook"></a>
+            </div>
+            <hr>
+            <div style="text-align: center">
+              <a ng-show="user.company" class="button" ng-click="playLevel(3)">Take on Level 3</a>
+            </div>
+            <div ng-hide="user.company" ng-show="getinfo">
+              <h6>The Time Has Come… The Ultimate Test of Memory + Speed!</h6>
+              <p>Get your running shoes on because now we’re gonna see how fast you are! Tell us the company name on your paychecks, and we’ll magically teleport you to another dimension (some peeps just call it Level 3. BORING).</p>
+              <label>Company Name:
+                <input type="text" ng-required ng-model="userCompany">
+              </label>
+              <a class="button-inline button" ng-disabled="!userCompany" ng-click="user.company = userCompany; playLevel(3)">GO</a>
+            </div>
+            <hr>
+            <div style="text-align: center">
+              <h6>Addicted to Level 2? No Problem, Play Again!</h6>
+              <p>We get it! We’ll shuffle the deck and you can play again!</p>
+              <a class="button" ng-click="newGame()">Play Again</a>
+            </div>
+          </div>
+          <div ng-show="game.results.missing" class="results">
+            <header class="animated fadeInDown">
+              <h2>Oh No, Time Is Up!</h2>
+            </header>
+            <subhead>Don’t give up! Use the time booster and play again for the win!</subhead>
+            <p></p>
+            <div class="share-ssk">
+              <a href="" class="ssk ssk-linkedin"></a>
+              <a href="" class="ssk ssk-twitter"></a>
+              <a href="" class="ssk ssk-pinterest"></a>
+              <a href="" class="ssk ssk-facebook"></a>
+            </div>
+            <hr>
+            <div style="text-align: center">
+              <a ng-show="user.company" class="button" ng-click="newGame(5)">Use a Time Booster</a>
+            </div>
+            <div ng-hide="user.company">
+              <h6>Unlock Your Time Booster!</h6>
+              <p>Enter your company name and get extra time to win! And if you’re loving this game, we’ll send you more games, quizzes, exclusive research and other awesome goodies!</p>
+              <label>Company Name:
+                <input type="text" ng-required ng-model="userCompany">
+              </label>
+              <a class="button-inline button" ng-disabled="!userCompany" ng-click="user.company = userCompany; newGame(5)">GO</a>
+            </div>
+            <hr>
+            <div style="text-align: center">
+              <h6>I Don’t Need No Stinkin Time Booster!</h6>
+              <p>No prob! We’ll shuffle the deck and you can play again!</p>
+              <a class="button" ng-click="newGame()">Play Again</a>
+            </div>
+          </div>
+        </div>
+        <!-- LEVEL 3 RESULTS -->
+        <div class="mg-resultspage mg-resultspage-3" ng-if="game.results && !resultsLoading && currentLevel() === 3">
+          <div ng-hide="game.results.missing" class="results">
+            <header>
+              <h2><span class="animated flip">Congratulations!</span></h2>
+            </header>
+            <h5>You Just Conquered the Ultimate, Ultimate Game of Memory Skillz!</h5>
+            <subhead>Take a deep breath. Sweet, sweet victory. You’re among the few people tough enough, proud enough and skillful enough to make it this far (and somewhere… An audience is on it’s feet).</subhead>
+            <subhead><strong>But wait. Are you faster than your friends and colleagues?! (Gasp!)</strong> It’s time to find out. Share this puppy (aren’t puppies the cutest?!) with another human (robots are also cool) and let’s see if their memory prowess is as good as yours!</subhead>
+            <p></p>
+            <div class="share-ssk">
+              <a href="" class="ssk ssk-linkedin"></a>
+              <a href="" class="ssk ssk-twitter"></a>
+              <a href="" class="ssk ssk-pinterest"></a>
+              <a href="" class="ssk ssk-facebook"></a>
+            </div>
+            <hr>
+            <h6>There’s More in Store!</h6>
+            <p>The fun doesn’t stop after Level 3! Play again to improve your time and stay tuned for additional card packs, levels and new features. In the meantime, play our other games below and make sure to check out the goodies we emailed you!</p>
+            <div class="results-section-wrapper">
+              <div class="results-section">
+                <p><strong>What’s Your Planner Personality?</strong>
+                  <br>The Maestro… The Trendsetter… Which of the four “event planner personalities” describes you? Take the quiz to find out.</p>
+                <a class="button" target="_blank" href="http://www.crowdcompassquiz.com">Find Out</a>
+              </div>
+              <div class="results-section">
+                <p><strong>What’s Your Mobile Apps Star Power?</strong>
+                  <br>Ever wondered what attendees really think of your mobile event app? Take this quiz to find out!</p>
+                <a class="button" target="_blank" href="http://www.eventappstarpower.com">Take the Quiz</a>
+              </div>
+              <p style="clear: both"></p>
+            </div>
+            <hr>
+            <div style="text-align: center">
+              <h6>Addicted to Level 3? No Problem, Play Again!</h6>
+              <p>We get it! We’ll shuffle the deck and you can play again!</p>
+              <a class="button" ng-click="newGame()">Play Again</a>
+            </div>
+          </div>
+          <div ng-show="game.results.missing" class="results">
+            <header class="animated fadeInDown">
+              <h2>Oh No, Time Is Up!</h2>
+            </header>
+            <subhead>You were sooo close with only {{ game.results.missing }} pairs of cards left! Don’t give up though! Play again for the win!</subhead>
+            <p></p>
+            <div class="share-ssk">
+              <a href="" class="ssk ssk-linkedin"></a>
+              <a href="" class="ssk ssk-twitter"></a>
+              <a href="" class="ssk ssk-pinterest"></a>
+              <a href="" class="ssk ssk-facebook"></a>
+            </div>
+            <hr>
+            <h6>There’s More in Store!</h6>
+            <p>The fun doesn’t stop after Level 3! Play again to improve your time and stay tuned for additional card packs, levels and new features. In the meantime, play our other games below and make sure to check out the goodies we emailed you!</p>
+            <div class="results-section-wrapper">
+              <div class="results-section">
+                <p><strong>What’s Your Planner Personality?</strong>
+                  <br>The Maestro… The Trendsetter… Which of the four “event planner personalities” describes you? Take the quiz to find out.</p>
+                <a class="button" target="_blank" href="http://www.crowdcompassquiz.com">Find Out</a>
+              </div>
+              <div class="results-section">
+                <p><strong>What’s Your Mobile Apps Star Power?</strong>
+                  <br>Ever wondered what attendees really think of your mobile event app? Take this quiz to find out!</p>
+                <a class="button" target="_blank" href="http://www.eventappstarpower.com">Take the Quiz</a>
+              </div>
+              <p style="clear: both"></p>
+            </div>
+            <hr>
+            <div style="text-align: center">
+              <a class="button" ng-click="newGame(5)">Use a Time Booster</a>
+            </div>
+            <hr>
+            <div style="text-align: center">
+              <h6>I Don’t Need No Stinkin Time Booster!</h6>
+              <p>No prob! We’ll shuffle the deck and you can play again!</p>
+              <a class="button" ng-click="newGame()">Play Again</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer class="mg-legal">
+        <span>© Copyright 2009-2016 <a href="http://www.crowdcompass.com">CrowdCompass</a>. All Rights Reserved.</span>
+      </footer>
+    </div>
+  </div>
+</div>

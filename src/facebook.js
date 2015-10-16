@@ -1,16 +1,6 @@
 'use strict';
 
 module.exports = function ($window) {
-  $window.fbAsyncInit = function() {
-    $window.FB.init({ 
-      appId: $window.app.facebook,
-      status: true, 
-      cookie: true, 
-      xfbml: true,
-      version: 'v2.4'
-    });
-  };
-
   return function (callback) {
     var FB = $window.FB;
     return function() {

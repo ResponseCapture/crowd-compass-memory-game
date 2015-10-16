@@ -1,5 +1,3 @@
-/* MProgress  inspire from Material Design and NProgress...
- * @license MIT */
 'use strict';
 
 window.jQuery = window.$ = require('jquery');
@@ -19,6 +17,11 @@ var facebook = require('./src/facebook')(window);
 var linkedin = require('./src/linkedin')(window);
 
 angular.module('memory-game', [])
+  .directive('appcontent', function () {
+    return {
+      template: require('raw!./src/app.html')
+    };
+  })
   .directive('minHeight', ['$window', minHeight])
   .directive('hierarchical', hierarchical)
   .controller('CardController', ['$scope', '$timeout', '$interval',
