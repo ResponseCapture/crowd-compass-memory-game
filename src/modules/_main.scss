@@ -132,7 +132,31 @@
     font-size: 21px;
     margin: 11px 0;
   }
+}
 
+.mg-resultsloading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: #444;
+  width: 40px;
+  height: 40px;
+  transition: all 3s;
+  border-radius: 10000px;
+  transform: scale(0);
+  animation: splash .4s 1 forwards;
+  animation-timing-function: ease-in-out;
+  animation-delay: 1.3s;
+  z-index: 1;
+}
+
+@keyframes splash {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(100);
+  }
 }
 
 .mg-play {

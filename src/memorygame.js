@@ -3,7 +3,7 @@
 var MProgress = require('./mprogress'),
   shuffle = require('./shuffle');
 
-function MemoryGame(timeout, interval) {
+function MemoryGame(timeout, interval, gameEndCb) {
   var user = {}, cardCount = 18;
 
   this.level = 1;
@@ -28,7 +28,8 @@ function MemoryGame(timeout, interval) {
       cards: getCards(this.level),
       picture: user.picture,
       limit: levelTimes[this.level - 1] + booster,
-      cardFront: 'card-front-' + this.level + '.png'
+      cardFront: 'card-front-' + this.level + '.png',
+      gameEndCb: gameEndCb
     }, timeout, interval);
   };
 }
@@ -46,6 +47,7 @@ function Game(options, timeout, interval) {
     limit = options.limit,
     limitMs = limit * 1000,
     noop = function () {},
+    gameEndCb = options.gameEndCb || noop,
     profileCard = {
       picture: 'url(' + options.picture + ')',
       position: '0% 0'
@@ -123,6 +125,7 @@ function Game(options, timeout, interval) {
     mprogress.set(1);
     mprogress.end();
     game.check = noop;
+    gameEndCb();
     var end = new Date() - begin;
     var faceDown = game.deck
       .filter(function (c) {

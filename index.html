@@ -656,6 +656,7 @@
         </nav>
         <section class="mg-content">
           <div class="mg-gameloading" ng-if="gameLoading"></div>
+          <div class="mg-resultsloading mg-resultspage-{{currentLevel()}}" ng-if="resultsLoading"></div>
           <div ng-if="!game.results && !gameLoading" class="mg-game-wrapper">
             <div ng-show="currentLevel() === 1" class="mg-levelintro" ng-class="{show: showIntro && !intro['1']}">
               <h2>Level 1</h2>
@@ -695,9 +696,8 @@
               <div style="clear: both;"></div>
             </div>
           </div>
-          <div class="mg-resultsloading" ng-if="resultsLoading"></div>
           <!-- LEVEL 1 RESULTS -->
-          <div class="mg-resultspage" ng-if="game.results && !resultsLoading && currentLevel() === 1">
+          <div class="mg-resultspage mg-resultspage-1" ng-if="game.results && !resultsLoading && currentLevel() === 1">
             <div ng-hide="game.results.missing" class="results">
               <div class="result-progress">
               </div>
@@ -770,7 +770,7 @@
             </div>
           </div>
           <!-- LEVEL 2 RESULTS -->
-          <div class="mg-resultspage" ng-if="game.results && !resultsLoading && currentLevel() === 2">
+          <div class="mg-resultspage mg-resultspage-2" ng-if="game.results && !resultsLoading && currentLevel() === 2">
             <div ng-hide="game.results.missing" class="results">
               <header>
                 <h2><span class="animated flip">Victory!</span></h2>
@@ -835,7 +835,7 @@
             </div>
           </div>
           <!-- LEVEL 3 RESULTS -->
-          <div class="mg-resultspage" ng-if="game.results && !resultsLoading && currentLevel() === 3">
+          <div class="mg-resultspage mg-resultspage-3" ng-if="game.results && !resultsLoading && currentLevel() === 3">
             <div ng-hide="game.results.missing" class="results">
               <header>
                 <h2><span class="animated flip">Congratulations!</span></h2>

@@ -29,7 +29,7 @@
 
 .mg-sidemenu--content-wrapper {
   width: 100%;
-  padding: 30px;
+  padding: 0 30px;
   height: calc(100vh - #{$height-sans-content});
   overflow: auto;
 }

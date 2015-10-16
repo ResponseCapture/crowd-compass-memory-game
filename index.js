@@ -23,7 +23,14 @@ angular.module('memory-game', [])
   .directive('hierarchical', hierarchical)
   .controller('CardController', ['$scope', '$timeout', '$interval',
     function ($scope, $timeout, $interval) {
-      var memoryGame = new MemoryGame($timeout, $interval),
+      function gameEnd() {
+        $scope.resultsLoading = true;
+        $timeout(function () {
+          $scope.resultsLoading = false;
+        }, 2000);
+      }
+
+      var memoryGame = new MemoryGame($timeout, $interval, gameEnd),
         availableLevels = {
           1: true
         };
