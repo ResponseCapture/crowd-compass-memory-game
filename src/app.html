@@ -1,6 +1,6 @@
 <div class="mg-game" ng-controller="CardController" ng-cloak>
   <div ng-hide="user" class="mg-entry">
-    <div class="mg-entryform">
+<!--     <div class="mg-entryform">
       <div>
         <img src="assets/images/crowdcompass-logo-white.png" title="CrowdCompass">
         <h1 class="brand-text">Memory Game</h1>
@@ -61,8 +61,36 @@
           <a ng-click="attemptSocial = false; enterName = true;">Continue</a>
         </div>
       </div>
+    </div> -->
+    <img class="mg-entry--wave1" src="assets/images/wave-bg.svg">
+    <img class="mg-entry--wave2" src="assets/images/wave-bg-2.svg">
+
+    <div class="mg-entry--hero">
+      <img class="mg-entry--box" src="assets/images/box.svg">
+        <div class="mg-entry--box-content">
+        <img class="mg-entry--title" src="assets/images/title.svg">
+        <div class="mg-entry--logins">
+          <subhead>
+            <strong>Are YOU up for the challenge?  Sign in now to find out!</strong>
+          </subhead>
+          <div class="mg-entry--login button-behavior">
+            <img class="mg-entry--fb-icon" src="assets/images/facebook.svg">
+            <img src="assets/images/homepage-button.svg">
+            <div class="mg-entry--login-text">
+              <strong>FACEBOOK</strong>
+            </div>
+          </div>
+          <div class="mg-entry--login button-behavior">
+            <img class="mg-entry--linkedin-icon" src="assets/images/linkedin.svg">
+            <img src="assets/images/homepage-button.svg">
+            <div class="mg-entry--login-text">
+              <strong>LINKEDIN</strong>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    
+
   </div>
   <div ng-if="user" class="mg-gamescreen">
     <span ng-show="user.picture && ((!game.results && currentLevel() === 3) || currentLevel() !== 3)" class="mg-main--avatar">
