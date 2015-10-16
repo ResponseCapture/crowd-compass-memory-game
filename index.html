@@ -537,10 +537,10 @@
         <p>(Don’t worry. Nothing posts to your accounts.)</p>
         <div ng-hide="enterName">
           <div class="mg-line">
-            <button id="fb-login-btn" class="ssk-facebook" type="submit" ng-click="social.facebook()">Sign in with Facebook</button>
+            <button id="fb-login-btn" class="login-facebook" type="submit" ng-click="social.facebook()">Sign in with Facebook</button>
           </div>
           <div class="mg-line">
-            <button id="li-login-btn" class="ssk-linkedin" type="submit" ng-click="social.linkedin()">Sign in with LinkedIn</button>
+            <button id="li-login-btn" class="login-linkedin" type="submit" ng-click="social.linkedin()">Sign in with LinkedIn</button>
           </div>
           <div class="mg-line">
             <a ng-click="attemptSocial = true">Sign in with name</a>
@@ -557,7 +557,7 @@
               <input name="lastname" type="text" required ng-model="lastname" placeholder="Last Name">
             </div>
             <div class="mg-line">
-              <button ng-disabled="!userForm.$valid" type="submit">Let's Play!</button>
+              <button class="button-full" ng-disabled="!userForm.$valid" type="submit">Let's Play!</button>
             </div>
           </form>
         </div>
@@ -713,7 +713,7 @@
               </div>
               <hr>
               <div style="text-align: center">
-                <a ng-show="user.workEmail" class="btn-round" ng-click="playLevel(2)">Take on Level 2</a>
+                <a ng-show="user.workEmail" class="button" ng-click="playLevel(2)">Take on Level 2</a>
               </div>
               <div ng-hide="user.workEmail">
                 <h6>Unlock Level 2 & Other Awesome Goodies!</h6>
@@ -724,13 +724,13 @@
                 <label>
                   <input type="checkbox" ng-init="user.unlockedAssets = true" ng-model="user.unlockedAssets" checked> Send Me Goodies!
                 </label>
-                <a class="btn-go btn-round" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; playLevel(2)">GO</a>
+                <a class="button-inline button" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; playLevel(2)">GO</a>
               </div>
               <hr>
               <div style="text-align: center">
                 <h6>Addicted to Level 1? No Problem, Play Again!</h6>
                 <p>We get it! We’ll shuffle the deck and you can play again!</p>
-                <a class="btn-round" ng-click="newGame()">Play Again</a>
+                <a class="button" ng-click="newGame()">Play Again</a>
               </div>
             </div>
             <div ng-show="game.results.missing" class="results">
@@ -747,7 +747,7 @@
               </div>
               <hr>
               <div style="text-align: center">
-                <a ng-show="user.company" class="btn-round" ng-click="newGame(5)">Use Your Time Booster</a>
+                <a ng-show="user.company" class="button" ng-click="newGame(5)">Use Your Time Booster</a>
               </div>
               <div ng-hide="user.company" ng-show="getinfo">
                 <h6>Unlock Your Time Booster!</h6>
@@ -758,13 +758,13 @@
                 <label>
                   <input type="checkbox" ng-init="user.unlockedAssets = true" ng-model="user.unlockedAssets" checked> Send Me Goodies!
                 </label>
-                <a class="btn-go btn-round" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; newGame(5)">GO</a>
+                <a class="button-inline button" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; newGame(5)">GO</a>
               </div>
               <hr>
               <div style="text-align: center">
                 <h6>I Don’t Need No Stinkin Time Booster!</h6>
                 <p>No prob! We’ll shuffle the deck and you can play again!</p>
-                <a class="btn-round" ng-click="newGame()">Play Again</a>
+                <a class="button" ng-click="newGame()">Play Again</a>
               </div>
             </div>
           </div>
@@ -784,7 +784,7 @@
               </div>
               <hr>
               <div style="text-align: center">
-                <a ng-show="user.company" class="btn-round" ng-click="playLevel(3)">Take on Level 3</a>
+                <a ng-show="user.company" class="button" ng-click="playLevel(3)">Take on Level 3</a>
               </div>
               <div ng-hide="user.company" ng-show="getinfo">
                 <h6>The Time Has Come… The Ultimate Test of Memory + Speed!</h6>
@@ -792,13 +792,13 @@
                 <label>Company Name:
                   <input type="text" ng-required ng-model="userCompany">
                 </label>
-                <a class="btn-go btn-round" ng-disabled="!userCompany" ng-click="user.company = userCompany; playLevel(3)">GO</a>
+                <a class="button-inline button" ng-disabled="!userCompany" ng-click="user.company = userCompany; playLevel(3)">GO</a>
               </div>
               <hr>
               <div style="text-align: center">
                 <h6>Addicted to Level 2? No Problem, Play Again!</h6>
                 <p>We get it! We’ll shuffle the deck and you can play again!</p>
-                <a class="btn-round" ng-click="newGame()">Play Again</a>
+                <a class="button" ng-click="newGame()">Play Again</a>
               </div>
             </div>
             <div ng-show="game.results.missing" class="results">
@@ -815,7 +815,7 @@
               </div>
               <hr>
               <div style="text-align: center">
-                <a ng-show="user.company" class="btn-round" ng-click="newGame(5)">Use a Time Booster</a>
+                <a ng-show="user.company" class="button" ng-click="newGame(5)">Use a Time Booster</a>
               </div>
               <div ng-hide="user.company">
                 <h6>Unlock Your Time Booster!</h6>
@@ -823,13 +823,13 @@
                 <label>Company Name:
                   <input type="text" ng-required ng-model="userCompany">
                 </label>
-                <a class="btn-go btn-round" ng-disabled="!userCompany" ng-click="user.company = userCompany; newGame(5)">GO</a>
+                <a class="button-inline button" ng-disabled="!userCompany" ng-click="user.company = userCompany; newGame(5)">GO</a>
               </div>
               <hr>
               <div style="text-align: center">
                 <h6>I Don’t Need No Stinkin Time Booster!</h6>
                 <p>No prob! We’ll shuffle the deck and you can play again!</p>
-                <a class="btn-round" ng-click="newGame()">Play Again</a>
+                <a class="button" ng-click="newGame()">Play Again</a>
               </div>
             </div>
           </div>
@@ -855,11 +855,11 @@
               <div class="results-section-wrapper">
                 <div class="results-section">
                   <p><strong>What’s Your Planner Personality?</strong><br>The Maestro… The Trendsetter… Which of the four “event planner personalities” describes you? Take the quiz to find out.</p>
-                  <a class="btn-round" target="_blank" href="http://www.crowdcompassquiz.com">Find Out</a>
+                  <a class="button" target="_blank" href="http://www.crowdcompassquiz.com">Find Out</a>
                 </div>
                 <div class="results-section">
                   <p><strong>What’s Your Mobile Apps Star Power?</strong><br>Ever wondered what attendees really think of your mobile event app? Take this quiz to find out!</p>
-                  <a class="btn-round" target="_blank" href="http://www.eventappstarpower.com">Take the Quiz</a>
+                  <a class="button" target="_blank" href="http://www.eventappstarpower.com">Take the Quiz</a>
                 </div>
                 <p style="clear: both"></p>
               </div>
@@ -867,7 +867,7 @@
               <div style="text-align: center">
                 <h6>Addicted to Level 3? No Problem, Play Again!</h6>
                 <p>We get it! We’ll shuffle the deck and you can play again!</p>
-                <a class="btn-round" ng-click="newGame()">Play Again</a>
+                <a class="button" ng-click="newGame()">Play Again</a>
               </div>
             </div>
             <div ng-show="game.results.missing" class="results">
@@ -888,23 +888,23 @@
               <div class="results-section-wrapper">
                 <div class="results-section">
                   <p><strong>What’s Your Planner Personality?</strong><br>The Maestro… The Trendsetter… Which of the four “event planner personalities” describes you? Take the quiz to find out.</p>
-                  <a class="btn-round" target="_blank" href="http://www.crowdcompassquiz.com">Find Out</a>
+                  <a class="button" target="_blank" href="http://www.crowdcompassquiz.com">Find Out</a>
                 </div>
                 <div class="results-section">
                   <p><strong>What’s Your Mobile Apps Star Power?</strong><br>Ever wondered what attendees really think of your mobile event app? Take this quiz to find out!</p>
-                  <a class="btn-round" target="_blank" href="http://www.eventappstarpower.com">Take the Quiz</a>
+                  <a class="button" target="_blank" href="http://www.eventappstarpower.com">Take the Quiz</a>
                 </div>
                 <p style="clear: both"></p>
               </div>
               <hr>
               <div style="text-align: center">
-                <a class="btn-round" ng-click="newGame(5)">Use a Time Booster</a>
+                <a class="button" ng-click="newGame(5)">Use a Time Booster</a>
               </div>
               <hr>
               <div style="text-align: center">
                 <h6>I Don’t Need No Stinkin Time Booster!</h6>
                 <p>No prob! We’ll shuffle the deck and you can play again!</p>
-                <a class="btn-round" ng-click="newGame()">Play Again</a>
+                <a class="button" ng-click="newGame()">Play Again</a>
               </div>
             </div>
           </div>

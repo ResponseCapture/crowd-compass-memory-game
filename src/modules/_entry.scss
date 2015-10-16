@@ -9,33 +9,6 @@
     width: 100%;
   }
 
-  button {
-    color: #fff;
-    padding: 6px 15px;
-    border: 1px solid transparent;
-    font-size: 14px;
-    font-weight: 100;
-    line-height: 1.6;
-    border-radius: 3px;
-    outline: 0;
-    display: block;
-    width: 100%;
-    user-select: none;
-    box-shadow: none;
-    -webkit-font-smoothing: subpixel-antialiased;
-    transition: border .2s linear, color .2s linear, width .2s linear, background-color .2s linear;
-
-    &:before {
-      content: initial;
-    }
-
-    &[disabled] {
-      background-color: #AAA;
-      color: #CCC;
-      border: 1px solid transparent;
-    }
-  }
-
   .mg-entryform {
     position: relative;
     top: 50%;
@@ -68,6 +41,31 @@
     &.areyousure {
       transform: scale(1);
     }
+  }
+
+  .login-facebook, .login-linkedin {
+    color: #FFF;
+    width: 100%
+  }
+
+  .login-facebook:after, .login-linkedin:after {
+    content: '';
+  }
+
+  .login-facebook {
+    background-color: #255c95
+  }
+
+  .login-facebook:hover {
+    background-color: #1b436c
+  }
+
+  .login-linkedin {
+    background-color: #1c87bd
+  }
+
+  .login-linkedin:hover {
+    background-color: #156791
   }
 
   .mg-line {

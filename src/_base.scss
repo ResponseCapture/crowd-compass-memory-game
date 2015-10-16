@@ -39,7 +39,7 @@ h1 {
   letter-spacing: -.04em;
 }
 
-h2, h3, h4, h5 {
+button, .button, h2, h3, h4, h5 {
   font-weight: 400;
 }
 
@@ -51,7 +51,7 @@ h5, h6 {
   margin: 12px 0;
 }
 
-h6, button, strong {
+h6, strong {
   font-weight: 500;
 }
 
@@ -100,7 +100,63 @@ caption {
   font-size: 12px;
 }
 
-button {
+.button[disabled], button[disabled] {
+  cursor: not-allowed;
+  background-color: #DDD;
+  color: #AAA;
+  filter: alpha(opacity=65);
+  box-shadow: none;
+  opacity: .65;
+  pointer-events: none;
+}
+
+.button:hover, button:hover {
+  background-color: #e5e5e5;
+  border-color: #adadad;
+  color: #333;
+  text-decoration: none;
+}
+
+.button:active, button:active {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.button, button {
+  min-width: 88px;
+  padding: 10px 14px;
+  background: 0 0;
+  background-color: #fff;
+  outline: 0;
+  outline-offset: 0;
+  border: 0;
+  border-radius: 2px;
+  transition: all 0.15s ease-in-out;
+  color: rgba(0, 0, 0, 0.87);
+  display: inline-block;
+  border-color: #ccc;
+  text-decoration: none;
+  margin-bottom: 0;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  appearance: button;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+}
+
+.button-inline {
+  padding: 1px 10px;
+  margin: 0 0 2px 2px;
+}
+
+.button-full {
+  width: 100%;
+}
+
+button, .button {
   font-size: 14px;
   text-transformation: uppercase;
 }
