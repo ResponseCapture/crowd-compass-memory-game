@@ -104,22 +104,3 @@
     transition: box-shadow .25s linear, border .25s linear, color .25s linear, background-color .25s linear;
   }
 }
-
-
-.loaded {
-  transition: all .5s;
-  opacity: 0;
-  transition-delay: calc(7s / 10);
-  pointer-events: none;
-}
-
-@for $i from 1 through 6 {
-  .loaded .square#{$i} {
-    animation: initial;
-    transition: all .5s ease-in-out;
-    transition-delay: calc(#{$i}s / 10);
-    transform: translateY(100vh);
-  }
-}
-  
-
