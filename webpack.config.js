@@ -20,9 +20,6 @@ module.exports = {
     }, {
       test: /\.(png|woff|woff2|eot|ttf)$/,
       loader: 'url-loader?limit=100000&name=[name].[ext]'
-    }, {
-        test: /\.svg$/,
-        loader: 'svg-inline'
     }]
   },
   resolve: {
