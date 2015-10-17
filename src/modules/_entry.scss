@@ -50,6 +50,10 @@
     font-size: 14px;
   }
 
+  .mg-logo-svg {
+    position: fixed;
+    left: 30px;
+  }
 
   .mg-entry--hero {
     position: relative;
@@ -184,16 +188,16 @@
 
   @keyframes colorshift {
     0% {
-      fill: $level-one-color;
-    }
-    33.333% {
       fill: $level-two-color;
     }
-    66.666% {
+    33.333% {
       fill: $level-three-color;
     }
-    100% {
+    66.666% {
       fill: $level-one-color;
+    }
+    100% {
+      fill: $level-two-color;
     }
   }
 
@@ -213,26 +217,25 @@
   }
 
   .login-linkedin {
-    &:active .mg-entry--loginbtn * {
-      animation: inital;
-      fill: #156791;
-    }
-
     &:hover .mg-entry--loginbtn * {
       animation: inital;
       fill: #1c87bd;
     }
+    &:active .mg-entry--loginbtn * {
+      animation: inital;
+      fill: #156791;
+    }
   }
 
   .login-facebook {
-    &:active .mg-entry--loginbtn * {
-      animation: inital;
-      fill: #1b436c;
-    }
-
     &:hover  .mg-entry--loginbtn * {
       animation: inital;
       fill: #255c95;
+    }
+
+    &:active .mg-entry--loginbtn * {
+      animation: inital;
+      fill: #1b436c;
     }
   }
 

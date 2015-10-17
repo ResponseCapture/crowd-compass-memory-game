@@ -3,6 +3,12 @@
   height: 28px;
 }
 
+.mg-logo-svg {
+  margin-top: 11px;
+  margin-left: -23px;
+  height: 35px;
+}
+
 .mg-game {
   width: 100vw;
   height: 100vh;
@@ -77,9 +83,10 @@ h6 {
   font-size: 20px;
 }
 
-hr {
+hr {    
   margin: 22px 0;
-  border: .5px solid #76838f;
+  border: 1px solid #37474f;
+  border-bottom: 0;
 }
 
 subhead, p {
