@@ -184,16 +184,16 @@
 
   @keyframes colorshift {
     0% {
-      fill: rgb(126, 148, 255);
+      fill: $level-one-color;
     }
     33.333% {
-      fill: rgb(101, 239, 172);
+      fill: $level-two-color;
     }
     66.666% {
-      fill: rgb(101, 239, 255);
+      fill: $level-three-color;
     }
     100% {
-      fill: rgb(126, 148, 255);
+      fill: $level-one-color;
     }
   }
 

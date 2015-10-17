@@ -18,7 +18,7 @@ module.exports = {
       test: /\.scss$/,
       loaders: ['style', 'css', 'autoprefixer', 'sass']
     }, {
-      test: /\.(png|woff|woff2|eot|ttf)$/,
+      test: /\.(png|woff|woff2|eot|ttf|svg)$/,
       loader: 'url-loader?limit=100000&name=[name].[ext]'
     }]
   },

@@ -55,15 +55,15 @@ $hover-transition: .15s;
   }
 
   .mg-level:nth-of-type(1).mg-levels--current, .mg-level:nth-of-type(1).mg-levels--available:hover {
-    background: rgb(123, 76, 255);
+    background: $level-one-color;
   }
 
   .mg-level:nth-of-type(2).mg-levels--current, .mg-level:nth-of-type(2).mg-levels--available:hover {
-    background: rgb(0, 229, 117);
+    background: $level-two-color;
   }
 
   .mg-level:nth-of-type(3).mg-levels--current, .mg-level:nth-of-type(3).mg-levels--available:hover {
-    background: rgb(0, 228, 255);
+    background: $level-three-color;
   }
 
   .mg-levels--available-path {

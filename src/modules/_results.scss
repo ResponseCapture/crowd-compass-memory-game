@@ -49,15 +49,15 @@
 }
 
 .mg-resultspage-1 {
-  background: rgb(126, 148, 255);
+  background: $level-one-color;
 }
 
 .mg-resultspage-2 {
-  background: rgb(101, 239, 172);
+  background: $level-two-color;
 }
 
 .mg-resultspage-3 {
-  background: rgb(101, 239, 255);
+  background: $level-three-color;
 }
 
 @media screen and (max-width: 450px) {
