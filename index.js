@@ -1,9 +1,21 @@
 'use strict';
 
 window.jQuery = window.$ = require('jquery');
-window.responseCapture = (window.responseCapture || {
+var api = window.responseCapture = (window.responseCapture || {
   updateUser: function (data) {
     window.console.log('called updateUser with', data);
+  },
+  facebookShare: function (results) {
+    window.console.log('facebook share with:', results);
+  },
+  linkedinShare: function (results) {
+    window.console.log('facebook share with:', results);
+  },
+  pinterestShare: function (results) {
+    window.console.log('facebook share with:', results);
+  },
+  twitterShare: function (results) {
+    window.console.log('facebook share with:', results);
   }
 });
 
@@ -40,6 +52,7 @@ angular.module('memory-game', [])
   .directive('hierarchical', hierarchical)
   .controller('CardController', ['$scope', '$timeout', '$interval',
     function ($scope, $timeout, $interval) {
+
       function gameEnd() {
         $scope.resultsLoading = true;
         $timeout(function () {
@@ -54,10 +67,13 @@ angular.module('memory-game', [])
 
       $scope.intro = {};
 
+      $scope.api = api;
+
       $scope.updateUser = function(user) {
         if (user) {
           $scope.user = user;
           memoryGame.addUser(user);
+          api.updateUser(user);
           $timeout(function () {
             $scope.$digest();
           });
