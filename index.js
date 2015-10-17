@@ -10,18 +10,26 @@ window.responseCapture = (window.responseCapture || {
 var angular = require('angular'),
   hierarchical = require('./src/hierarchical.directive'),
   minHeight = require('./src/minHeight.directive'),
-  MemoryGame = require('./src/memorygame');
+  MemoryGame = require('./src/memorygame'),
+  appHtml = require('raw!./src/app.html'),
+  boxSvg = require('./assets/images/box.svg'),
+  titleSvg = require('./assets/images/title.svg'),
+  loginSvg = require('./assets/images/homepage-button.svg'),
+  facebookSvg = require('./assets/images/facebook.svg'),
+  linkedinSvg = require('./assets/images/linkedin.svg'),
+  template = require('./src/template.directive');
 
 require('./index.scss');
 var facebook = require('./src/facebook')(window);
 var linkedin = require('./src/linkedin')(window);
 
 angular.module('memory-game', [])
-  .directive('appcontent', function () {
-    return {
-      template: require('raw!./src/app.html')
-    };
-  })
+  .directive('appcontent', template(appHtml))
+  .directive('boxSvg', template(boxSvg))
+  .directive('titleSvg', template(titleSvg))
+  .directive('loginSvg', template(loginSvg))
+  .directive('facebookSvg', template(facebookSvg))
+  .directive('linkedinSvg', template(linkedinSvg))
   .directive('minHeight', ['$window', minHeight])
   .directive('hierarchical', hierarchical)
   .controller('CardController', ['$scope', '$timeout', '$interval',

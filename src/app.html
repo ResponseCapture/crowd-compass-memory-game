@@ -66,23 +66,23 @@
     <img class="mg-entry--wave2" src="assets/images/wave-bg-2.svg">
 
     <div class="mg-entry--hero">
-      <img class="mg-entry--box" src="assets/images/box.svg">
-        <div class="mg-entry--box-content">
-        <img class="mg-entry--title" src="assets/images/title.svg">
+      <div box-svg class="mg-entry--box colorshift" />
+      <div class="mg-entry--box-content">
+        <div title-svg class="mg-entry--title colorshift" />
         <div class="mg-entry--logins">
-          <subhead>
-            <strong>Are YOU up for the challenge?  Sign in now to find out!</strong>
-          </subhead>
-          <div class="mg-entry--login button-behavior" ng-click="social.facebook()">
-            <img class="mg-entry--fb-icon" src="assets/images/facebook.svg">
-            <img src="assets/images/homepage-button.svg">
+        <svg height="15" width="340" class="colorshift">
+          <text x="0" y="10">Are YOU up for the challenge? Sign in now to find out!</text>
+        </svg>
+          <div class="mg-entry--login login-facebook button-behavior" ng-click="social.facebook()">
+            <div facebook-svg class="mg-entry--fb-icon mg-entry--icon" />
+            <div login-svg class="mg-entry--loginbtn colorshift" />
             <div class="mg-entry--login-text">
               <strong>FACEBOOK</strong>
             </div>
           </div>
-          <div class="mg-entry--login button-behavior" ng-click="social.linkedin()">
-            <img class="mg-entry--linkedin-icon" src="assets/images/linkedin.svg">
-            <img src="assets/images/homepage-button.svg">
+          <div class="mg-entry--login login-linkedin button-behavior" ng-click="social.linkedin()">
+            <div linkedin-svg class="mg-entry--linkedin-icon mg-entry--icon" />
+            <div login-svg class="mg-entry--loginbtn colorshift" />
             <div class="mg-entry--login-text">
               <strong>LINKEDIN</strong>
             </div>
