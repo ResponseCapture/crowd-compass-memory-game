@@ -5,6 +5,9 @@
 GIT and a github.com account
 NodeJS v0.12.7 with NPM
 
+How to use GIT:
+https://try.github.io/levels/1/challenges/1
+
 ## Install
 
 Clone and browse in a terminal window to the root directory of the repository.  Then type the following command.
