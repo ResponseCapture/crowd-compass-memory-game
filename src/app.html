@@ -170,9 +170,11 @@
                 <input type="email" ng-pattern="/\./" ng-required ng-model="userWorkEmail">
               </label>
               <label>
+              <p></p>
                 <input type="checkbox" ng-init="unlockedAssets = true" ng-model="unlockedAssets" checked> Send Me Goodies!
               </label>
-              <a class="button-inline button" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; user.unlockedAssets = unlockedAssets; playLevel(2)">GO</a>
+              <p></p>
+              <a class="button" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; user.unlockedAssets = unlockedAssets; playLevel(2)">GO</a>
             </div>
             <hr>
             <div style="text-align: center">
@@ -203,10 +205,12 @@
               <label>Work Email:
                 <input type="email" ng-pattern="/\./" ng-required ng-model="userWorkEmail">
               </label>
+              <p></p>
               <label>
                 <input type="checkbox" ng-init="unlockedAssets = true" ng-model="unlockedAssets" checked> Send Me Goodies!
               </label>
-              <a class="button-inline button" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; user.unlockedAssets = unlockedAssets; playLevel(2)">GO</a>
+              <p></p>
+              <a class="button" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; user.unlockedAssets = unlockedAssets; playLevel(2)">GO</a>
             </div>
             <hr>
             <div style="text-align: center">
@@ -240,7 +244,8 @@
               <label>Company Name:
                 <input type="text" ng-required ng-model="userCompany">
               </label>
-              <a class="button-inline button" ng-disabled="!userCompany" ng-click="user.companyName = userCompany; playLevel(3)">GO</a>
+              <p></p>
+              <a class="button" ng-disabled="!userCompany" ng-click="user.companyName = userCompany; playLevel(3)">GO</a>
             </div>
             <hr>
             <div style="text-align: center">
@@ -271,7 +276,8 @@
               <label>Company Name:
                 <input type="text" ng-required ng-model="userCompany">
               </label>
-              <a class="button-inline button" ng-disabled="!userCompany" ng-click="user.companyName = userCompany; newGame(5)">GO</a>
+              <p></p>
+              <a class="button" ng-disabled="!userCompany" ng-click="user.companyName = userCompany; newGame(5)">GO</a>
             </div>
             <hr>
             <div style="text-align: center">

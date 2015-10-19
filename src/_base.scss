@@ -148,18 +148,13 @@ caption {
   appearance: button;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  text-align: center;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
 }
 
 .button, button, .button-behavior {
   cursor: pointer;
   user-select: none;
-}
-
-.button-inline {
-  padding: 1px 10px;
-  margin: 0 0 2px 2px;
-  text-align: center;
 }
 
 .button-full {
