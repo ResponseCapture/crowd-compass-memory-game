@@ -1,23 +1,7 @@
 'use strict';
 
 window.jQuery = window.$ = require('jquery');
-var api = window.responseCapture = (window.responseCapture || {
-  updateUser: function (data) {
-    window.console.log('called updateUser with', data);
-  },
-  facebookShare: function (results) {
-    window.console.log('facebook share with:', results);
-  },
-  linkedinShare: function (results) {
-    window.console.log('facebook share with:', results);
-  },
-  pinterestShare: function (results) {
-    window.console.log('facebook share with:', results);
-  },
-  twitterShare: function (results) {
-    window.console.log('facebook share with:', results);
-  }
-});
+var api = window.responseCapture;
 
 var angular = require('angular'),
   hierarchical = require('./src/hierarchical.directive'),

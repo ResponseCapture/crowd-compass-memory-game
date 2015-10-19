@@ -15,7 +15,7 @@ Clone and browse in a terminal window to the root directory of the repository.  
 
 ## Development
 
-This project uses webpack to build and deploy.  Install the build tool globally with the following command.
+This project uses webpack to build and deploy.  Install the build tool globally with the following command then browse to http://localhost:8080.
 
 ```
 > npm install webpack -g && npm install webpack-dev-server -g
@@ -27,7 +27,15 @@ Once installed run a local dev server with the following command from the root d
 > webpack-dev-server --inline --hot
 ```
 
-## API Integration
+## Integration
+
+1. Copy index.html into the campain editor.
+
+2. Reference the app.js in index.html from the master branch in github.  Here's the link: https://raw.githubusercontent.com/ResponseCapture/crowd-compass-memory-game/master/assets/app.js
+
+
+3. Move the two sprite images from assets folder to relative path of the site.  (e.g. /assets/sprite.png and sprite@2x.jpg)
+
 
 ```
 window.responseCapture = {
@@ -53,16 +61,20 @@ window.responseCapture = {
       });
     },
     facebookShare: function (results) {
-      window.console.log('facebook share with:', results);
+      if (results) {
+        //share from results
+      } else {
+        //share from sidebar
+      }
     },
     linkedinShare: function (results) {
-      window.console.log('facebook share with:', results);
+      //same as facebookShare
     },
     pinterestShare: function (results) {
-      window.console.log('facebook share with:', results);
+      //same as facebookShare
     },
     twitterShare: function (results) {
-      window.console.log('facebook share with:', results);
+      //same as facebookShare
     }
   }
 }

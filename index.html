@@ -423,6 +423,23 @@
     });
   };
 
+  window.responseCapture = {
+    updateUser: function (data) {
+      window.console.log('called updateUser with', data);
+    },
+    facebookShare: function (results) {
+      window.console.log('facebook share with:', results);
+    },
+    linkedinShare: function (results) {
+      window.console.log('linkedin share with:', results);
+    },
+    pinterestShare: function (results) {
+      window.console.log('pinterest share with:', results);
+    },
+    twitterShare: function (results) {
+      window.console.log('twitter share with:', results);
+    }
+  };
   /// END SOCIAL API KEYS
   </script>
 </head>
