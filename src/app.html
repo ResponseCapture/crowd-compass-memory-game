@@ -103,9 +103,8 @@
       </nav>
       <section class="mg-content">
         <div class="mg-gameloading" ng-if="gameLoading"></div>
-        <div class="mg-resultsloading mg-resultspage-{{currentLevel()}}" ng-if="resultsLoading"></div>
         <div ng-if="!game.results && !gameLoading" class="mg-game-wrapper">
-          <div ng-show="currentLevel() === 1" class="mg-levelintro" ng-class="{show: showIntro && !intro['1']}">
+          <div ng-show="currentLevel() === 1" class="mg-levelintro mg-resultspage-1" ng-class="{show: showIntro && !intro['1']}">
             <h2>Level 1</h2>
             <h6>
               Alright {{user.firstName}},
@@ -115,7 +114,7 @@
             <p>Click any card to start the game.</p>
             <button class="mg-play" ng-click="intro['1'] = true">Got it!</button>
           </div>
-          <div ng-show="currentLevel() === 2" class="mg-levelintro" ng-class="{show: showIntro && !intro['2']}">
+          <div ng-show="currentLevel() === 2" class="mg-levelintro mg-resultspage-2" ng-class="{show: showIntro && !intro['2']}">
             <h2>Level 2</h2>
             <h6>
               Okay {{user.firstName}},
@@ -124,7 +123,7 @@
             <p>Can you save the show in <strong>20 seconds</strong> or less?</p>
             <button class="mg-play" ng-click="intro['2'] = true">Got it!</button>
           </div>
-          <div ng-show="currentLevel() === 3" class="mg-levelintro" ng-class="{show: showIntro && !intro['3']}">
+          <div ng-show="currentLevel() === 3" class="mg-levelintro mg-resultspage-3" ng-class="{show: showIntro && !intro['3']}">
             <h2>Level 3</h2>
             <h6>
               Wow {{user.firstName}} {{user.lastName}}!
@@ -330,7 +329,7 @@
             <header class="animated fadeInDown">
               <h2>Oh No, Time Is Up!</h2>
             </header>
-            <subhead>You were sooo close with only {{ game.results.missing }} pairs of cards left! Don’t give up though! Play again for the win!</subhead>
+            <subhead>You were sooo close with only {{ game.results.missing }} pair{{ game.results.missing === 1 ? '' : 's' }} of cards left! Don’t give up though! Play again for the win!</subhead>
             <p></p>
             <div class="share-ssk">
               <a href="" class="ssk ssk-linkedin"></a>

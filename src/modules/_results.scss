@@ -48,17 +48,18 @@
   overflow: auto;
 }
 
-.mg-resultspage-1 {
-  background: $level-one-color;
+.mg-resultspage-1 h2 {
+  color: $level-one-color;
 }
 
-.mg-resultspage-2 {
-  background: $level-two-color;
+.mg-resultspage-2 h2 {
+  color: $level-two-color;
 }
 
-.mg-resultspage-3 {
-  background: $level-three-color;
+.mg-resultspage-3 h2 {
+  color: $level-three-color;
 }
+
 
 @media screen and (max-width: 450px) {
   .results-section {

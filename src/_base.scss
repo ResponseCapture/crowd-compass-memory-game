@@ -45,7 +45,11 @@ h1 {
   letter-spacing: -.04em;
 }
 
-button, .button, h2, h3, h4, h5 {
+button, .button {
+  font-weight: 500;
+}
+
+h2, h3, h4, h5 {
   font-weight: 400;
 }
 
@@ -119,9 +123,9 @@ caption {
 }
 
 .button:hover, button:hover {
-  background-color: #e5e5e5;
+  background-color: hsl(217, 86, 68%);
   border-color: #adadad;
-  color: #333;
+  color: #fff;
   text-decoration: none;
 }
 
@@ -133,13 +137,13 @@ caption {
   min-width: 88px;
   padding: 10px 14px;
   background: 0 0;
-  background-color: #fff;
+  background-color: hsl(217, 86, 58%);
   outline: 0;
   outline-offset: 0;
   border: 0;
   border-radius: 2px;
   transition: all 0.15s ease-in-out;
-  color: rgba(0, 0, 0, 0.87);
+  color: #FFF;
   display: inline-block;
   border-color: #ccc;
   text-decoration: none;
@@ -150,6 +154,7 @@ caption {
   text-rendering: optimizeLegibility;
   text-align: center;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  width: 160px;
 }
 
 .button, button, .button-behavior {

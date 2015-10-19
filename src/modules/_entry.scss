@@ -14,7 +14,6 @@
 
   .colorshift path, text {
     animation: colorshift 10s infinite;
-    animation-delay: 1s;
     font-weight: 500;
     font-size: 14px;
   }
@@ -188,39 +187,14 @@
     }
   }
 
-  .login-linkedin {
-    &:hover .mg-entry--loginbtn * {
-      animation: inital;
-      fill: #1c87bd;
-    }
-    &:active .mg-entry--loginbtn * {
-      animation: inital;
-      fill: #156791;
-    }
-  }
-
-  .login-facebook {
-
-
-    &:hover  .mg-entry--loginbtn * {
-      animation: inital;
-      fill: #255c95;
-    }
-
-    &:active .mg-entry--loginbtn * {
-      animation: inital;
-      fill: #1b436c;
-    }
-  }
-
   .login-facebook, .login-linkedin {
-    &:hover .mg-entry--icon *, 
-    &:active .mg-entry--icon * {
-      fill: #fff;
+    &:hover .mg-entry--loginbtn *, &:active .mg-entry--loginbtn * {
+      fill: #FFF;
+      transition: .15s;
+      animation: initial;
     }
-    &:active *,
-    &:hover * {
-      color: #fff;
+    .mg-entry--loginbtn * {
+      fill: rgba(255,255,255,.25);
     }
   }
 

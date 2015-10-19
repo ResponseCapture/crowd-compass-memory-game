@@ -6,9 +6,9 @@ $game-content-width-landscape: 756px;
 $game-content-width-portrait: 567px;
 $nav-height: 66px;
 $footer-height: 46px;
-$level-one-color: hsla(257, 100%, 71%, 1);
-$level-two-color: rgb(0, 229, 117);
-$level-three-color: rgb(0, 228, 255);
+$level-one-color: #7b4cff;
+$level-two-color: #00e575;
+$level-three-color: #00e4ff;
 $height-sans-content: $nav-height + $footer-height;
 
 @import 'base';
