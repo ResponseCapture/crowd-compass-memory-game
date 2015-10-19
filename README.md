@@ -27,6 +27,47 @@ Once installed run a local dev server with the following command from the root d
 > webpack-dev-server --inline --hot
 ```
 
+## API Integration
+
+```
+window.responseCapture = {
+  updateUser: function (data) {
+      /* Data Object
+        {
+          firstName: string,
+          lastName: string,
+          email: string,
+          workEmail: string,
+          companyName: string,
+          levelComplete: string,
+          unlockedAssets: bool,
+          numberOfPlays: int
+        }
+      */
+
+      //sudo code
+      $.ajax({
+        url: '/Quiz',
+        type: 'POST',
+        data: data
+      });
+    },
+    facebookShare: function (results) {
+      window.console.log('facebook share with:', results);
+    },
+    linkedinShare: function (results) {
+      window.console.log('facebook share with:', results);
+    },
+    pinterestShare: function (results) {
+      window.console.log('facebook share with:', results);
+    },
+    twitterShare: function (results) {
+      window.console.log('facebook share with:', results);
+    }
+  }
+}
+```
+
 ## Deployment
 
 Create a build with the following command from the root directory of the repository then commit your changes:
