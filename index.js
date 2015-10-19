@@ -53,9 +53,11 @@ angular.module('memory-game', [])
   .controller('CardController', ['$scope', '$timeout', '$interval',
     function ($scope, $timeout, $interval) {
 
-      function gameEnd() {
+      function gameEnd(results) {
         $scope.resultsLoading = true;
         $timeout(function () {
+          $scope.user.numberOfPlays = results.numberOfPlays;
+          $scope.user.levelComplete = results.levelComplete;
           $scope.resultsLoading = false;
         }, 2000);
       }
@@ -80,9 +82,22 @@ angular.module('memory-game', [])
         }
       };
 
+      function createUser(user) {
+        $scope.userLoading = true;
+        $timeout(function () {
+          $scope.$digest();
+          $timeout(function () {
+            $scope.updateUser(user);
+            $scope.userLoading = false;
+          }, 1500);
+        });
+      }
+
+      $scope.$watch('user', $scope.updateUser, true);
+
       $scope.social = {
-        linkedin: linkedin($scope.updateUser),
-        facebook: facebook($scope.updateUser)
+        linkedin: linkedin(createUser),
+        facebook: facebook(createUser)
       };
 
       function newGame(booster) {

@@ -1,75 +1,13 @@
 <div class="mg-game" ng-controller="CardController" ng-cloak>
-  <div ng-hide="user" class="mg-entry">
-<!--     <div class="mg-entryform">
-      <div>
-        <img src="assets/images/crowdcompass-logo-white.png" title="CrowdCompass">
-        <h1 class="brand-text">Memory Game</h1>
-      </div>
-      <div></div>
-      <h6>Personalize Your Experience!</h6>
-      <p>Get a one-of-a-kind game experience, designed just for you, by signing in on social.</p>
-      <p>(Don’t worry. Nothing posts to your accounts.)</p>
-      <div ng-hide="enterName">
-        <div class="mg-line">
-          <button id="fb-login-btn" class="login-facebook" type="submit" ng-click="social.facebook()">Sign in with Facebook</button>
-        </div>
-        <div class="mg-line">
-          <button id="li-login-btn" class="login-linkedin" type="submit" ng-click="social.linkedin()">Sign in with LinkedIn</button>
-        </div>
-        <div class="mg-line">
-          <a ng-click="attemptSocial = true">Sign in with name</a>
-        </div>
-      </div>
-      <div ng-show="enterName">
-        <form name="userForm" ng-submit="updateUser({firstName: firstname, lastName: lastname})">
-          <div class="mg-line">
-            <label class="sr-only" for="firstname">First Name</label>
-            <input name="firstname" type="text" required ng-model="firstname" placeholder="First Name">
-          </div>
-          <div class="mg-line">
-            <label class="sr-only" for="lastname">Last Name</label>
-            <input name="lastname" type="text" required ng-model="lastname" placeholder="Last Name">
-          </div>
-          <div class="mg-line">
-            <button class="button-full" ng-disabled="!userForm.$valid" type="submit">Let's Play!</button>
-          </div>
-        </form>
-      </div>
-      <footer class="mg-legal mg-line">
-        <div class="social">
-          <a href="javascript:void(0)">
-            <i class="icon bd-twitter" aria-hidden="true"></i>
-          </a>
-          <a href="javascript:void(0)">
-            <i class="icon bd-facebook" aria-hidden="true"></i>
-          </a>
-          <a href="javascript:void(0)">
-            <i class="icon bd-pinterest" aria-hidden="true"></i>
-          </a>
-        </div>
-      </footer>
-      <div class="mg-attemptsocial" ng-class="{areyousure: attemptSocial}">
-        <div class="mg-line">
-          <img src="assets/images/sadcat.jpg">
-          <h3>Don’t Make Sebastian Sad...</h3>
-          <p>Sebastian doesn’t want you to miss out on the one-of-a-kind experience! Don’t make him sad. Sign in on social! (Seriously – nothing posts to your account!)</p>
-        </div>
-        <div class="mg-line">
-          <a ng-click="attemptSocial = false;">Okay, I'll use social.</a>
-        </div>
-        <div class="mg-line">
-          <a ng-click="attemptSocial = false; enterName = true;">Continue</a>
-        </div>
-      </div>
-    </div> -->
-    <div class="mg-entry--wave1" wave-bg-svg />
-    <div class="mg-entry--wave2" wave-bg-two-svg />
+  <div ng-hide="user" class="mg-entry" ng-class="{'loggedin': userLoading}">
+    <div class="mg-entry--wave1" ng-class="{'loggedin': userLoading}" wave-bg-svg />
+    <div class="mg-entry--wave2" ng-class="{'loggedin': userLoading}" wave-bg-two-svg />
 
     <div logo-svg class="mg-logo-svg" title="CrowdCompass" />
     
     <div class="mg-entry--hero">
-      <div box-svg class="mg-entry--box colorshift" />
-      <div class="mg-entry--box-content">
+      <div box-svg class="mg-entry--box colorshift" ng-class="{'loggedin': userLoading}" />
+      <div class="mg-entry--box-content" ng-class="{'loggedin': userLoading}">
         <div title-svg class="mg-entry--title colorshift" />
         <div class="mg-entry--logins">
         <svg height="15" width="190" class="colorshift">
@@ -98,7 +36,7 @@
     </div>
 
   </div>
-  <div ng-if="user" class="mg-gamescreen">
+  <div ng-if="user || userLoading" class="mg-gamescreen">
     <span ng-show="user.picture && ((!game.results && currentLevel() === 3) || currentLevel() !== 3)" class="mg-main--avatar">
       <img ng-src="{{user.picture}}" alt="...">
     </span>
@@ -195,7 +133,7 @@
             <p>Can you uncover your post-event stress relievers in <strong>10 seconds</strong> or less?</p>
             <button class="mg-play" ng-click="intro['3'] = true">Got it!</button>
           </div>
-          <div ng-style="{'pointer-events': !intro[currentLevel()] ? 'none' : 'all'}" data-animation-in="bounceIn" class="card-container mg-center grid" ng-init="newGameIfNotStarted()" min-height hierarchical>
+          <div ng-if="user" ng-style="{'pointer-events': !intro[currentLevel()] ? 'none' : 'all'}" data-animation-in="bounceIn" class="card-container mg-center grid" ng-init="newGameIfNotStarted()" min-height hierarchical>
             <div class="grid-sizer"></div>
             <div ng-repeat="card in game.deck" class="card-wrapper" ng-class="{turncard: card.isFaceUp, bounce: card.celebrate}" ng-click="game.check(card)" data-target=".card-container">
               <div class="card" ng-style="{'background-image': 'url(assets/images/' + game.cardFront + ')' }">
@@ -232,9 +170,9 @@
                 <input type="email" ng-pattern="/\./" ng-required ng-model="userWorkEmail">
               </label>
               <label>
-                <input type="checkbox" ng-init="user.unlockedAssets = true" ng-model="user.unlockedAssets" checked> Send Me Goodies!
+                <input type="checkbox" ng-init="unlockedAssets = true" ng-model="unlockedAssets" checked> Send Me Goodies!
               </label>
-              <a class="button-inline button" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; playLevel(2)">GO</a>
+              <a class="button-inline button" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; user.unlockedAssets = unlockedAssets; playLevel(2)">GO</a>
             </div>
             <hr>
             <div style="text-align: center">
@@ -257,18 +195,18 @@
             </div>
             <hr>
             <div style="text-align: center">
-              <a ng-show="user.company" class="button" ng-click="newGame(5)">Use Your Time Booster</a>
+              <a ng-show="user.companyName" class="button" ng-click="newGame(5)">Use Your Time Booster</a>
             </div>
-            <div ng-hide="user.company" ng-show="getinfo">
+            <div ng-hide="user.companyName" ng-show="getinfo">
               <h6>Unlock Your Time Booster!</h6>
               <p>Enter your email and get extra time to win! And if you’re loving this game, we’ll send you more games, quizzes, exclusive research and other awesome goodies!</p>
               <label>Work Email:
                 <input type="email" ng-pattern="/\./" ng-required ng-model="userWorkEmail">
               </label>
               <label>
-                <input type="checkbox" ng-init="user.unlockedAssets = true" ng-model="user.unlockedAssets" checked> Send Me Goodies!
+                <input type="checkbox" ng-init="unlockedAssets = true" ng-model="unlockedAssets" checked> Send Me Goodies!
               </label>
-              <a class="button-inline button" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; newGame(5)">GO</a>
+              <a class="button-inline button" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; user.unlockedAssets = unlockedAssets; playLevel(2)">GO</a>
             </div>
             <hr>
             <div style="text-align: center">
@@ -294,15 +232,15 @@
             </div>
             <hr>
             <div style="text-align: center">
-              <a ng-show="user.company" class="button" ng-click="playLevel(3)">Take on Level 3</a>
+              <a ng-show="user.companyName" class="button" ng-click="playLevel(3)">Take on Level 3</a>
             </div>
-            <div ng-hide="user.company" ng-show="getinfo">
+            <div ng-hide="user.companyName" ng-show="getinfo">
               <h6>The Time Has Come… The Ultimate Test of Memory + Speed!</h6>
               <p>Get your running shoes on because now we’re gonna see how fast you are! Tell us the company name on your paychecks, and we’ll magically teleport you to another dimension (some peeps just call it Level 3. BORING).</p>
               <label>Company Name:
                 <input type="text" ng-required ng-model="userCompany">
               </label>
-              <a class="button-inline button" ng-disabled="!userCompany" ng-click="user.company = userCompany; playLevel(3)">GO</a>
+              <a class="button-inline button" ng-disabled="!userCompany" ng-click="user.companyName = userCompany; playLevel(3)">GO</a>
             </div>
             <hr>
             <div style="text-align: center">
@@ -325,15 +263,15 @@
             </div>
             <hr>
             <div style="text-align: center">
-              <a ng-show="user.company" class="button" ng-click="newGame(5)">Use a Time Booster</a>
+              <a ng-show="user.companyName" class="button" ng-click="newGame(5)">Use a Time Booster</a>
             </div>
-            <div ng-hide="user.company">
+            <div ng-hide="user.companyName">
               <h6>Unlock Your Time Booster!</h6>
               <p>Enter your company name and get extra time to win! And if you’re loving this game, we’ll send you more games, quizzes, exclusive research and other awesome goodies!</p>
               <label>Company Name:
                 <input type="text" ng-required ng-model="userCompany">
               </label>
-              <a class="button-inline button" ng-disabled="!userCompany" ng-click="user.company = userCompany; newGame(5)">GO</a>
+              <a class="button-inline button" ng-disabled="!userCompany" ng-click="user.companyName = userCompany; newGame(5)">GO</a>
             </div>
             <hr>
             <div style="text-align: center">

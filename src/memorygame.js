@@ -1,10 +1,13 @@
 'use strict';
 
 var MProgress = require('./mprogress'),
-  shuffle = require('./shuffle');
+  shuffle = require('./shuffle'),
+  numberOfPlays = 0,
+  levelComplete = 0;
 
 function MemoryGame(timeout, interval, gameEndCb) {
-  var user = {}, cardCount = 18;
+  var user = {},
+    cardCount = 18;
 
   this.level = 1;
 
@@ -29,7 +32,8 @@ function MemoryGame(timeout, interval, gameEndCb) {
       picture: user.picture,
       limit: levelTimes[this.level - 1] + booster,
       cardFront: 'card-front-' + this.level + '.png',
-      gameEndCb: gameEndCb
+      gameEndCb: gameEndCb,
+      level: this.level
     }, timeout, interval);
   };
 }
@@ -125,19 +129,28 @@ function Game(options, timeout, interval) {
     mprogress.set(1);
     mprogress.end();
     game.check = noop;
-    gameEndCb();
-    var end = new Date() - begin;
-    var faceDown = game.deck
-      .filter(function (c) {
-        return !c.isFaceUp;
-      }).length;
+    
+    var end = new Date() - begin,
+      faceDown = game.deck
+        .filter(function (c) {
+          return !c.isFaceUp;
+        }).length,
+      missing = Math.ceil(faceDown / 2);
 
-    timeout(function () {
-      game.results = {
+    if (!missing && options.level > levelComplete) {
+      levelComplete = options.level;
+    }
+
+    var results = {
         time: Math.ceil(end / 1000),
-        total: game.deck.length / 2,
-        missing: Math.ceil(faceDown / 2)
+        missing: missing,
+        levelComplete: levelComplete,
+        numberOfPlays: ++numberOfPlays
       };
+
+    gameEndCb(results);
+    timeout(function () {
+      game.results = results;
     }, 1500);
   };
 
