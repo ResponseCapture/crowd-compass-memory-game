@@ -8,25 +8,27 @@
     <div class="mg-entry--hero">
       <div box-svg class="mg-entry--box colorshift" ng-class="{'loggedin': userLoading}" />
       <div class="mg-entry--box-content" ng-class="{'loggedin': userLoading}">
-        <div title-svg class="mg-entry--title colorshift" />
-        <div class="mg-entry--logins">
-        <svg height="15" width="190" class="colorshift">
-          <text x="0" y="10">Are YOU up for the challenge?</text>
-        </svg>
-        <svg height="15" width="145" class="colorshift">
-          <text x="0" y="10">Sign in now to find out!</text>
-        </svg>
-        <br>
+        <h4 class="mg-top-title colorshift">The ultimate event pro</h4>
+        <h2 class="mg-title colorshift">Memory Game</h2>
+        <h5 class="mg-entry--title-desc colorshift">A card matching game for event pros, personalized for you.</h5>
+        <div ng-hide="letsPlay" class="mg-entry--start">
+          <p class="mg-entry--start-desc">Do you have what it takes to conquer all three levels and become the event pro memory champion of the universe?</p>
+          <button ng-click="letsPlay = true">Let's Play</button>
+        </div>
+        <div ng-show="letsPlay" class="mg-entry--logins">
+          <p class="mg-entry--logins-desc">Get a personalized experience. Sign in with social.</p>
           <div class="mg-entry--login login-facebook button-behavior" ng-click="social.facebook()">
-            <div facebook-svg class="mg-entry--fb-icon mg-entry--icon" />
-            <div login-svg class="mg-entry--loginbtn colorshift" />
+            <div class="mg-entry--icon-wrap">
+              <div facebook-svg class="mg-entry--fb-icon mg-entry--icon" />
+            </div>
             <div class="mg-entry--login-text">
               <strong>FACEBOOK</strong>
             </div>
           </div>
           <div class="mg-entry--login login-linkedin button-behavior" ng-click="social.linkedin()">
-            <div linkedin-svg class="mg-entry--linkedin-icon mg-entry--icon" />
-            <div login-svg class="mg-entry--loginbtn colorshift" />
+            <div class="mg-entry--icon-wrap">
+              <div linkedin-svg class="mg-entry--linkedin-icon mg-entry--icon"></div>
+            </div>
             <div class="mg-entry--login-text">
               <strong>LINKEDIN</strong>
             </div>
