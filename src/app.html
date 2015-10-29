@@ -56,19 +56,22 @@
       </nav>
       <div class="mg-sidemenu--content-wrapper">
         <div class="mg-sidemenu--content">
-          <div class="mg-levels">
-            <br>
-            <div class="mg-level" ng-click="currentLevel() !== 1 && playLevel(1)" ng-class="{'mg-levels--available': levelIsAvailable(1) && currentLevel() !== 1, 'mg-levels--current': currentLevel() === 1}">
-              <span>1</span>
-            </div>
-            <br>
-            <div class="mg-level" ng-click="currentLevel() !== 2 && playLevel(2)" ng-class="{'mg-levels--available': levelIsAvailable(2) && currentLevel() !== 2, 'mg-levels--current': currentLevel() === 2}">
-              <span>2</span>
-            </div>
-            <br>
+          <div class="mg-levels mg-level--{{currentLevel()}}">
+            <h4 class="mg-top-title colorshift">The ultimate event pro</h4>
+            <h2 class="mg-title colorshift">Memory Game</h2>
+            <hr>
             <div class="mg-level" ng-click="currentLevel() !== 3 && playLevel(3)" ng-class="{'mg-levels--available': levelIsAvailable(3) && currentLevel() !== 3, 'mg-levels--current': currentLevel() === 3}">
               <span>3</span>
             </div>
+            <p><span ng-show="currentLevel() === 3">The Day After</span></p>
+            <div class="mg-level" ng-click="currentLevel() !== 2 && playLevel(2)" ng-class="{'mg-levels--available': levelIsAvailable(2) && currentLevel() !== 2, 'mg-levels--current': currentLevel() === 2}">
+              <span>2</span>
+            </div>
+            <p><span ng-show="currentLevel() === 2">The Big Day</span></p>
+            <div class="mg-level" ng-click="currentLevel() !== 1 && playLevel(1)" ng-class="{'mg-levels--available': levelIsAvailable(1) && currentLevel() !== 1, 'mg-levels--current': currentLevel() === 1}">
+              <span>1</span>
+            </div>
+            <p><span ng-show="currentLevel() === 1">Event Eve</span></p>
           </div>
         </div>
       </div>
