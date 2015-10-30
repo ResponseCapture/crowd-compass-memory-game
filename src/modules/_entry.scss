@@ -104,7 +104,7 @@
 
 
         &:hover {
-          animation: hoverglow 1s alternate infinite ease;
+          animation: hoverglowsocial 1s alternate infinite ease;
         }
 
         &:active {
@@ -170,12 +170,21 @@
     }
   }
 
-  @keyframes hoverglow {
+  @keyframes hoverglowsocial {
     from {
       box-shadow: 0px 0px 1px 1px #FFF, 4px 0 0px #3a81f0 inset;
     }
     to {
       box-shadow: 0px 0px 5px 1px #FFF, 4px 0 0px #3a81f0 inset;
+    }
+  }
+
+  @keyframes hoverglow {
+    from {
+      box-shadow: 0px 0px 1px 1px #FFF;
+    }
+    to {
+      box-shadow: 0px 0px 5px 1px #FFF;
     }
   }
 
