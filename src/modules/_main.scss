@@ -108,18 +108,67 @@
 
 .mg-levelintro {
   position: absolute;
-  top: 50%;
+  color: #000;
+  top: 55%;
   left: 50%;
-  display: inline-block;
-  text-align: center;
+  display: block;
   margin-left: -150px;
   max-width: 300px;
   z-index: 1;
-  padding: 30px;
   background: #FFF;
-  box-shadow: 5px 5px 15px rgba(0,0,0,.4);
+  box-shadow: 0px 10px 15px -5px rgba(0,0,0,.4);
   transition: transform .15s;
   transform: translateY(-50%) scale(0);
+
+  .mg-level {
+    color: #FFF;
+    margin: 8%;
+  }
+
+  .mg-levelintro--banner {
+    text-align: center;
+    background-color: #DDD;
+    height: 100%;
+    padding: 30px 0 25px 0;
+
+    h3 {
+      font-weight: 400;
+      margin: 0;
+      padding: 0;
+      line-height: .6;
+    }
+  }
+
+  .mg-levelintro--content {
+    padding: 20px 40px 30px;
+  }
+
+  &.mg-resultspage-1 {
+    h2, h3 {
+      color: $level-one-color-dark;
+    }
+    .mg-level {
+      background-color: $level-one-color-dark;
+    }
+  }
+
+  &.mg-resultspage-2 {
+    h2, h3 {
+      color: $level-two-color-dark;
+    }
+    .mg-level {
+      background-color: $level-two-color-dark;
+    }
+  }
+
+  &.mg-resultspage-3 {
+    h2, h3 {
+      color: $level-three-color-dark;
+    }
+    .mg-level {
+      background-color: $level-three-color-dark;
+    }
+  }
 
   &.show {
     transform: translateY(-50%) scale(1);
@@ -128,14 +177,14 @@
   }
 
   p {
-   font-size: 14px;
+   font-size: 12px;
    > strong {
     font-weight: 500;
    }
   }
 
   h2 {
-    font-weight: 400;
+    font-weight: 700;
     font-size: 28px;
     margin: 0;
   }
@@ -144,6 +193,10 @@
     font-weight: 300;
     font-size: 21px;
     margin: 11px 0;
+  }
+
+  h6 {
+    margin: 0;
   }
 }
 
@@ -173,7 +226,8 @@
 }
 
 .mg-play {
-  width: 100%;
+  margin: 0 auto;
+  display: block;
 }
 
 .mg-game-wrapper {
