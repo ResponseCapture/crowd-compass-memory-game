@@ -35,6 +35,19 @@
     max-width: 100%;
     height: auto;
     border-radius: 1000px;
+    border: 2px solid;
+
+    &.level-1 {
+      border-color: $level-one-color;
+    }
+
+    &.level-2 {
+      border-color: $level-two-color;
+    }
+
+    &.level-3 {
+      border-color: $level-three-color;
+    }
   }
 }
 

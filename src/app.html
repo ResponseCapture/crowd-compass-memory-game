@@ -40,7 +40,7 @@
   </div>
   <div ng-if="user || userLoading" class="mg-gamescreen">
     <span ng-show="user.picture && ((!game.results && currentLevel() === 3) || currentLevel() !== 3)" class="mg-main--avatar">
-      <img ng-src="{{user.picture}}" alt="...">
+      <img ng-src="{{user.picture}}" class="level-{{currentLevel()}}" alt="...">
     </span>
     <nav class="mg-mobilenav">
       <img class="mg-logo" src="assets/images/crowdcompass-brandmark-white.png" title="CrowdCompass">
