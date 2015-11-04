@@ -14,6 +14,11 @@ $level-one-color-dark: #5B1ED7;
 $level-two-color-dark: #20C85A;
 $level-three-color-dark: #1DB9D4;
 $height-sans-content: $nav-height + $footer-height;
+$card-layout-width: 260px;
+
+$button-width: 180px;
+$button-height: 40px;
+
 
 @import 'base';
 @import 'modules';

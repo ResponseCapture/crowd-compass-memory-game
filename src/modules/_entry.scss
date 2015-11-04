@@ -88,17 +88,16 @@
       }
     }
 
-    $button-height: 35px;
-
     .mg-entry--logins {
       text-align: center;
 
       .mg-entry--login {
+        position: relative;
         margin: 5px;
         position: relative;
         height: $button-height;
         display: inline-block;
-        width: 180px;
+        width: $button-width;
         background: #fff;
         border-radius: 2px;
         overflow: hidden;

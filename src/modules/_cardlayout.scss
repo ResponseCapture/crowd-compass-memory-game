@@ -1,0 +1,25 @@
+$card-content-side-margin: ($card-layout-width - $button-width) / 2;
+
+.mg-card-layout {
+  width: $card-layout-width;
+}
+
+.mg-card-layout--banner {
+  position: relative;
+  text-align: center;
+  height: 202px;
+
+  .mg-card-layout--banner-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+  }
+}
+
+.mg-card-layout--content {
+  padding-top: 20px;
+  padding-bottom: 30px;
+  margin: 0 $card-content-side-margin;
+}  
+

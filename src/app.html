@@ -109,33 +109,35 @@
       <section class="mg-content">
         <div class="mg-gameloading" ng-if="gameLoading"></div>
         <div ng-if="!game.results && !gameLoading" class="mg-game-wrapper">
-          <div ng-show="currentLevel() === 1" class="mg-levelintro mg-resultspage-1" ng-class="{show: showIntro && !intro['1']}">
-            <div class="mg-levelintro--banner">
+          <div ng-show="currentLevel() === 1" class="mg-levelintro mg-resultspage-1 mg-card-layout" ng-class="{show: showIntro && !intro['1']}">
+            <div class="mg-card-layout--banner">
+              <div intro-card-bg-svg class="mg-card-layout--banner-bg"></div>
               <div class="mg-level mg-levels--current">
                 <span>1</span>
               </div>
               <h2>Level 1</h2>
               <h3>Event Eve</h3>
             </div>
-            <div class="mg-levelintro--content">
+            <div class="mg-card-layout--content">
               <h6>
                 Alright {{user.firstName}},
               </h6>
               <p>Here’s the situation. It’s the night before the biggest event of your year – and your event day toolkit has gone missing!</p>
-              <p>Can you find all your essentials in <strong>35 seconds</strong> or less?</p>
+              <p>Can you find all your essentials in <strong>35 seconds or less</strong>?</p>
               <p class="blue"><strong>Click any card to start the game.</strong></p>
               <button class="mg-play" ng-click="intro['1'] = true">GOT IT!</button>
             </div>
           </div>
-          <div ng-show="currentLevel() === 2" class="mg-levelintro mg-resultspage-2" ng-class="{show: showIntro && !intro['2']}">
-            <div class="mg-levelintro--banner">
+          <div ng-show="currentLevel() === 2" class="mg-levelintro mg-resultspage-2 mg-card-layout" ng-class="{show: showIntro && !intro['2']}">
+            <div class="mg-card-layout--banner">
+              <div intro-card-bg-svg class="mg-card-layout--banner-bg"></div>
               <div class="mg-level mg-levels--current">
                 <span>2</span>
               </div>
               <h2>Level 2</h2>
               <h3>The Big Day</h3>
             </div>
-            <div class="mg-levelintro--content">
+            <div class="mg-card-layout--content">
               <h6>
                 Okay {{user.firstName}},
               </h6>
@@ -145,15 +147,16 @@
               <button class="mg-play" ng-click="intro['2'] = true">Got it!</button>
             </div>
           </div>
-          <div ng-show="currentLevel() === 3" class="mg-levelintro mg-resultspage-3" ng-class="{show: showIntro && !intro['3']}">
-            <div class="mg-levelintro--banner">
+          <div ng-show="currentLevel() === 3" class="mg-levelintro mg-resultspage-3 mg-card-layout" ng-class="{show: showIntro && !intro['3']}">
+            <div class="mg-card-layout--banner">
+              <div intro-card-bg-svg class="mg-card-layout--banner-bg"></div>
               <div class="mg-level mg-levels--current">
                 <span>3</span>
               </div>
               <h2>Level 3</h2>
               <h3>The Day After</h3>
             </div>
-            <div class="mg-levelintro--content">
+            <div class="mg-card-layout--content">
               <h6>
                 Wow {{user.firstName}} {{user.lastName}}!
               </h6>

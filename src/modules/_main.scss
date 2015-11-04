@@ -121,26 +121,19 @@
   transform: translateY(-50%) scale(0);
 
   .mg-level {
+    position: relative;
+    transform: scale(1.8);
+    margin: 15% 0 5%;
     color: #FFF;
-    margin: 8%;
   }
 
-  .mg-levelintro--banner {
-    text-align: center;
-    background-color: #DDD;
-    height: 100%;
-    padding: 30px 0 25px 0;
-
+  .mg-card-layout--banner {
     h3 {
       font-weight: 400;
       margin: 0;
       padding: 0;
       line-height: .6;
     }
-  }
-
-  .mg-levelintro--content {
-    padding: 20px 40px 30px;
   }
 
   &.mg-resultspage-1 {
@@ -177,10 +170,11 @@
   }
 
   p {
-   font-size: 12px;
-   > strong {
-    font-weight: 500;
-   }
+    line-height: 1.4;
+    font-size: 12px;
+    > strong {
+      font-weight: 500;
+    }
   }
 
   h2 {

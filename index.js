@@ -10,6 +10,7 @@ var angular = require('angular'),
   appHtml = require('raw!./src/app.html'),
   boxSvg = require('svg-inline!./src/svg/box.sv'),
   titleSvg = require('svg-inline!./src/svg/title.sv'),
+  introCardBgSvg = require('svg-inline?removeSVGTagAttrs=false!./src/svg/intro-card-bg.sv'),
   loginSvg = require('svg-inline!./src/svg/homepage-button.sv'),
   facebookSvg = require('svg-inline!./src/svg/facebook.sv'),
   linkedinSvg = require('svg-inline!./src/svg/linkedin.sv'),
@@ -32,6 +33,7 @@ angular.module('memory-game', [])
   .directive('waveBgTwoSvg', template(waveBgTwoSvg))
   .directive('waveBgSvg', template(waveBgSvg))
   .directive('logoSvg', template(logoSvg))
+  .directive('introCardBgSvg', template(introCardBgSvg))
   .directive('minHeight', ['$window', minHeight])
   .directive('hierarchical', hierarchical)
   .controller('CardController', ['$scope', '$timeout', '$interval',
