@@ -1,5 +1,5 @@
 <div class="mg-game" ng-controller="CardController" ng-cloak>
-  <div ng-hide="user" class="mg-entry" ng-class="{'loggedin': userLoading}">
+  <div ng-hide="user || query.level" class="mg-entry" ng-class="{'loggedin': userLoading}">
     <div class="mg-entry--wave1" ng-class="{'loggedin': userLoading}" wave-bg-svg />
     <div class="mg-entry--wave2" ng-class="{'loggedin': userLoading}" wave-bg-two-svg />
 
@@ -35,7 +35,7 @@
               <strong>FACEBOOK</strong>
             </div>
           </div>
-          
+
         </div>
       </div>
     </div>
@@ -179,84 +179,119 @@
             <div style="clear: both;"></div>
           </div>
         </div>
+        
         <!-- LEVEL 1 RESULTS -->
+
         <div class="mg-resultspage mg-resultspage-1" ng-if="game.results && !resultsLoading && currentLevel() === 1">
           <div ng-hide="game.results.missing" class="results">
             <div class="result-progress">
             </div>
-            <header>
-              <h2><span class="animated flip">Victory!</span></h2>
-            </header>
-            <subhead>And it feels great to be a winner, right? Share your speedy time and challenge other event pros to a game!</subhead>
-            <p></p>
-            <div class="share-ssk">
-              <a ng-click="api.linkedinShare(game.results)" class="ssk ssk-linkedin"></a>
-              <a ng-click="api.twitterShare(game.results)" class="ssk ssk-twitter"></a>
-              <a ng-click="api.pinterestShare(game.results)" class="ssk ssk-pinterest"></a>
-              <a ng-click="api.facebookShare(game.results)" class="ssk ssk-facebook"></a>
-            </div>
-            <hr>
-            <div style="text-align: center">
-              <a ng-show="user.workEmail" class="button" ng-click="playLevel(2)">Take on Level 2</a>
-            </div>
-            <div ng-hide="user.workEmail">
-              <h6>Unlock Level 2 & Other Awesome Goodies!</h6>
-              <p>Loving this game? Enter your email to unlock Level 2 and we’ll also send you more games, quizzes, exclusive research and other awesome goodies!</p>
-              <label>Work Email:
-                <input type="email" ng-pattern="/\./" ng-required ng-model="userWorkEmail">
-              </label>
-              <label>
-              <p></p>
-                <input type="checkbox" ng-init="unlockedAssets = true" ng-model="unlockedAssets" checked> Send Me Goodies!
-              </label>
-              <p></p>
-              <a class="button" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; user.unlockedAssets = unlockedAssets; playLevel(2)">GO</a>
-            </div>
-            <hr>
-            <div style="text-align: center">
-              <h6>Addicted to Level 1? No Problem, Play Again!</h6>
-              <p>We get it! We’ll shuffle the deck and you can play again!</p>
-              <a class="button" ng-click="newGame()">Play Again</a>
+            <h2 class="animated flip"><strong>Victory!</strong> Impressive {{user.firstName}}!</h2>
+            <div class="mg-card-layout--container">
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div class="mg-results--circle">
+                    <h2>{{ game.results.time }}</h2>
+                    <span>Seconds</span>
+                  </div>
+                  <div level-one-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>And it feels great to be a winner, right?</h6>
+                  <p><strong class="blue">Share your speedy time and challenge other event pros to a game!</strong></p>
+                  <div class="share-ssk">
+                    <a ng-click="api.linkedinShare(game.results)" class="ssk ssk-linkedin"></a>
+                    <a ng-click="api.twitterShare(game.results)" class="ssk ssk-twitter"></a>
+                    <a ng-click="api.pinterestShare(game.results)" class="ssk ssk-pinterest"></a>
+                    <a ng-click="api.facebookShare(game.results)" class="ssk ssk-facebook"></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div ng-show="user.workEmail" class="mg-card-layout--content"><br><br><br>
+                    <a class="button" ng-click="playLevel(2)">Take on Level 2</a>
+                  </div>
+                  <div ng-hide="user.workEmail" class="mg-card-layout--content">
+                    <form name="workEmailForm" class="group">
+                      <input name="email" type="email" ng-pattern="/\./" ng-required ng-model="userWorkEmail"  ng-class="{used: workEmailForm.email.$viewValue}">
+                      <span class="highlight"></span><span class="bar"></span>
+                      <label>Work Email Address</label>
+                    </form>
+                    <p></p>
+                    <label>
+                      <input type="checkbox" ng-init="unlockedAssets = true" ng-model="unlockedAssets" checked> Send Me Goodies!
+                    </label>
+                    <p></p>
+                    <a class="button" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; user.unlockedAssets = unlockedAssets; playLevel(2)">Take on Level 2</a>
+                  </div>
+                  <div level-one-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>Unlock Level 2 & Other Awesome Goodies!</h6>
+                  <p>Loving this game? Enter your email to unlock Level 2 and we’ll also send you more games, quizzes, exclusive research and other awesome goodies!</p>
+                </div>
+              </div>
             </div>
           </div>
           <div ng-show="game.results.missing" class="results">
             <header class="animated fadeInDown">
-              <h2>Oh No, Time's Up!</h2>
+              <h2>Oh no {{user.firstName}}, <strong>time's up!</strong></h2>
             </header>
-            <subhead>Don’t give up! Use the time booster's extra time to win!</subhead>
-            <p></p>
-            <div class="share-ssk">
-              <a href="" class="ssk ssk-linkedin"></a>
-              <a href="" class="ssk ssk-twitter"></a>
-              <a href="" class="ssk ssk-pinterest"></a>
-              <a href="" class="ssk ssk-facebook"></a>
-            </div>
-            <hr>
-            <div style="text-align: center">
-              <a ng-show="user.companyName" class="button" ng-click="newGame(5)">Use Your Time Booster</a>
-            </div>
-            <div ng-hide="user.companyName" ng-show="getinfo">
-              <h6>Unlock Your Time Booster!</h6>
-              <p>Enter your email and get extra time to win! And if you’re loving this game, we’ll send you more games, quizzes, exclusive research and other awesome goodies!</p>
-              <label>Work Email:
-                <input type="email" ng-pattern="/\./" ng-required ng-model="userWorkEmail">
-              </label>
-              <p></p>
-              <label>
-                <input type="checkbox" ng-init="unlockedAssets = true" ng-model="unlockedAssets" checked> Send Me Goodies!
-              </label>
-              <p></p>
-              <a class="button" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; user.unlockedAssets = unlockedAssets; newGame(5)">GO</a>
-            </div>
-            <hr>
-            <div style="text-align: center">
-              <h6>I Don’t Need No Stinkin Time Booster!</h6>
-              <p>No prob! We’ll shuffle the deck and you can play again!</p>
-              <a class="button" ng-click="newGame()">Play Again</a>
+            <div class="mg-card-layout--container">
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div class="mg-results--circle">
+                    <h2>{{ game.results.missing }}</h2>
+                    <span>Pair{{ game.results.missing === 1 ? '' : 's' }} Left</span>
+                  </div>
+                  <div level-one-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>You were so close!</h6>
+                  <p>With only {{ game.results.missing }} of pairs left to match, you can’t give up now! Unlock the time booster to win!</p>
+                  <p><strong>Don’t forget to share this game with your friends!</strong></p>
+                  <div class="share-ssk">
+                    <a ng-click="api.linkedinShare(game.results)" class="ssk ssk-linkedin"></a>
+                    <a ng-click="api.twitterShare(game.results)" class="ssk ssk-twitter"></a>
+                    <a ng-click="api.pinterestShare(game.results)" class="ssk ssk-pinterest"></a>
+                    <a ng-click="api.facebookShare(game.results)" class="ssk ssk-facebook"></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div ng-show="user.workEmail" class="mg-card-layout--content"><br><br><br>
+                    <a ng-show="user.companyName" class="button" ng-click="newGame(5)">Use Booster</a>
+                  </div>
+                  <div ng-hide="user.workEmail" class="mg-card-layout--content">
+                    <form name="workEmailForm" class="group">
+                      <input name="email" type="email" ng-pattern="/\./" ng-required ng-model="userWorkEmail"  ng-class="{used: workEmailForm.email.$viewValue}">
+                      <span class="highlight"></span><span class="bar"></span>
+                      <label>Work Email Address</label>
+                    </form>
+                    <p></p>
+                    <label>
+                      <input type="checkbox" ng-init="unlockedAssets = true" ng-model="unlockedAssets" checked> Send Me Goodies!
+                    </label>
+                    <p></p>
+                    <a class="button" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; user.unlockedAssets = unlockedAssets; newGame(5)">Unlock Booster</a>
+                  </div>
+                  <div level-one-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>Unlock Your Time Booster!</h6>
+                  <p>Enter your email to <strong>play again with a 5 second booster!</strong> And as a bonus, we’ll send you more games, exclusive research, and other goodies!</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
         <!-- LEVEL 2 RESULTS -->
+
         <div class="mg-resultspage mg-resultspage-2" ng-if="game.results && !resultsLoading && currentLevel() === 2">
           <div ng-hide="game.results.missing" class="results">
             <header>

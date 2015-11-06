@@ -11,6 +11,9 @@ var angular = require('angular'),
   boxSvg = require('svg-inline!./src/svg/box.sv'),
   titleSvg = require('svg-inline!./src/svg/title.sv'),
   introCardBgSvg = require('svg-inline?removeSVGTagAttrs=false!./src/svg/intro-card-bg.sv'),
+  levelOneBgSvg = require('svg-inline?removeSVGTagAttrs=false!./src/svg/level-1-bg.sv'),
+  levelTwoBgSvg = require('svg-inline?removeSVGTagAttrs=false!./src/svg/level-2-bg.sv'),
+  levelThreeBgSvg = require('svg-inline?removeSVGTagAttrs=false!./src/svg/level-3-bg.sv'),
   loginSvg = require('svg-inline!./src/svg/homepage-button.sv'),
   facebookSvg = require('svg-inline!./src/svg/facebook.sv'),
   linkedinSvg = require('svg-inline!./src/svg/linkedin.sv'),
@@ -34,6 +37,9 @@ angular.module('memory-game', [])
   .directive('waveBgSvg', template(waveBgSvg))
   .directive('logoSvg', template(logoSvg))
   .directive('introCardBgSvg', template(introCardBgSvg))
+  .directive('levelOneBgSvg', template(levelOneBgSvg))
+  .directive('levelTwoBgSvg', template(levelTwoBgSvg))
+  .directive('levelThreeBgSvg', template(levelThreeBgSvg))
   .directive('minHeight', ['$window', minHeight])
   .directive('hierarchical', hierarchical)
   .controller('CardController', ['$scope', '$timeout', '$interval',
@@ -54,6 +60,28 @@ angular.module('memory-game', [])
         };
 
       $scope.intro = {};
+
+      if (window.query.level) {
+        
+        $scope.user = {
+          firstName: 'Joe',
+          lastName: 'Bob'
+        };
+
+        availableLevels = {
+          1: true,
+          2: true,
+          3: true
+        };
+        
+        memoryGame.level = window.query.level;
+        $scope.game = {};
+        
+        $scope.game.results = {
+          missing: window.query.missing || 0,
+          time: 23
+        };
+      }
 
       $scope.api = api;
 

@@ -1,7 +1,25 @@
 $card-content-side-margin: ($card-layout-width - $button-width) / 2;
 
+.mg-card-layout--container {
+  height: 490px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
 .mg-card-layout {
   width: $card-layout-width;
+
+  h6 {
+    line-height: 1;
+  }
+
+  p {
+    line-height: 1.4;
+    font-size: 12px;
+    > strong {
+      font-weight: 500;
+    }
+  }
 }
 
 .mg-card-layout--banner {
@@ -13,11 +31,12 @@ $card-content-side-margin: ($card-layout-width - $button-width) / 2;
     position: absolute;
     left: 0;
     top: 0;
-    z-index: -1;
   }
 }
 
 .mg-card-layout--content {
+  z-index: 2;
+  position: relative;
   padding-top: 20px;
   padding-bottom: 30px;
   margin: 0 $card-content-side-margin;

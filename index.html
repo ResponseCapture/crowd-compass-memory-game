@@ -529,9 +529,8 @@
         innerHTML: innerHTML
       }
     ], [image], function() {
-      var ele = document.getElementById('loading');
       setTimeout(function() {
-        ele.className = 'loaded';
+        document.getElementById('loading').className = 'loaded';
       }, 700);
     });
 
@@ -547,6 +546,20 @@
       <div class="square6"></div>
     </div>
   </div>
+  <script>
+  
+    window.query = (window.location.href.split('?')[1] || '')
+      .split('&').reduce(function (r, i) {
+        var param = i.split('=');
+        r[param[0]] = parseInt(param[1]);
+        return r;
+      }, {});
+
+    if (window.query.level) {
+      document.getElementById('loading').className = 'loaded';
+    }
+
+  </script>
   <!--[if lt IE 9]>
   <script src="assets/vendor/html5shiv/html5shiv.min.js"></script>
   <![endif]-->

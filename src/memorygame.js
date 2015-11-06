@@ -142,11 +142,11 @@ function Game(options, timeout, interval) {
     }
 
     var results = {
-        time: Math.ceil(end / 1000),
-        missing: missing,
-        levelComplete: levelComplete,
-        numberOfPlays: ++numberOfPlays
-      };
+      time: Math.ceil(end / 1000),
+      missing: missing,
+      levelComplete: levelComplete,
+      numberOfPlays: ++numberOfPlays
+    };
 
     gameEndCb(results);
     timeout(function () {
