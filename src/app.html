@@ -186,7 +186,7 @@
           <div ng-hide="game.results.missing" class="results">
             <div class="result-progress">
             </div>
-            <h2 class="animated flip"><strong>Victory!</strong> Impressive {{user.firstName}}!</h2>
+            <h4 class="animated flip"><strong>Victory!</strong> Impressive {{user.firstName}}!</h4>
             <div class="mg-card-layout--container">
               <div class="mg-card-layout">
                 <div class="mg-card-layout--banner">
@@ -237,7 +237,7 @@
           </div>
           <div ng-show="game.results.missing" class="results">
             <header class="animated fadeInDown">
-              <h2>Oh no {{user.firstName}}, <strong>time's up!</strong></h2>
+              <h4>Oh no {{user.firstName}}, <strong>time's up!</strong></h4>
             </header>
             <div class="mg-card-layout--container">
               <div class="mg-card-layout">
@@ -358,7 +358,9 @@
             </div>
           </div>
         </div>
+
         <!-- LEVEL 3 RESULTS -->
+        
         <div class="mg-resultspage mg-resultspage-3" ng-if="game.results && !resultsLoading && currentLevel() === 3">
           <div ng-hide="game.results.missing" class="results">
             <header>

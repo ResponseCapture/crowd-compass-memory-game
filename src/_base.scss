@@ -63,7 +63,7 @@ h5, h6 {
 }
 
 h6, strong {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 h2 {
@@ -169,8 +169,8 @@ caption {
   margin-bottom: 10px; 
     
   input {
-    font-size: 18px;
-    padding: 10px 10px 10px 5px;
+    font-size: 14px;
+    padding: 10px 0px 10px 0px;
     -webkit-appearance: none;
     display: block;
     background-color: transparent;
@@ -277,7 +277,8 @@ caption {
 }
 
 button, .button {
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 500;
   text-transformation: uppercase;
 }
 

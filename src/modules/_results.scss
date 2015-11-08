@@ -7,8 +7,14 @@
   top: 50%;
   transform: translateY(-50%);
 
-  h2 {
+  h4 {
     text-align: center;
+    color: #37474f;
+    font-weight: 300;
+
+    strong {
+      font-weight: 500;
+    }
   }
 
   h2, h4, h5, h6, p, subhead {
@@ -96,16 +102,16 @@
     background-color: #CCC;
   }
 
-  h2, .mg-card-layout--content strong {
+  h4, .mg-card-layout--content strong {
     color: $level-one-color;
   }
 }
 
-.mg-resultspage-2 h2 {
+.mg-resultspage-2 h4 {
   color: $level-two-color;
 }
 
-.mg-resultspage-3 h2 {
+.mg-resultspage-3 h4 {
   color: $level-three-color;
 }
 
@@ -114,9 +120,6 @@
   .results-section {
     float: left;
     width: 100%;
-  }
-  h2 {
-    font-size: 38px;
   }
 }
 
@@ -129,6 +132,11 @@
 .share-ssk .ssk:hover {
   transition: transform .15s;
   transform: scale(1.1);
+  box-shadow: 0 2px 2px rgba(0,0,0,.1);
+}
+
+.share-ssk .ssk-facebook::before {
+  left: -3px;
 }
 
 .share-ssk .ssk:active {
