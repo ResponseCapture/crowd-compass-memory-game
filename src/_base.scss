@@ -169,7 +169,7 @@ caption {
   margin-bottom: 10px; 
     
   input {
-    font-size: 14px;
+    font-size: 12px;
     padding: 10px 0px 10px 0px;
     -webkit-appearance: none;
     display: block;
@@ -188,11 +188,11 @@ caption {
 
   label {
     color: #EEE; 
-    font-size: 15px;
+    font-size: 12px;
     font-weight: normal;
     position: absolute;
     pointer-events: none;
-    left: 5px;
+    left: 0px;
     top: 15px;
     transition: all 0.2s ease;
   }
@@ -201,8 +201,8 @@ caption {
   /* active */
 
   input:focus ~ label, input.used ~ label {
-    top: -20px;
-    transform: scale(.75); left: -2px;
+    top: -10px;
+    transform: scale(.75); left: -12px;
     /* font-size: 14px; */
     color: #FFF;
   }

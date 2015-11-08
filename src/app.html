@@ -215,13 +215,13 @@
                   </div>
                   <div ng-hide="user.workEmail" class="mg-card-layout--content">
                     <form name="workEmailForm" class="group">
-                      <input name="email" type="email" ng-pattern="/\./" ng-required ng-model="userWorkEmail"  ng-class="{used: workEmailForm.email.$viewValue}">
+                      <input name="email" type="email" ng-pattern="/\./" autocomplete="off" ng-required ng-model="userWorkEmail"  ng-class="{used: workEmailForm.email.$viewValue}">
                       <span class="highlight"></span><span class="bar"></span>
                       <label>Work Email Address</label>
                     </form>
                     <p></p>
                     <label>
-                      <input type="checkbox" ng-init="unlockedAssets = true" ng-model="unlockedAssets" checked> Send Me Goodies!
+                      <input type="checkbox" ng-init="unlockedAssets = true" ng-model="unlockedAssets" checked> Yes, send me goodies!
                     </label>
                     <p></p>
                     <a class="button" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; user.unlockedAssets = unlockedAssets; playLevel(2)">Take on Level 2</a>
@@ -268,13 +268,13 @@
                   </div>
                   <div ng-hide="user.workEmail" class="mg-card-layout--content">
                     <form name="workEmailForm" class="group">
-                      <input name="email" type="email" ng-pattern="/\./" ng-required ng-model="userWorkEmail"  ng-class="{used: workEmailForm.email.$viewValue}">
+                      <input name="email" type="email" ng-pattern="/\./" autocomplete="off" ng-required ng-model="userWorkEmail"  ng-class="{used: workEmailForm.email.$viewValue}">
                       <span class="highlight"></span><span class="bar"></span>
                       <label>Work Email Address</label>
                     </form>
                     <p></p>
                     <label>
-                      <input type="checkbox" ng-init="unlockedAssets = true" ng-model="unlockedAssets" checked> Send Me Goodies!
+                      <input type="checkbox" ng-init="unlockedAssets = true" ng-model="unlockedAssets" checked> Yes, send me goodies!
                     </label>
                     <p></p>
                     <a class="button" ng-disabled="!userWorkEmail" ng-click="user.workEmail = userWorkEmail; user.unlockedAssets = unlockedAssets; newGame(5)">Unlock Booster</a>
