@@ -18,24 +18,38 @@
         <div ng-show="letsPlay" class="mg-entry--logins">
           <p class="mg-entry--logins-desc">Get a personalized experience. Sign in with social.</p>
 
-          <div class="mg-entry--login login-linkedin button-behavior" ng-click="social.linkedin()">
-            <div class="mg-entry--icon-wrap">
-              <div linkedin-svg class="mg-entry--linkedin-icon mg-entry--icon"></div>
+          <div ng-hide="noSocial">
+            <div class="mg-entry--login login-linkedin button-behavior" ng-click="social.linkedin()">
+              <div class="mg-entry--icon-wrap">
+                <div linkedin-svg class="mg-entry--linkedin-icon mg-entry--icon"></div>
+              </div>
+              <div class="mg-entry--login-text">
+                <strong>LINKEDIN</strong>
+              </div>
             </div>
-            <div class="mg-entry--login-text">
-              <strong>LINKEDIN</strong>
-            </div>
-          </div>
 
-          <div class="mg-entry--login login-facebook button-behavior" ng-click="social.facebook()">
-            <div class="mg-entry--icon-wrap">
-              <div facebook-svg class="mg-entry--fb-icon mg-entry--icon" />
+            <div class="mg-entry--login login-facebook button-behavior" ng-click="social.facebook()">
+              <div class="mg-entry--icon-wrap">
+                <div facebook-svg class="mg-entry--fb-icon mg-entry--icon" />
+              </div>
+              <div class="mg-entry--login-text">
+                <strong>FACEBOOK</strong>
+              </div>
             </div>
-            <div class="mg-entry--login-text">
-              <strong>FACEBOOK</strong>
-            </div>
-          </div>
 
+            <a ng-click="noSocial = true">No thanks, enter name manually.</a>
+          </div>
+          <form class="mg-entry--manual" ng-show="noSocial" name="manualLoginForm">
+            <div class="group mg-entry--login-manual">
+              <input name="first" ng-model="firstName" required type="text" ng-class="{used: manualLoginForm.first.$viewValue}">
+              <label for="first">First Name</label>
+            </div>
+            <div class="group mg-entry--login-manual">
+              <input name="last" ng-model="lastName" required type="text" ng-class="{used: manualLoginForm.last.$viewValue}">
+              <label for="last">Last Name</label>
+            </div>
+            <button ng-disabled="manualLoginForm.$invalid" ng-click="updateUser({firstName:firstName, lastName:lastName})">></button>
+          </form>
         </div>
       </div>
     </div>
