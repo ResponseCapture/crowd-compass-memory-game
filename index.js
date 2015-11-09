@@ -14,6 +14,8 @@ var angular = require('angular'),
   levelOneBgSvg = require('svg-inline?removeSVGTagAttrs=false!./src/svg/level-1-bg.sv'),
   levelTwoBgSvg = require('svg-inline?removeSVGTagAttrs=false!./src/svg/level-2-bg.sv'),
   levelThreeBgSvg = require('svg-inline?removeSVGTagAttrs=false!./src/svg/level-3-bg.sv'),
+  closeSvg = require('svg-inline?removeSVGTagAttrs=false!./src/svg/close.sv'),
+  socialSvg = require('svg-inline!./src/svg/share.sv'),
   loginSvg = require('svg-inline!./src/svg/homepage-button.sv'),
   facebookSvg = require('svg-inline!./src/svg/facebook.sv'),
   linkedinSvg = require('svg-inline!./src/svg/linkedin.sv'),
@@ -40,6 +42,8 @@ angular.module('memory-game', [])
   .directive('levelOneBgSvg', template(levelOneBgSvg))
   .directive('levelTwoBgSvg', template(levelTwoBgSvg))
   .directive('levelThreeBgSvg', template(levelThreeBgSvg))
+  .directive('socialSvg', template(socialSvg))
+  .directive('closeSvg', template(closeSvg))
   .directive('minHeight', ['$window', minHeight])
   .directive('hierarchical', hierarchical)
   .controller('CardController', ['$scope', '$timeout', '$interval',

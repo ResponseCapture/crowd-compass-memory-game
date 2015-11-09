@@ -199,11 +199,27 @@
                 <div class="mg-card-layout--content">
                   <h6>And it feels great to be a winner, right?</h6>
                   <p><strong class="blue">Share your speedy time and challenge other event pros to a game!</strong></p>
-                  <div class="share-ssk">
-                    <a ng-click="api.linkedinShare(game.results)" class="ssk ssk-linkedin"></a>
-                    <a ng-click="api.twitterShare(game.results)" class="ssk ssk-twitter"></a>
-                    <a ng-click="api.pinterestShare(game.results)" class="ssk ssk-pinterest"></a>
-                    <a ng-click="api.facebookShare(game.results)" class="ssk ssk-facebook"></a>
+                  <div class="share-ssk" ng-class="{'share-open': shareOpen}">
+                    <div class="social-wrap">
+                      <a ng-click="api.linkedinShare(game.results)" class="ssk ssk-linkedin"></a>
+                    </div>
+                    <div class="social-wrap">
+                      <a ng-click="api.twitterShare(game.results)" class="ssk ssk-twitter"></a>
+                    </div>
+                    <div class="social-wrap">
+                      <a ng-click="api.pinterestShare(game.results)" class="ssk ssk-pinterest"></a>
+                    </div>
+                    <div class="social-wrap">
+                      <a ng-click="api.facebookShare(game.results)" class="ssk ssk-facebook"></a>
+                    </div>
+                    <a ng-hide="shareOpen" ng-click="shareOpen = true" class="ssk share-button">
+                      <div class="clickable"></div>
+                      <div social-svg></div>
+                    </a>
+                    <a ng-show="shareOpen" ng-click="shareOpen = false" class="ssk share-button">
+                      <div class="clickable"></div>
+                      <div close-svg></div>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -250,7 +266,7 @@
                 </div>
                 <div class="mg-card-layout--content">
                   <h6>You were so close!</h6>
-                  <p>With only {{ game.results.missing }} of pairs left to match, you can’t give up now! Unlock the time booster to win!</p>
+                  <p>With only {{ game.results.missing }} pair{{ game.results.missing === 1 ? '' : 's' }} left to match, you can’t give up now! Unlock the time booster to win!</p>
                   <p><strong>Don’t forget to share this game with your friends!</strong></p>
                   <div class="share-ssk">
                     <a ng-click="api.linkedinShare(game.results)" class="ssk ssk-linkedin"></a>
