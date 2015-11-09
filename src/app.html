@@ -181,13 +181,13 @@
         </div>
         
         <!-- LEVEL 1 RESULTS -->
-
         <div class="mg-resultspage mg-resultspage-1" ng-if="game.results && !resultsLoading && currentLevel() === 1">
+          
+          <!-- WIN -->
           <div ng-hide="game.results.missing" class="results">
-            <div class="result-progress">
-            </div>
             <h4 class="animated flip"><strong>Victory!</strong> Impressive {{user.firstName}}!</h4>
             <div class="mg-card-layout--container">
+
               <div class="mg-card-layout">
                 <div class="mg-card-layout--banner">
                   <div class="mg-results--circle">
@@ -198,29 +198,8 @@
                 </div>
                 <div class="mg-card-layout--content">
                   <h6>And it feels great to be a winner, right?</h6>
-                  <p><strong class="blue">Share your speedy time and challenge other event pros to a game!</strong></p>
-                  <div class="share-ssk" ng-class="{'share-open': shareOpen}">
-                    <div class="social-wrap">
-                      <a ng-click="api.linkedinShare(game.results)" class="ssk ssk-linkedin"></a>
-                    </div>
-                    <div class="social-wrap">
-                      <a ng-click="api.twitterShare(game.results)" class="ssk ssk-twitter"></a>
-                    </div>
-                    <div class="social-wrap">
-                      <a ng-click="api.pinterestShare(game.results)" class="ssk ssk-pinterest"></a>
-                    </div>
-                    <div class="social-wrap">
-                      <a ng-click="api.facebookShare(game.results)" class="ssk ssk-facebook"></a>
-                    </div>
-                    <a ng-hide="shareOpen" ng-click="shareOpen = true" class="ssk share-button">
-                      <div class="clickable"></div>
-                      <div social-svg></div>
-                    </a>
-                    <a ng-show="shareOpen" ng-click="shareOpen = false" class="ssk share-button">
-                      <div class="clickable"></div>
-                      <div close-svg></div>
-                    </a>
-                  </div>
+                  <p><strong>Share your speedy time and challenge other event pros to a game!</strong></p>
+                  <div share-html></div>
                 </div>
               </div>
 
@@ -230,12 +209,11 @@
                     <a class="button" ng-click="playLevel(2)">Take on Level 2</a>
                   </div>
                   <div ng-hide="user.workEmail" class="mg-card-layout--content">
-                    <form name="workEmailForm" class="group">
-                      <input name="email" type="email" ng-pattern="/\./" autocomplete="off" ng-required ng-model="userWorkEmail"  ng-class="{used: workEmailForm.email.$viewValue}">
+                    <form name="workEmailWinForm" class="group">
+                      <input name="email" type="email" ng-pattern="/\./" autocomplete="off" ng-required ng-model="userWorkEmail"  ng-class="{used: workEmailWinForm.email.$viewValue}">
                       <span class="highlight"></span><span class="bar"></span>
                       <label>Work Email Address</label>
                     </form>
-                    <p></p>
                     <label>
                       <input type="checkbox" ng-init="unlockedAssets = true" ng-model="unlockedAssets" checked> Yes, send me goodies!
                     </label>
@@ -244,18 +222,26 @@
                   </div>
                   <div level-one-bg-svg class="mg-card-layout--banner-bg"></div>
                 </div>
-                <div class="mg-card-layout--content">
+                <div ng-hide="user.workEmail" class="mg-card-layout--content">
                   <h6>Unlock Level 2 & Other Awesome Goodies!</h6>
                   <p>Loving this game? Enter your email to unlock Level 2 and we’ll also send you more games, quizzes, exclusive research and other awesome goodies!</p>
                 </div>
+                <div ng-show="user.workEmail" class="mg-card-layout--content">
+                  <h6>Are you ready to conquer Level 2?</h6>
+                  <p>With only 20 seconds on the clock, Level 2 is no walk in the park! But we think you may what it takes... <strong>Find out now!</strong></p>
+                </div>
               </div>
+
             </div>
           </div>
+
+          <!-- LOSE -->
           <div ng-show="game.results.missing" class="results">
             <header class="animated fadeInDown">
               <h4>Oh no {{user.firstName}}, <strong>time's up!</strong></h4>
             </header>
             <div class="mg-card-layout--container">
+
               <div class="mg-card-layout">
                 <div class="mg-card-layout--banner">
                   <div class="mg-results--circle">
@@ -268,23 +254,18 @@
                   <h6>You were so close!</h6>
                   <p>With only {{ game.results.missing }} pair{{ game.results.missing === 1 ? '' : 's' }} left to match, you can’t give up now! Unlock the time booster to win!</p>
                   <p><strong>Don’t forget to share this game with your friends!</strong></p>
-                  <div class="share-ssk">
-                    <a ng-click="api.linkedinShare(game.results)" class="ssk ssk-linkedin"></a>
-                    <a ng-click="api.twitterShare(game.results)" class="ssk ssk-twitter"></a>
-                    <a ng-click="api.pinterestShare(game.results)" class="ssk ssk-pinterest"></a>
-                    <a ng-click="api.facebookShare(game.results)" class="ssk ssk-facebook"></a>
-                  </div>
+                  <div share-html></div>
                 </div>
               </div>
 
               <div class="mg-card-layout">
                 <div class="mg-card-layout--banner">
                   <div ng-show="user.workEmail" class="mg-card-layout--content"><br><br><br>
-                    <a ng-show="user.companyName" class="button" ng-click="newGame(5)">Use Booster</a>
+                    <a ng-show="user.workEmail" class="button" ng-click="newGame(5)">Use Booster</a>
                   </div>
                   <div ng-hide="user.workEmail" class="mg-card-layout--content">
-                    <form name="workEmailForm" class="group">
-                      <input name="email" type="email" ng-pattern="/\./" autocomplete="off" ng-required ng-model="userWorkEmail"  ng-class="{used: workEmailForm.email.$viewValue}">
+                    <form name="workEmailLoseForm" class="group">
+                      <input name="email" type="email" ng-pattern="/\./" autocomplete="off" ng-required ng-model="userWorkEmail"  ng-class="{used: workEmailLoseForm.email.$viewValue}">
                       <span class="highlight"></span><span class="bar"></span>
                       <label>Work Email Address</label>
                     </form>
@@ -297,163 +278,281 @@
                   </div>
                   <div level-one-bg-svg class="mg-card-layout--banner-bg"></div>
                 </div>
-                <div class="mg-card-layout--content">
-                  <h6>Unlock Your Time Booster!</h6>
+                <div ng-hide="user.workEmail" class="mg-card-layout--content">
+                  <h6>Unlock your 5 second time booster and win!</h6>
                   <p>Enter your email to <strong>play again with a 5 second booster!</strong> And as a bonus, we’ll send you more games, exclusive research, and other goodies!</p>
                 </div>
+                <div ng-show="user.workEmail" class="mg-card-layout--content">
+                  <h6>You’ll get it this time!</h6>
+                  <p><strong>Keep your 5 second time booster and play again for the win!</strong></p>
+                  <p>And don’t forget to check your inbox! We sent you loads of goodies to keep the fun going!</p>
+                </div>
               </div>
+
             </div>
           </div>
+
         </div>
 
         <!-- LEVEL 2 RESULTS -->
-
         <div class="mg-resultspage mg-resultspage-2" ng-if="game.results && !resultsLoading && currentLevel() === 2">
+        
+          <!-- WIN -->
           <div ng-hide="game.results.missing" class="results">
-            <header>
-              <h2><span class="animated flip">Victory!</span></h2>
-            </header>
-            <subhead>Congrats! Ummm, you’re like, the fastest event pro, EVER. But now… Drumroll… It’s about to get tough. Meaning, we’re going to test you. It’s time to put on your big kid pants.</subhead>
-            <p></p>
-            <div class="share-ssk">
-              <a href="" class="ssk ssk-linkedin"></a>
-              <a href="" class="ssk ssk-twitter"></a>
-              <a href="" class="ssk ssk-pinterest"></a>
-              <a href="" class="ssk ssk-facebook"></a>
-            </div>
-            <hr>
-            <div style="text-align: center">
-              <a ng-show="user.companyName" class="button" ng-click="playLevel(3)">Take on Level 3</a>
-            </div>
-            <div ng-hide="user.companyName" ng-show="getinfo">
-              <h6>The Time Has Come… The Ultimate Test of Memory + Speed!</h6>
-              <p>Get your running shoes on because now we’re gonna see how fast you are! Tell us the company name on your paychecks, and we’ll magically teleport you to another dimension (some peeps just call it Level 3. BORING).</p>
-              <label>Company Name:
-                <input type="text" ng-required ng-model="userCompany">
-              </label>
-              <p></p>
-              <a class="button" ng-disabled="!userCompany" ng-click="user.companyName = userCompany; playLevel(3)">GO</a>
-            </div>
-            <hr>
-            <div style="text-align: center">
-              <h6>Addicted to Level 2? No Problem, Play Again!</h6>
-              <p>We get it! We’ll shuffle the deck and you can play again!</p>
-              <a class="button" ng-click="newGame()">Play Again</a>
+            <h4 class="animated flip"><strong>Victory!</strong> Impressive {{user.firstName}}!</h4>
+            <div class="mg-card-layout--container">
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div class="mg-results--circle">
+                    <h2>{{ game.results.time }}</h2>
+                    <span>Seconds</span>
+                  </div>
+                  <div level-two-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>Congrats! Ummm, you’re like, the fastest event pro, EVER.</h6>
+                  <p>But now… Drumroll… It’s about to get tough. Meaning, we’re going to test you. It’s time to put on <strong>your big kid pants.</strong></p>
+                  <div share-html></div>
+                </div>
+              </div>
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div ng-show="user.companyName" class="mg-card-layout--content"><br><br><br>
+                    <a class="button" ng-click="playLevel(3)">Take on Level 3</a>
+                  </div>
+                  <div ng-hide="user.companyName" class="mg-card-layout--content">
+                    <br>
+                    <form name="companyNameWinForm" class="group">
+                      <input type="text" name="company" autocomplete="off" ng-required ng-model="userCompany" ng-class="{used: companyNameWinForm.company.$viewValue}">
+                      <span class="highlight"></span><span class="bar"></span>
+                      <label>Company Name</label>
+                    </form>
+                    <a class="button" ng-disabled="!userCompany" ng-click="user.companyName = userCompany; playLevel(3)">Take on Level 3</a>
+                  </div>
+                  <div level-two-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>Are you sure you’re ready for Level 3?</h6>
+                  <p>Enter your company name to <strong>unlock Level 3!</strong> With a mere 10 seconds on the clock, you’ll have to move fast!</p>
+                </div>
+              </div>
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div class="results-heart" heart-svg></div>
+                  <div level-two-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>Loving Level 2? No problem, play again!</h6>
+                  <p>We get it, we love it too! We’ll shuffle the deck so you can <strong>play again!</strong></p>
+                  <a class="button" ng-click="playLevel(2)">Play Level 2 Again</a>
+                </div>
+              </div>
+
             </div>
           </div>
+
+          <!-- LOSE -->
           <div ng-show="game.results.missing" class="results">
             <header class="animated fadeInDown">
-              <h2>Oh No, Time Is Up!</h2>
+              <h4>Oh no {{user.firstName}}, <strong>time's up!</strong></h4>
             </header>
-            <subhead>Don’t give up! Use the time booster and play again for the win!</subhead>
-            <p></p>
-            <div class="share-ssk">
-              <a href="" class="ssk ssk-linkedin"></a>
-              <a href="" class="ssk ssk-twitter"></a>
-              <a href="" class="ssk ssk-pinterest"></a>
-              <a href="" class="ssk ssk-facebook"></a>
-            </div>
-            <hr>
-            <div style="text-align: center">
-              <a ng-show="user.companyName" class="button" ng-click="newGame(5)">Use a Time Booster</a>
-            </div>
-            <div ng-hide="user.companyName">
-              <h6>Unlock Your Time Booster!</h6>
-              <p>Enter your company name and get extra time to win! And if you’re loving this game, we’ll send you more games, quizzes, exclusive research and other awesome goodies!</p>
-              <label>Company Name:
-                <input type="text" ng-required ng-model="userCompany">
-              </label>
-              <p></p>
-              <a class="button" ng-disabled="!userCompany" ng-click="user.companyName = userCompany; newGame(5)">GO</a>
-            </div>
-            <hr>
-            <div style="text-align: center">
-              <h6>I Don’t Need No Stinkin Time Booster!</h6>
-              <p>No prob! We’ll shuffle the deck and you can play again!</p>
-              <a class="button" ng-click="newGame()">Play Again</a>
+            <div class="mg-card-layout--container">
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div class="mg-results--circle">
+                    <h2>{{ game.results.missing }}</h2>
+                    <span>Pair{{ game.results.missing === 1 ? '' : 's' }} Left</span>
+                  </div>
+                  <div level-two-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>You were so close!</h6>
+                  <p>With only {{ game.results.missing }} pair{{ game.results.missing === 1 ? '' : 's' }} left to match, you can’t give up now! Unlock the time booster to win!</p>
+                  <p><strong>Don’t forget to share this game with your friends!</strong></p>
+                  <div share-html></div>
+                </div>
+              </div>
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div ng-show="user.companyName" class="mg-card-layout--content"><br><br><br>
+                    <a class="button" ng-click="playLevel(3)">Take on Level 3</a>
+                  </div>
+                  <div ng-hide="user.companyName" class="mg-card-layout--content">
+                    <br>
+                    <form name="companyNameLoseForm" class="group">
+                      <input type="text" name="company" autocomplete="off" ng-required ng-model="userCompany" ng-class="{used: companyNameLoseForm.company.$viewValue}">
+                      <span class="highlight"></span><span class="bar"></span>
+                      <label>Company Name</label>
+                    </form>
+                    <a class="button" ng-disabled="!userCompany" ng-click="user.companyName = userCompany; playLevel(3)">Take on Level 3</a>
+                  </div>
+                  <div level-two-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div ng-hide="user.companyName" class="mg-card-layout--content">
+                  <h6>Unlock your 5 second time booster and win!</h6>
+                  <p>Enter your email to <strong>play again with a 5 second booster!</strong> And as a bonus, we’ll send you more games, exclusive research, and other goodies!</p>
+                </div>
+                <div ng-show="user.companyName" class="mg-card-layout--content">
+                  <h6>You’ll get it this time!</h6>
+                  <p><strong>Keep your 5 second time booster and play again for the win!</strong></p>
+                  <p>And don’t forget to check your inbox! We sent you loads of goodies to keep the fun going!</p>
+                </div>
+              </div>
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div class="results-toughguy" toughguy-svg></div>
+                  <div level-two-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>Nah, I’m gonna tough it out...</h6>
+                  <p>Think you can handle it on your own? No problem! We’ll shuffle the deck and you can <strong>play again!</strong></p>
+                  <a class="button" ng-click="playLevel(2)">Play Level 2 Again</a>
+                </div>
+              </div>
+
             </div>
           </div>
+
         </div>
 
         <!-- LEVEL 3 RESULTS -->
-        
         <div class="mg-resultspage mg-resultspage-3" ng-if="game.results && !resultsLoading && currentLevel() === 3">
+
+          <!-- WIN -->
           <div ng-hide="game.results.missing" class="results">
             <header>
-              <h2><span class="animated flip">Congratulations!</span></h2>
+              <h4><span class="animated flip"><strong>Congratulations {{user.firstName}}!</strong> You did it!</span></h4>
             </header>
-            <h5>You Just Conquered the Ultimate, Ultimate Game of Memory Skillz!</h5>
-            <subhead>Take a deep breath. Sweet, sweet victory. You’re among the few people tough enough, proud enough and skillful enough to make it this far (and somewhere… An audience is on it’s feet).</subhead>
-            <subhead><strong>But wait. Are you faster than your friends and colleagues?! (Gasp!)</strong> It’s time to find out. Share this puppy (aren’t puppies the cutest?!) with another human (robots are also cool) and let’s see if their memory prowess is as good as yours!</subhead>
-            <p></p>
-            <div class="share-ssk">
-              <a href="" class="ssk ssk-linkedin"></a>
-              <a href="" class="ssk ssk-twitter"></a>
-              <a href="" class="ssk ssk-pinterest"></a>
-              <a href="" class="ssk ssk-facebook"></a>
-            </div>
-            <hr>
-            <h6>There’s More in Store!</h6>
-            <p>The fun doesn’t stop after Level 3! Play again to improve your time and stay tuned for additional card packs, levels and new features. In the meantime, play our other games below and make sure to check out the goodies we emailed you!</p>
-            <div class="results-section-wrapper">
-              <div class="results-section">
-                <p><strong>What’s Your Planner Personality?</strong>
-                  <br>The Maestro… The Trendsetter… Which of the four “event planner personalities” describes you? Take the quiz to find out.</p>
-                <a class="button" target="_blank" href="http://www.crowdcompassquiz.com">Find Out</a>
+            <div class="mg-card-layout--container">
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div class="mg-results--circle">
+                    <h2>{{ game.results.time }}</h2>
+                    <span>Seconds</span>
+                  </div>
+                  <div level-three-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>You Just Conquered the Ultimate Game of Memory Skillz!</h6>
+                  <p>But the fun doesn’t stop here! Play again to improve your time and <strong>stay tuned for additional card packs, and new features.</strong> In the meantime, play our other games below and make sure to check out the goodies we emailed you!</p>
+                </div>
               </div>
-              <div class="results-section">
-                <p><strong>What’s Your Mobile Apps Star Power?</strong>
-                  <br>Ever wondered what attendees really think of your mobile event app? Take this quiz to find out!</p>
-                <a class="button" target="_blank" href="http://www.eventappstarpower.com">Take the Quiz</a>
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div level-three-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>Find out if you’re you faster than your friends and colleagues!</h6>
+                  <p>Ahh, sweet, sweet victory... But wait. <strong>Are you faster than your friends and colleagues?!</strong> It’s time to find out. Share this puppy with another human and let’s see if their memory is as good as yours!</p>
+                  <div share-html></div>
+                </div>
               </div>
-              <p style="clear: both"></p>
-            </div>
-            <hr>
-            <div style="text-align: center">
-              <h6>Addicted to Level 3? No Problem, Play Again!</h6>
-              <p>We get it! We’ll shuffle the deck and you can play again!</p>
-              <a class="button" ng-click="newGame()">Play Again</a>
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div class="results-personality-planner"></div>
+                  <div level-three-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>What’s YOUR Planner Personality?</h6>
+                  <p><em>A Quiz by CrowdCompass</em></p>
+                  <p>The Maestro... The Trendsetter... Which of the four “event planner personalities” describes you? <strong>Take the quiz to find out.</strong></p>
+                  <a class="button" target="_blank" href="http://www.crowdcompassquiz.com">Find Out</a>
+                </div>
+              </div>
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div class="results-star-power" star-power-svg></div>
+                  <div level-three-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>What’s Your Mobile App Star Power?</h6>
+                  <p><em>A Quiz by CrowdCompass</em></p>
+                  <p>Ever wondered what attendees really think of your mobile event app? <strong>Take the quiz to find out.</strong></p>
+                  <a class="button" target="_blank" href="http://www.eventappstarpower.com">Take the Quiz</a>
+                </div>
+              </div>
+
             </div>
           </div>
+
+          <!-- LOSE -->
           <div ng-show="game.results.missing" class="results">
+            <div class="result-progress">
+            </div>
             <header class="animated fadeInDown">
-              <h2>Oh No, Time Is Up!</h2>
+              <h4>Oh no {{user.firstName}}, <strong>time's up!</strong></h4>
             </header>
-            <subhead>You were sooo close with only {{ game.results.missing }} pair{{ game.results.missing === 1 ? '' : 's' }} of cards left! Don’t give up though! Play again for the win!</subhead>
-            <p></p>
-            <div class="share-ssk">
-              <a href="" class="ssk ssk-linkedin"></a>
-              <a href="" class="ssk ssk-twitter"></a>
-              <a href="" class="ssk ssk-pinterest"></a>
-              <a href="" class="ssk ssk-facebook"></a>
-            </div>
-            <hr>
-            <h6>There’s More in Store!</h6>
-            <p>The fun doesn’t stop after Level 3! Play again to improve your time and stay tuned for additional card packs, levels and new features. In the meantime, play our other games below and make sure to check out the goodies we emailed you!</p>
-            <div class="results-section-wrapper">
-              <div class="results-section">
-                <p><strong>What’s Your Planner Personality?</strong>
-                  <br>The Maestro… The Trendsetter… Which of the four “event planner personalities” describes you? Take the quiz to find out.</p>
-                <a class="button" target="_blank" href="http://www.crowdcompassquiz.com">Find Out</a>
+
+            <div class="mg-card-layout--container">
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div class="mg-results--circle">
+                    <h2>{{ game.results.missing }}</h2>
+                    <span>Pair{{ game.results.missing === 1 ? '' : 's' }} Left</span>
+                  </div>
+                  <div level-three-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>You were so close!</h6>
+                  <p>With only {{ game.results.missing }} pair{{ game.results.missing === 1 ? '' : 's' }} left to match, you can’t give up now! Unlock the time booster to win!</p>
+                  <p><strong>Don’t forget to share this game with your friends!</strong></p>
+                  <div share-html></div>
+                </div>
               </div>
-              <div class="results-section">
-                <p><strong>What’s Your Mobile Apps Star Power?</strong>
-                  <br>Ever wondered what attendees really think of your mobile event app? Take this quiz to find out!</p>
-                <a class="button" target="_blank" href="http://www.eventappstarpower.com">Take the Quiz</a>
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div class="mg-card-layout--content"><br><br><br>
+                    <a class="button" ng-click="newGame(5)">Take On Level 3 Again</a>
+                  </div>
+                  <div level-three-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>You’ll get it this time!</h6>
+                  <p><strong>Keep your 5 second time booster and play again for the win!</strong></p>
+                  <p>And don’t forget to check your inbox! We sent you loads of goodies to keep the fun going!</p>
+                </div>
               </div>
-              <p style="clear: both"></p>
-            </div>
-            <hr>
-            <div style="text-align: center">
-              <a class="button" ng-click="newGame(5)">Use a Time Booster</a>
-            </div>
-            <hr>
-            <div style="text-align: center">
-              <h6>I Don’t Need No Stinkin Time Booster!</h6>
-              <p>No prob! We’ll shuffle the deck and you can play again!</p>
-              <a class="button" ng-click="newGame()">Play Again</a>
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div class="results-personality-planner"></div>
+                  <div level-three-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>What’s YOUR Planner Personality?</h6>
+                  <p><em>A Quiz by CrowdCompass</em></p>
+                  <p>The Maestro... The Trendsetter... Which of the four “event planner personalities” describes you? <strong>Take the quiz to find out.</strong></p>
+                  <a class="button" target="_blank" href="http://www.crowdcompassquiz.com">Find Out</a>
+                </div>
+              </div>
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div class="results-star-power" star-power-svg></div>
+                  <div level-three-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>What’s Your Mobile App Star Power?</h6>
+                  <p><em>A Quiz by CrowdCompass</em></p>
+                  <p>Ever wondered what attendees really think of your mobile event app? <strong>Take the quiz to find out.</strong></p>
+                  <a class="button" target="_blank" href="http://www.eventappstarpower.com">Take the Quiz</a>
+                </div>
+              </div>
+
             </div>
           </div>
+
         </div>
       </section>
       <footer class="mg-legal">

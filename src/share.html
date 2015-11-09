@@ -1,0 +1,22 @@
+<div class="share-ssk" ng-class="{'share-open': shareOpen}">
+  <div class="social-wrap">
+    <a ng-click="api.linkedinShare(game.results)" class="ssk ssk-linkedin"></a>
+  </div>
+  <div class="social-wrap">
+    <a ng-click="api.twitterShare(game.results)" class="ssk ssk-twitter"></a>
+  </div>
+  <div class="social-wrap">
+    <a ng-click="api.pinterestShare(game.results)" class="ssk ssk-pinterest"></a>
+  </div>
+  <div class="social-wrap">
+    <a ng-click="api.facebookShare(game.results)" class="ssk ssk-facebook"></a>
+  </div>
+  <a ng-hide="shareOpen" ng-click="shareOpen = true" class="ssk share-button">
+    <div class="clickable"></div>
+    <div social-svg></div>
+  </a>
+  <a ng-show="shareOpen" ng-click="shareOpen = false" class="ssk share-button">
+    <div class="clickable"></div>
+    <div close-svg></div>
+  </a>
+</div>

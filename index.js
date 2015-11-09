@@ -8,13 +8,17 @@ var angular = require('angular'),
   minHeight = require('./src/minHeight.directive'),
   MemoryGame = require('./src/memorygame'),
   appHtml = require('raw!./src/app.html'),
+  shareHtml = require('raw!./src/share.html'),
   boxSvg = require('svg-inline!./src/svg/box.sv'),
   titleSvg = require('svg-inline!./src/svg/title.sv'),
   introCardBgSvg = require('svg-inline?removeSVGTagAttrs=false!./src/svg/intro-card-bg.sv'),
   levelOneBgSvg = require('svg-inline?removeSVGTagAttrs=false!./src/svg/level-1-bg.sv'),
   levelTwoBgSvg = require('svg-inline?removeSVGTagAttrs=false!./src/svg/level-2-bg.sv'),
   levelThreeBgSvg = require('svg-inline?removeSVGTagAttrs=false!./src/svg/level-3-bg.sv'),
+  starPowerSvg = require('svg-inline?removeSVGTagAttrs=false!./src/svg/star-power-img.sv'),
+  heartSvg = require('svg-inline?removeSVGTagAttrs=false!./src/svg/heart.sv'),
   closeSvg = require('svg-inline?removeSVGTagAttrs=false!./src/svg/close.sv'),
+  toughguySvg = require('svg-inline?removeSVGTagAttrs=false!./src/svg/toughguy.sv'),
   socialSvg = require('svg-inline!./src/svg/share.sv'),
   loginSvg = require('svg-inline!./src/svg/homepage-button.sv'),
   facebookSvg = require('svg-inline!./src/svg/facebook.sv'),
@@ -30,6 +34,7 @@ var linkedin = require('./src/linkedin')(window);
 
 angular.module('memory-game', [])
   .directive('appcontent', template(appHtml))
+  .directive('shareHtml', template(shareHtml))
   .directive('boxSvg', template(boxSvg))
   .directive('titleSvg', template(titleSvg))
   .directive('loginSvg', template(loginSvg))
@@ -44,6 +49,9 @@ angular.module('memory-game', [])
   .directive('levelThreeBgSvg', template(levelThreeBgSvg))
   .directive('socialSvg', template(socialSvg))
   .directive('closeSvg', template(closeSvg))
+  .directive('toughguySvg', template(toughguySvg))
+  .directive('heartSvg', template(heartSvg))
+  .directive('starPowerSvg', template(starPowerSvg))
   .directive('minHeight', ['$window', minHeight])
   .directive('hierarchical', hierarchical)
   .controller('CardController', ['$scope', '$timeout', '$interval',
@@ -71,6 +79,14 @@ angular.module('memory-game', [])
           firstName: 'Joe',
           lastName: 'Bob'
         };
+
+        if ((window.query.round || 1) - 1) {
+          if (window.query.level === 1) {
+            $scope.user.workEmail = 'test@test.com';
+          } else {
+            $scope.user.companyName = 'company name';
+          }
+        }
 
         availableLevels = {
           1: true,

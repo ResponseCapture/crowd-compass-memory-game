@@ -2,7 +2,8 @@ $card-content-side-margin: ($card-layout-width - $button-width) / 2;
 
 .mg-card-layout--container {
   height: 490px;
-  max-width: 600px;
+  max-width: 1200px;
+  display: inline-block;
   margin: 0 auto;
 }
 
@@ -10,7 +11,8 @@ $card-content-side-margin: ($card-layout-width - $button-width) / 2;
   width: $card-layout-width;
 
   h6 {
-    line-height: 1;
+    line-height: 1.2;
+    font-size: 18px;
   }
 
   p {
