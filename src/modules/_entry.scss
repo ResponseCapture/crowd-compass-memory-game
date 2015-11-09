@@ -1,3 +1,5 @@
+$entry-box-width: 500px;
+
 .mg-entry {
   position: fixed;
   width: 100vw;
@@ -5,6 +7,45 @@
   background-color: rgb(40,50,56);
   z-index: 9000;
   background: radial-gradient(circle, hsl(203, 16.7%, 18.8%), hsl(203, 16.7%, 17%));
+
+  footer {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+
+    .footer-content {
+      display: relative;
+      margin: 0 auto;
+      padding: 15px 0;
+      color: #FFF;
+      text-align: center;
+
+      ul {
+        list-style: none;
+      }
+
+      .footer-content--links,
+      .footer-content--legal,
+      ul, li {
+        display: inline-block;
+        padding-right: 5px;
+        padding-left: 5px;
+      }
+      a, p {
+        font-size: 11px;
+        color: #FFF;
+      }
+
+      a {
+        text-decoration: underline;
+      }
+    }
+
+
+    li {
+      display: inline-block;
+    }
+  }
 
   &.loggedin {
     transform: translateX(-100%);
@@ -24,7 +65,7 @@
   .mg-entry--hero {
     position: relative;
     margin: 0 auto;
-    max-width: 500px;
+    max-width: $entry-box-width;
     top: 50%;
     transform: translateY(-50%);
 
