@@ -2,6 +2,7 @@
 
 window.jQuery = window.$ = require('jquery');
 var api = window.responseCapture;
+window.query = window.query || {};
 
 var angular = require('angular'),
   hierarchical = require('./src/hierarchical.directive'),
