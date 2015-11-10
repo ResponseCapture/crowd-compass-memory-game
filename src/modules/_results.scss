@@ -13,6 +13,15 @@
     }
   }
 
+  strong a {
+    font-weight: 700;
+    text-decoration: none;
+
+    &:hover {
+      opacity: .5;
+    }
+  }
+
   h2, h4, h5, h6, p, subhead {
     color: #37474f;
   }
@@ -139,7 +148,7 @@
   
   max-width: 600px;
 
-  .mg-results--circle * {
+  .mg-results--circle *, strong a {
     color: $level-two-color-dark;
   }
 
@@ -156,7 +165,7 @@
   
   max-width: 900px;
 
-  .mg-results--circle * {
+  .mg-results--circle *, strong a {
     color: $level-three-color-dark;
   }
 
@@ -172,7 +181,7 @@
 .mg-resultspage-3 .results {
   max-width: 1200px;
 
-  .mg-results--circle * {
+  .mg-results--circle *, strong a {
     color: $level-one-color-dark;
   }
 

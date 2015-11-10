@@ -218,21 +218,6 @@
 
               <div class="mg-card-layout">
                 <div class="mg-card-layout--banner">
-                  <div class="mg-results--circle">
-                    <h2>{{ game.results.time }}</h2>
-                    <span>Seconds</span>
-                  </div>
-                  <div level-one-bg-svg class="mg-card-layout--banner-bg"></div>
-                </div>
-                <div class="mg-card-layout--content">
-                  <h6>And it feels great to be a winner, right?</h6>
-                  <p><strong>Share your speedy time and challenge other event pros to a game!</strong></p>
-                  <div share-html></div>
-                </div>
-              </div>
-
-              <div class="mg-card-layout">
-                <div class="mg-card-layout--banner">
                   <div ng-show="user.workEmail" class="mg-card-layout--content"><br><br><br>
                     <a class="button" ng-click="playLevel(2)">Take on Level 2</a>
                   </div>
@@ -260,6 +245,21 @@
                 </div>
               </div>
 
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div class="mg-results--circle">
+                    <h2>{{ game.results.time }}</h2>
+                    <span>Seconds</span>
+                  </div>
+                  <div level-one-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>And it feels great to be a winner, right?</h6>
+                  <p><strong>Share your speedy time and challenge other event pros to a game!</strong></p>
+                  <div share-html></div>
+                </div>
+              </div>
+
             </div>
           </div>
 
@@ -269,22 +269,6 @@
               <h4>Oh no {{user.firstName}}, <strong>time's up!</strong></h4>
             </header>
             <div class="mg-card-layout--container">
-
-              <div class="mg-card-layout">
-                <div class="mg-card-layout--banner">
-                  <div class="mg-results--circle">
-                    <h2>{{ game.results.missing }}</h2>
-                    <span>Pair{{ game.results.missing === 1 ? '' : 's' }} Left</span>
-                  </div>
-                  <div level-one-bg-svg class="mg-card-layout--banner-bg"></div>
-                </div>
-                <div class="mg-card-layout--content">
-                  <h6>You were so close!</h6>
-                  <p>With only {{ game.results.missing }} pair{{ game.results.missing === 1 ? '' : 's' }} left to match, you can’t give up now! Unlock the time booster to win!</p>
-                  <p><strong>Don’t forget to share this game with your friends!</strong></p>
-                  <div share-html></div>
-                </div>
-              </div>
 
               <div class="mg-card-layout">
                 <div class="mg-card-layout--banner">
@@ -317,6 +301,22 @@
                 </div>
               </div>
 
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div class="mg-results--circle">
+                    <h2>{{ game.results.missing }}</h2>
+                    <span>Pair{{ game.results.missing === 1 ? '' : 's' }} Left</span>
+                  </div>
+                  <div level-one-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>You were so close!</h6>
+                  <p>With only {{ game.results.missing }} pair{{ game.results.missing === 1 ? '' : 's' }} left to match, you can’t give up now! Unlock the time booster to win!</p>
+                  <p><strong>Don’t forget to share this game with your friends!</strong></p>
+                  <div share-html></div>
+                </div>
+              </div>
+
             </div>
           </div>
 
@@ -329,21 +329,6 @@
           <div ng-hide="game.results.missing" class="results">
             <h4 class="animated flip"><strong>Victory!</strong> Impressive {{user.firstName}}!</h4>
             <div class="mg-card-layout--container">
-
-              <div class="mg-card-layout">
-                <div class="mg-card-layout--banner">
-                  <div class="mg-results--circle">
-                    <h2>{{ game.results.time }}</h2>
-                    <span>Seconds</span>
-                  </div>
-                  <div level-two-bg-svg class="mg-card-layout--banner-bg"></div>
-                </div>
-                <div class="mg-card-layout--content">
-                  <h6>Congrats! Ummm, you’re like, the fastest event pro, EVER.</h6>
-                  <p>But now… Drumroll… It’s about to get tough. Meaning, we’re going to test you. It’s time to put on <strong>your big kid pants.</strong></p>
-                  <div share-html></div>
-                </div>
-              </div>
 
               <div class="mg-card-layout">
                 <div class="mg-card-layout--banner">
@@ -369,13 +354,28 @@
 
               <div class="mg-card-layout">
                 <div class="mg-card-layout--banner">
+                  <div class="mg-results--circle">
+                    <h2>{{ game.results.time }}</h2>
+                    <span>Seconds</span>
+                  </div>
+                  <div level-two-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>Congrats! Ummm, you’re like, the fastest event pro, EVER.</h6>
+                  <p>But now… Drumroll… It’s about to get tough. Meaning, we’re going to test you. It’s time to put on <strong>your big kid pants.</strong></p>
+                  <div share-html></div>
+                </div>
+              </div>
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
                   <div class="results-heart" heart-svg></div>
                   <div level-two-bg-svg class="mg-card-layout--banner-bg"></div>
                 </div>
                 <div class="mg-card-layout--content">
                   <h6>Loving Level 2? No problem, play again!</h6>
                   <p>We get it, we love it too! We’ll shuffle the deck so you can <strong>play again!</strong></p>
-                  <a class="button" ng-click="playLevel(2)">Play Level 2 Again</a>
+                  <strong><a ng-click="playLevel(2)">Play Level 2 Again ></a></strong>
                 </div>
               </div>
 
@@ -388,6 +388,33 @@
               <h4>Oh no {{user.firstName}}, <strong>time's up!</strong></h4>
             </header>
             <div class="mg-card-layout--container">
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div ng-show="user.companyName" class="mg-card-layout--content"><br><br><br>
+                    <a class="button" ng-click="playLevel(3)">Use Booster</a>
+                  </div>
+                  <div ng-hide="user.companyName" class="mg-card-layout--content">
+                    <br>
+                    <form name="companyNameLoseForm" class="group">
+                      <input type="text" name="company" autocomplete="off" ng-required ng-model="userCompany" ng-class="{used: companyNameLoseForm.company.$viewValue}">
+                      <span class="highlight"></span><span class="bar"></span>
+                      <label>Company Name</label>
+                    </form>
+                    <a class="button" ng-disabled="!userCompany" ng-click="user.companyName = userCompany; playLevel(3)">Unlock Booster</a>
+                  </div>
+                  <div level-two-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div ng-hide="user.companyName" class="mg-card-layout--content">
+                  <h6>Unlock your 5 second time booster and win!</h6>
+                  <p>Enter your email to <strong>play again with a 5 second booster!</strong> And as a bonus, we’ll send you more games, exclusive research, and other goodies!</p>
+                </div>
+                <div ng-show="user.companyName" class="mg-card-layout--content">
+                  <h6>You’ll get it this time!</h6>
+                  <p><strong>Keep your 5 second time booster and play again for the win!</strong></p>
+                  <p>And don’t forget to check your inbox! We sent you loads of goodies to keep the fun going!</p>
+                </div>
+              </div>
 
               <div class="mg-card-layout">
                 <div class="mg-card-layout--banner">
@@ -407,40 +434,13 @@
 
               <div class="mg-card-layout">
                 <div class="mg-card-layout--banner">
-                  <div ng-show="user.companyName" class="mg-card-layout--content"><br><br><br>
-                    <a class="button" ng-click="playLevel(3)">Take on Level 3</a>
-                  </div>
-                  <div ng-hide="user.companyName" class="mg-card-layout--content">
-                    <br>
-                    <form name="companyNameLoseForm" class="group">
-                      <input type="text" name="company" autocomplete="off" ng-required ng-model="userCompany" ng-class="{used: companyNameLoseForm.company.$viewValue}">
-                      <span class="highlight"></span><span class="bar"></span>
-                      <label>Company Name</label>
-                    </form>
-                    <a class="button" ng-disabled="!userCompany" ng-click="user.companyName = userCompany; playLevel(3)">Take on Level 3</a>
-                  </div>
-                  <div level-two-bg-svg class="mg-card-layout--banner-bg"></div>
-                </div>
-                <div ng-hide="user.companyName" class="mg-card-layout--content">
-                  <h6>Unlock your 5 second time booster and win!</h6>
-                  <p>Enter your email to <strong>play again with a 5 second booster!</strong> And as a bonus, we’ll send you more games, exclusive research, and other goodies!</p>
-                </div>
-                <div ng-show="user.companyName" class="mg-card-layout--content">
-                  <h6>You’ll get it this time!</h6>
-                  <p><strong>Keep your 5 second time booster and play again for the win!</strong></p>
-                  <p>And don’t forget to check your inbox! We sent you loads of goodies to keep the fun going!</p>
-                </div>
-              </div>
-
-              <div class="mg-card-layout">
-                <div class="mg-card-layout--banner">
                   <div class="results-toughguy" toughguy-svg></div>
                   <div level-two-bg-svg class="mg-card-layout--banner-bg"></div>
                 </div>
                 <div class="mg-card-layout--content">
                   <h6>Nah, I’m gonna tough it out...</h6>
                   <p>Think you can handle it on your own? No problem! We’ll shuffle the deck and you can <strong>play again!</strong></p>
-                  <a class="button" ng-click="playLevel(2)">Play Level 2 Again</a>
+                  <strong><a ng-click="playLevel(2)">Play Level 2 Again ></a></strong>
                 </div>
               </div>
 
@@ -461,6 +461,17 @@
 
               <div class="mg-card-layout">
                 <div class="mg-card-layout--banner">
+                  <div level-three-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>Find out if you’re you faster than your friends and colleagues!</h6>
+                  <p>Ahh, sweet, sweet victory... But wait. <strong>Are you faster than your friends and colleagues?!</strong> It’s time to find out. Share this puppy with another human and let’s see if their memory is as good as yours!</p>
+                  <div share-html></div>
+                </div>
+              </div>
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
                   <div class="mg-results--circle">
                     <h2>{{ game.results.time }}</h2>
                     <span>Seconds</span>
@@ -475,25 +486,14 @@
 
               <div class="mg-card-layout">
                 <div class="mg-card-layout--banner">
-                  <div level-three-bg-svg class="mg-card-layout--banner-bg"></div>
-                </div>
-                <div class="mg-card-layout--content">
-                  <h6>Find out if you’re you faster than your friends and colleagues!</h6>
-                  <p>Ahh, sweet, sweet victory... But wait. <strong>Are you faster than your friends and colleagues?!</strong> It’s time to find out. Share this puppy with another human and let’s see if their memory is as good as yours!</p>
-                  <div share-html></div>
-                </div>
-              </div>
-
-              <div class="mg-card-layout">
-                <div class="mg-card-layout--banner">
                   <div class="results-personality-planner"></div>
                   <div level-three-bg-svg class="mg-card-layout--banner-bg"></div>
                 </div>
                 <div class="mg-card-layout--content">
                   <h6>What’s YOUR Planner Personality?</h6>
                   <p><em>A Quiz by CrowdCompass</em></p>
-                  <p>The Maestro... The Trendsetter... Which of the four “event planner personalities” describes you? <strong>Take the quiz to find out.</strong></p>
-                  <a class="button" target="_blank" href="http://www.crowdcompassquiz.com">Find Out</a>
+                  <p>Which of the four “event planner personalities” describes you? <strong>Take the quiz to find out.</strong></p>
+                  <strong><a target="_blank" href="http://www.crowdcompassquiz.com">Let's Play ></a></strong>
                 </div>
               </div>
 
@@ -506,7 +506,7 @@
                   <h6>What’s Your Mobile App Star Power?</h6>
                   <p><em>A Quiz by CrowdCompass</em></p>
                   <p>Ever wondered what attendees really think of your mobile event app? <strong>Take the quiz to find out.</strong></p>
-                  <a class="button" target="_blank" href="http://www.eventappstarpower.com">Take the Quiz</a>
+                  <strong><a target="_blank" href="http://www.eventappstarpower.com">Take the Quiz ></a></strong>
                 </div>
               </div>
 
@@ -520,6 +520,21 @@
             </header>
 
             <div class="mg-card-layout--container">
+
+              <div class="mg-card-layout">
+                <div class="mg-card-layout--banner">
+                  <div class="mg-card-layout--content"><br><br><br>
+                    <a class="button" ng-click="newGame(5)">Use Booster</a>
+                  </div>
+                  <div level-three-bg-svg class="mg-card-layout--banner-bg"></div>
+                </div>
+                <div class="mg-card-layout--content">
+                  <h6>You’ll get it this time!</h6>
+                  <p><strong>Keep your 5 second time booster and play again for the win!</strong></p>
+                  <p>And don’t forget to check your inbox! We sent you loads of goodies to keep the fun going!</p>
+                </div>
+              </div>
+
               <div class="mg-card-layout">
                 <div class="mg-card-layout--banner">
                   <div class="mg-results--circle">
@@ -538,28 +553,14 @@
 
               <div class="mg-card-layout">
                 <div class="mg-card-layout--banner">
-                  <div class="mg-card-layout--content"><br><br><br>
-                    <a class="button" ng-click="newGame(5)">Take On Level 3 Again</a>
-                  </div>
-                  <div level-three-bg-svg class="mg-card-layout--banner-bg"></div>
-                </div>
-                <div class="mg-card-layout--content">
-                  <h6>You’ll get it this time!</h6>
-                  <p><strong>Keep your 5 second time booster and play again for the win!</strong></p>
-                  <p>And don’t forget to check your inbox! We sent you loads of goodies to keep the fun going!</p>
-                </div>
-              </div>
-
-              <div class="mg-card-layout">
-                <div class="mg-card-layout--banner">
                   <div class="results-personality-planner"></div>
                   <div level-three-bg-svg class="mg-card-layout--banner-bg"></div>
                 </div>
                 <div class="mg-card-layout--content">
                   <h6>What’s YOUR Planner Personality?</h6>
                   <p><em>A Quiz by CrowdCompass</em></p>
-                  <p>The Maestro... The Trendsetter... Which of the four “event planner personalities” describes you? <strong>Take the quiz to find out.</strong></p>
-                  <a class="button" target="_blank" href="http://www.crowdcompassquiz.com">Find Out</a>
+                  <p>Which of the four “event planner personalities” describes you? <strong>Take the quiz to find out.</strong></p>
+                  <strong><a target="_blank" href="http://www.crowdcompassquiz.com">Let's Play ></a></strong>
                 </div>
               </div>
 
@@ -572,7 +573,7 @@
                   <h6>What’s Your Mobile App Star Power?</h6>
                   <p><em>A Quiz by CrowdCompass</em></p>
                   <p>Ever wondered what attendees really think of your mobile event app? <strong>Take the quiz to find out.</strong></p>
-                  <a class="button" target="_blank" href="http://www.eventappstarpower.com">Take the Quiz</a>
+                  <strong><a target="_blank" href="http://www.eventappstarpower.com">Take the Quiz ></a></strong>
                 </div>
               </div>
 
