@@ -97,26 +97,38 @@
   width: 50%;
 }
 
+.results-social-img {
+  opacity: .75;
+  background-image: url('assets/images/level-3-social-image.png');
+}
+
 .results-personality-planner {
+  background-image: url('assets/images/planner-personality-img.png');
+}
+
+.results-personality-planner, .results-social-img {
   width: 100%;
   height: 100%;
   position: absolute;
+  z-index: 1;
   top: -1.5px;
-  background-image: url('assets/images/planner-personality-img.png');
   background-size: cover;
 }
 
 .results-star-power {
+  opacity: .75;
   top: 12%;
   height: 75%;
 }
 
 .results-heart {
   top: 20%;
+  opacity: .75;
 }
 
 .results-toughguy {
   top: 10%;
+  opacity: .75;
 }
 
 .mg-results--circle {
