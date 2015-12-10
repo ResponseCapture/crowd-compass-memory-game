@@ -1,11 +1,14 @@
 <div class="mg-game" ng-controller="CardController" ng-cloak>
-  <div ng-hide="user || query.level" class="mg-entry" ng-class="{'loggedin': userLoading}">
+  <div class="screen-too-small">
+    <p>Game disabled in Landscape Mode.  Turn your phone.</p>
+  </div>
+  <div ng-hide="user || query.level" class="mg-entry" ng-class="{'loggedin': userLoading}" >
     <div class="mg-logo--container">
       <div logo-svg class="mg-logo-svg" title="CrowdCompass" />
     </div>
     
     <div class="mg-entry--container">
-      <div class="mg-entry--wave1" ng-class="{'loggedin': userLoading}" wave-bg-svg />
+      <div class="mg-entry--wave1" ng-class="{'loggedin': userLoading}"wave-bg-svg />
       <div class="mg-entry--wave2" ng-class="{'loggedin': userLoading}" wave-bg-two-svg />
 
       <div class="mg-entry--hero">
@@ -44,7 +47,7 @@
             </div>
             <form class="mg-entry--manual" ng-show="noSocial" name="manualLoginForm">
               <div class="group mg-entry--login-manual">
-                <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" name="first" ng-model="firstName" required type="text" ng-class="{used: manualLoginForm.first.$viewValue}">
+                <input name="first" ng-model="firstName" required type="text" ng-class="{used: manualLoginForm.first.$viewValue}">
                 <label for="first">First Name</label>
               </div>
               <div class="group mg-entry--login-manual">

@@ -1,8 +1,26 @@
 $entry-box-width: 500px;
 
+.screen-too-small {
+  background-color: rgb(40,50,56);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: none;
+  text-align: center;
+  p {
+    padding-top: 25%;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  z-index: 10000;
+}
+
 .mg-entry {
   width: 100vw;
   height: 100%;
+  position: absolute;
   background-color: rgb(40,50,56);
   z-index: 9000;
   background: radial-gradient(circle, hsl(203, 16.7%, 18.8%), hsl(203, 16.7%, 17%));
@@ -353,6 +371,12 @@ $entry-box-width: 500px;
   }
 }
 
+@media screen and (max-width: 460px) {
+  .mg-entry {
+    position: absolute;
+  }
+}
+
 @media screen and (max-width: 396px) and (min-width: 335px) {
   .mg-title {
     font-size: 2.5em;
@@ -376,3 +400,8 @@ $entry-box-width: 500px;
   }
 }
 
+@media screen and (max-height: 450px) {
+  .screen-too-small {
+    display: block;
+  }
+}
