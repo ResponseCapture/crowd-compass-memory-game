@@ -44,7 +44,7 @@
             </div>
             <form class="mg-entry--manual" ng-show="noSocial" name="manualLoginForm">
               <div class="group mg-entry--login-manual">
-                <input name="first" ng-model="firstName" required type="text" ng-class="{used: manualLoginForm.first.$viewValue}">
+                <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" name="first" ng-model="firstName" required type="text" ng-class="{used: manualLoginForm.first.$viewValue}">
                 <label for="first">First Name</label>
               </div>
               <div class="group mg-entry--login-manual">
