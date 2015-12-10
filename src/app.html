@@ -1,11 +1,13 @@
 <div class="mg-game" ng-controller="CardController" ng-cloak>
   <div ng-hide="user || query.level" class="mg-entry" ng-class="{'loggedin': userLoading}">
+    <div class="mg-logo--container">
+      <div logo-svg class="mg-logo-svg" title="CrowdCompass" />
+    </div>
+    
     <div class="mg-entry--container">
       <div class="mg-entry--wave1" ng-class="{'loggedin': userLoading}" wave-bg-svg />
       <div class="mg-entry--wave2" ng-class="{'loggedin': userLoading}" wave-bg-two-svg />
 
-      <div logo-svg class="mg-logo-svg" title="CrowdCompass" />
-      
       <div class="mg-entry--hero">
         <div box-svg class="mg-entry--box colorshift" ng-class="{'loggedin': userLoading}" />
         <div class="mg-entry--box-content" ng-class="{'loggedin': userLoading}">

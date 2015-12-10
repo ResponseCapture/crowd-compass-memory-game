@@ -2,12 +2,14 @@ $entry-box-width: 500px;
 
 .mg-entry {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background-color: rgb(40,50,56);
   z-index: 9000;
   background: radial-gradient(circle, hsl(203, 16.7%, 18.8%), hsl(203, 16.7%, 17%));
 
   footer {
+    z-index: 2;
+    position: relative;
     width: 100vw;
 
     .footer-content {
@@ -36,7 +38,6 @@ $entry-box-width: 500px;
       }
     }
 
-
     li {
       display: inline-block;
     }
@@ -52,14 +53,19 @@ $entry-box-width: 500px;
     animation: colorshift 10s infinite;
   }
 
+  .mg-logo--container {
+    padding-left: 30px;
+    height: 75px;
+  }
+
   .mg-logo-svg {
-    position: fixed;
-    left: 30px;
+    position: relative;
+    z-index: 2;
   }
 
   .mg-entry--container {
     width: 100%;
-    height: calc(100% - 75px);
+    height: calc(100% - 150px);
   }
 
   .mg-entry--hero {
