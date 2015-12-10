@@ -1,55 +1,57 @@
 <div class="mg-game" ng-controller="CardController" ng-cloak>
   <div ng-hide="user || query.level" class="mg-entry" ng-class="{'loggedin': userLoading}">
-    <div class="mg-entry--wave1" ng-class="{'loggedin': userLoading}" wave-bg-svg />
-    <div class="mg-entry--wave2" ng-class="{'loggedin': userLoading}" wave-bg-two-svg />
+    <div class="mg-entry--container">
+      <div class="mg-entry--wave1" ng-class="{'loggedin': userLoading}" wave-bg-svg />
+      <div class="mg-entry--wave2" ng-class="{'loggedin': userLoading}" wave-bg-two-svg />
 
-    <div logo-svg class="mg-logo-svg" title="CrowdCompass" />
-    
-    <div class="mg-entry--hero">
-      <div box-svg class="mg-entry--box colorshift" ng-class="{'loggedin': userLoading}" />
-      <div class="mg-entry--box-content" ng-class="{'loggedin': userLoading}">
-        <h4 class="mg-top-title colorshift">The ultimate event pro</h4>
-        <h2 class="mg-title colorshift">Memory Game</h2>
-        <h5 class="mg-entry--title-desc colorshift">A card matching game for event pros, personalized for you.</h5>
-        <div ng-hide="letsPlay" class="mg-entry--start">
-          <p class="mg-entry--start-desc">Do you have what it takes to conquer all three levels and become the event pro memory champion of the universe?</p>
-          <button ng-click="letsPlay = true">Let's Play</button>
-        </div>
-        <div ng-show="letsPlay" class="mg-entry--logins">
-          <p class="mg-entry--logins-desc">Get a personalized experience. Sign in with social.</p>
-
-          <div ng-hide="noSocial">
-            <div class="mg-entry--login login-linkedin button-behavior" ng-click="social.linkedin()">
-              <div class="mg-entry--icon-wrap">
-                <div linkedin-svg class="mg-entry--linkedin-icon mg-entry--icon"></div>
-              </div>
-              <div class="mg-entry--login-text">
-                <strong>LINKEDIN</strong>
-              </div>
-            </div>
-
-            <div class="mg-entry--login login-facebook button-behavior" ng-click="social.facebook()">
-              <div class="mg-entry--icon-wrap">
-                <div facebook-svg class="mg-entry--fb-icon mg-entry--icon" />
-              </div>
-              <div class="mg-entry--login-text">
-                <strong>FACEBOOK</strong>
-              </div>
-            </div>
-
-            <p><a ng-click="noSocial = true">No thanks, enter name manually.</a></p>
+      <div logo-svg class="mg-logo-svg" title="CrowdCompass" />
+      
+      <div class="mg-entry--hero">
+        <div box-svg class="mg-entry--box colorshift" ng-class="{'loggedin': userLoading}" />
+        <div class="mg-entry--box-content" ng-class="{'loggedin': userLoading}">
+          <h4 class="mg-top-title colorshift">The ultimate event pro</h4>
+          <h2 class="mg-title colorshift">Memory Game</h2>
+          <h5 class="mg-entry--title-desc colorshift">A card matching game for event pros, personalized for you.</h5>
+          <div ng-hide="letsPlay" class="mg-entry--start">
+            <p class="mg-entry--start-desc">Do you have what it takes to conquer all three levels and become the event pro memory champion of the universe?</p>
+            <button ng-click="letsPlay = true">Let's Play</button>
           </div>
-          <form class="mg-entry--manual" ng-show="noSocial" name="manualLoginForm">
-            <div class="group mg-entry--login-manual">
-              <input name="first" ng-model="firstName" required type="text" ng-class="{used: manualLoginForm.first.$viewValue}">
-              <label for="first">First Name</label>
+          <div ng-show="letsPlay" class="mg-entry--logins">
+            <p class="mg-entry--logins-desc">Get a personalized experience. Sign in with social.</p>
+
+            <div ng-hide="noSocial">
+              <div class="mg-entry--login login-linkedin button-behavior" ng-click="social.linkedin()">
+                <div class="mg-entry--icon-wrap">
+                  <div linkedin-svg class="mg-entry--linkedin-icon mg-entry--icon"></div>
+                </div>
+                <div class="mg-entry--login-text">
+                  <strong>LINKEDIN</strong>
+                </div>
+              </div>
+
+              <div class="mg-entry--login login-facebook button-behavior" ng-click="social.facebook()">
+                <div class="mg-entry--icon-wrap">
+                  <div facebook-svg class="mg-entry--fb-icon mg-entry--icon" />
+                </div>
+                <div class="mg-entry--login-text">
+                  <strong>FACEBOOK</strong>
+                </div>
+              </div>
+
+              <p><a ng-click="noSocial = true">No thanks, enter name manually.</a></p>
             </div>
-            <div class="group mg-entry--login-manual">
-              <input name="last" ng-model="lastName" required type="text" ng-class="{used: manualLoginForm.last.$viewValue}">
-              <label for="last">Last Name</label>
-            </div>
-            <button ng-disabled="manualLoginForm.$invalid" ng-click="updateUser({firstName:firstName, lastName:lastName})">></button>
-          </form>
+            <form class="mg-entry--manual" ng-show="noSocial" name="manualLoginForm">
+              <div class="group mg-entry--login-manual">
+                <input name="first" ng-model="firstName" required type="text" ng-class="{used: manualLoginForm.first.$viewValue}">
+                <label for="first">First Name</label>
+              </div>
+              <div class="group mg-entry--login-manual">
+                <input name="last" ng-model="lastName" required type="text" ng-class="{used: manualLoginForm.last.$viewValue}">
+                <label for="last">Last Name</label>
+              </div>
+              <button ng-disabled="manualLoginForm.$invalid" ng-click="updateUser({firstName:firstName, lastName:lastName})">></button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -60,10 +62,10 @@
             <li><a href="http://http://www.crowdcompass.com/privacy.shtml" target="_blank">Privacy</a></li>
             <li><a href="http://http://www.crowdcompass.com/terms-of-use.shtml" target="_blank">Terms of Use</a></li>
             <li><a href="http://http://www.crowdcompass.com/sitemap.shtml" target="_blank">Sitemap</a></li>
-          </ul>    
-        </div>
-        <div class="footer-content--legal">
-          <p>© Copyright 2009-2015 CrowdCompass. All Rights Reserved.</p>
+            <li>
+            <p>© Copyright 2009-2015 CrowdCompass. All Rights Reserved.</p>
+            </li>
+          </ul>
         </div>
       </div>
     </footer>

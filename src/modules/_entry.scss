@@ -1,7 +1,6 @@
 $entry-box-width: 500px;
 
 .mg-entry {
-  position: fixed;
   width: 100vw;
   height: 100vh;
   background-color: rgb(40,50,56);
@@ -9,14 +8,10 @@ $entry-box-width: 500px;
   background: radial-gradient(circle, hsl(203, 16.7%, 18.8%), hsl(203, 16.7%, 17%));
 
   footer {
-    position: fixed;
-    bottom: 0;
     width: 100vw;
 
     .footer-content {
-      display: relative;
       margin: 0 auto;
-      padding: 15px 0;
       color: #FFF;
       text-align: center;
 
@@ -60,6 +55,11 @@ $entry-box-width: 500px;
   .mg-logo-svg {
     position: fixed;
     left: 30px;
+  }
+
+  .mg-entry--container {
+    width: 100%;
+    height: calc(100% - 75px);
   }
 
   .mg-entry--hero {
@@ -356,6 +356,17 @@ $entry-box-width: 500px;
 @media screen and (max-width: 335px) {
   .mg-title {
     font-size: 2.3em;
+  }
+
+  .mg-entry .mg-entry--hero .mg-entry--logins-desc {
+    padding: 5px 0;
+    line-height: 1;
+    font-size: 12px;
+  }
+
+  .mg-entry footer .footer-content--links p {
+    line-height: 1;
+    font-size: 9px;   
   }
 }
 
