@@ -5,8 +5,8 @@ var path = require('path');
 module.exports = {
   entry: './index.js',
   output: {
-    path: path.join(__dirname, 'assets'),
-    publicPath: 'assets/',
+    path: path.join(__dirname, 'Campaigns/CC-03/assets'),
+    publicPath: 'Campaigns/CC-03/assets/',
     filename: './app.js'
   },
   module: {

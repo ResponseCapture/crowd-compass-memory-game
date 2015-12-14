@@ -100,11 +100,11 @@
 
 .results-social-img {
   opacity: .75;
-  background-image: url('assets/images/level-3-social-image.png');
+  background-image: url('Campaigns/CC-03/assets/images/level-3-social-image.png');
 }
 
 .results-personality-planner {
-  background-image: url('assets/images/planner-personality-img.png');
+  background-image: url('Campaigns/CC-03/assets/images/planner-personality-img.png');
 }
 
 .results-personality-planner, .results-social-img {
@@ -225,12 +225,16 @@
 @media screen and (max-width: 1530px) and (min-width: 600px) {
   .mg-resultspage-3 .results {
     max-width: 600px;
+    position: static;
+    transform: translateY(0);
   }
 }
 
 @media screen and (max-width: 1230px) and (min-width: 600px) {
   .mg-resultspage-1 .results,
   .mg-resultspage-2 .results {
+    position: static;
+    transform: translateY(0);
     max-width: 600px;
   }
 }
@@ -239,6 +243,8 @@
   .mg-resultspage-1 .results,
   .mg-resultspage-2 .results,
   .mg-resultspage-3 .results {
+    position: static;
+    transform: translateY(0);
     max-width: 300px;
   }
 }

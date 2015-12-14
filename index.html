@@ -8,9 +8,9 @@
   <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="apple-touch-icon" sizes="140x140" href="assets/images/logo.png">
-  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-  <link rel="shortcut icon" href="assets/images/favicon.ico">
+  <link rel="apple-touch-icon" sizes="140x140" href="Campaigns/CC-03/assets/images/logo.png">
+  <link rel="apple-touch-icon" href="Campaigns/CC-03/assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="Campaigns/CC-03/assets/images/favicon.ico">
   <style>
   * {
     box-sizing: border-box;
@@ -516,14 +516,14 @@
       return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx), only screen and (min-resolution: 75.6dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)').matches)) || (window.devicePixelRatio && window.devicePixelRatio >= 2)) && /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
     }
 
-    var image = isRetina() ? 'assets/sprite@2x.png' : 'assets/sprite.png';
+    var image = isRetina() ? 'Campaigns/CC-03/assets/sprite@2x.png' : 'Campaigns/CC-03/assets/sprite.png';
     var innerHTML = 'api_key: ' + window.app.linkedin + '\nonLoad: onLinkedInLoad';
     //var innerHTML = 'api_key: ' + window.app.linkedin + '\nauthorize: true\nonLoad: onLinkedInLoad';
     var protocol = ('https:' == document.location.protocol ? 'https' : 'http');
 
     Loader([
       protocol + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js',
-      'assets/app.js',
+      'Campaigns/CC-03/assets/app.js',
       protocol + '://connect.facebook.net/en_US/sdk.js', {
         src: protocol + '://platform.linkedin.com/in.js',
         innerHTML: innerHTML

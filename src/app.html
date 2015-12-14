@@ -81,7 +81,7 @@
       <img ng-src="{{user.picture}}" class="level-{{currentLevel()}}" alt="...">
     </span>
     <nav class="mg-mobilenav">
-      <img class="mg-logo" src="assets/images/crowdcompass-brandmark-white.png" title="CrowdCompass">
+      <img class="mg-logo" src="Campaigns/CC-03/assets/images/crowdcompass-brandmark-white.png" title="CrowdCompass">
       <a class="hamburger" ng-click="menuOpen = !menuOpen" ng-class="{'hamburger-close': menuOpen}">
         <span class="sr-only">Toggle navigation</span>
         <span class="hamburger-bar"></span>
@@ -207,7 +207,7 @@
           <div ng-if="user" ng-style="{'pointer-events': !intro[currentLevel()] ? 'none' : 'all'}" data-animation-in="bounceIn" class="card-container mg-center grid" ng-init="newGameIfNotStarted()" min-height hierarchical>
             <div class="grid-sizer"></div>
             <div ng-repeat="card in game.deck" class="card-wrapper" ng-class="{turncard: card.isFaceUp, bounce: card.celebrate}" ng-click="game.check(card)" data-target=".card-container">
-              <div class="card" ng-style="{'background-image': 'url(assets/images/' + game.cardFront + ')' }">
+              <div class="card" ng-style="{'background-image': 'url(Campaigns/CC-03/assets/images/' + game.cardFront + ')' }">
                 <div class="back face flipped" ng-style="{'background-position': card.item.position, 'background-image': card.item.picture, 'background-size': card.item.picture ? 'cover' : ''}"></div>
               </div>
             </div>

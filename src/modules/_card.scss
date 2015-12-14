@@ -53,7 +53,7 @@
 }
 
 .flipped {
-  background: url('assets/images/sprite.png');
+  background: url('Campaigns/CC-03/assets/images/sprite.png');
   background-repeat: no-repeat;
 }
 
@@ -137,7 +137,7 @@
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
 only screen and (min-device-pixel-ratio: 2) {
   .flipped {
-    background: url('assets/images/sprite@2x.png');
+    background: url('Campaigns/CC-03/assets/images/sprite@2x.png');
     background-size: auto 100%;
   }
 }
