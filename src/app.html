@@ -47,11 +47,11 @@
             </div>
             <form class="mg-entry--manual" ng-show="noSocial" name="manualLoginForm">
               <div class="group mg-entry--login-manual">
-                <input name="first" ng-model="firstName" required type="text" ng-class="{used: manualLoginForm.first.$viewValue}">
+                <input name="first" ng-model="firstName" required type="text"autocomplete="off"  ng-class="{used: manualLoginForm.first.$viewValue}">
                 <label for="first">First Name</label>
               </div>
               <div class="group mg-entry--login-manual">
-                <input name="last" ng-model="lastName" required type="text" ng-class="{used: manualLoginForm.last.$viewValue}">
+                <input name="last" ng-model="lastName" required type="text"autocomplete="off"  ng-class="{used: manualLoginForm.last.$viewValue}">
                 <label for="last">Last Name</label>
               </div>
               <button ng-disabled="manualLoginForm.$invalid" ng-click="updateUser({firstName:firstName, lastName:lastName})">></button>
